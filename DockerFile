@@ -1,0 +1,7 @@
+FROM openjdk11:alpine
+
+ARG JAR_PATH=build/libs/Transfolio-0.1.jar
+
+ADD ${JAR_PATH} transfolio-dev.jar
+
+ENTRYPOINT ["java", "-jar", "transfolio-dev.jar"]
