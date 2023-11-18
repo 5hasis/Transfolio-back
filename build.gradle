@@ -2,6 +2,9 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '2.7.17'
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+
+    // asciidoctor 플러그인
+    id "org.asciidoctor.jvm.convert" version "3.3.2"
 }
 
 group = 'com.example'
@@ -11,7 +14,30 @@ java {
     sourceCompatibility = '11'
 }
 
+ext {
+    snippetsDir = file('build/generated-snippets') // (5)
+}
+
+asciidoctor {
+    configurations 'asciidoctorExt' // (7)
+    baseDirFollowsSourceFile() // (8)
+    inputs.dir snippetsDir // (9)
+    dependsOn test // (10)
+}
+
+asciidoctor.doFirst {
+    delete file('src/main/resources/static/docs')  // (11)
+}
+
+task copyDocument(type: Copy) { // (12)
+    dependsOn asciidoctor
+    from file("build/docs/asciidoc")
+    into file("src/main/resources/static/docs")
+}
+
+
 configurations {
+    asciidoctorExt
     compileOnly {
         extendsFrom annotationProcessor
     }
@@ -33,8 +59,12 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:2.3.1'
+
+    asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor'
+    testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
 }
 
 tasks.named('test') {
     useJUnitPlatform()
+    outputs.dir snippetsDir // (6)
 }
