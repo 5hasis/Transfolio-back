@@ -10,7 +10,7 @@ public class TestAPI {
     @GetMapping("/test")
     public String Test() {
 
-        return "Test Get API Success";
+        return "Test Get API1234 Success";
 
     }
 
