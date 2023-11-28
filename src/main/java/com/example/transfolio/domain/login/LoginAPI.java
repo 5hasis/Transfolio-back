@@ -22,4 +22,16 @@ public class LoginAPI {
         return "";
     }
 
+    // 이메일 인증
+    @PostMapping("/auth/email")
+    public String LoginAuthEmail(@RequestBody String email) {
+        return "";
+    }
+
+    // 회원가입
+    @PostMapping("/")
+    public String LoginSave(@RequestBody String info) {
+        return "";
+    }
+
 }
