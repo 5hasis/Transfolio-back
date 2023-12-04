@@ -1,6 +1,8 @@
 package com.example.transfolio.domain.login;
 
+import com.example.transfolio.common.response.ResObj;
 import com.example.transfolio.common.utils.StringUtils;
+import netscape.javascript.JSObject;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
@@ -16,10 +18,10 @@ public class LoginAPI {
 
     // 로그인 중복 체크
     @PostMapping("/dupl/{id}")
-    public String DuplicationID(@RequestBody String id) {
-        int result = loginService.SearchById(id);
+    public JSObject DuplicationID(@RequestBody String id) {
+        loginService.SearchById(id);
 
-        return "";
+        return new ResObj(id);
     }
 
     // 이메일 인증
