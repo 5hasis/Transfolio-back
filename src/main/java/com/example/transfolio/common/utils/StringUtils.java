@@ -31,4 +31,18 @@ public class StringUtils {
 
         return randomString.toString();
     }
+
+
+    /**
+     * 빈값이거나 Null 체크
+     */
+    public static boolean IsNullOrEmpty(String message) {
+
+        if (message.equals("") || message == null) {
+            return true;
+        }
+
+        return false;
+
+    }
 }

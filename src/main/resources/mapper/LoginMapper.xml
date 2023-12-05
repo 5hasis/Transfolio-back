@@ -5,8 +5,11 @@
 <mapper namespace="com.example.transfolio.domain.login.LoginDao">
 
     <!-- Id 검색 -->
-    <select id="SearchId" resultType="Int" parameterType="String">
-
+    <select id="SearchId" resultType="HashMap" parameterType="HashMap">
+        SELECT
+            *
+        FROM MB_INFRM
+        WHERE id = #{userId}
     </select>
 
 </mapper>
