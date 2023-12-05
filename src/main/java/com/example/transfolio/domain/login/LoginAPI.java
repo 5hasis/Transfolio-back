@@ -2,8 +2,12 @@ package com.example.transfolio.domain.login;
 
 import com.example.transfolio.common.response.ResObj;
 import com.example.transfolio.common.utils.StringUtils;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import netscape.javascript.JSObject;
+import org.json.simple.JSONObject;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
 
 @CrossOrigin
 @RestController
@@ -17,11 +21,10 @@ public class LoginAPI {
     }
 
     // 로그인 중복 체크
-    @PostMapping("/dupl/{id}")
-    public JSObject DuplicationID(@RequestBody String id) {
-        loginService.SearchById(id);
+    @PostMapping("/dupl")
+    public JSONObject DuplicationID(@RequestBody HashMap body) {
 
-        return new ResObj(id);
+        return loginService.SearchById(body);
     }
 
     // 이메일 인증
