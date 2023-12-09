@@ -1,8 +1,10 @@
-package com.example.transfolio.domain.login;
+package com.example.transfolio.domain.login.service;
 
+import com.example.transfolio.common.error.ErrorMessage;
+import com.example.transfolio.common.error.ErrorObj;
 import com.example.transfolio.common.response.ResObj;
 import com.example.transfolio.common.utils.StringUtils;
-import netscape.javascript.JSObject;
+import com.example.transfolio.domain.login.dao.LoginDao;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Service;
 
@@ -20,9 +22,12 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public JSONObject SearchById(HashMap body) {
 
-
         HashMap hashMap = loginDao.SearchId(body);
 
-        return new ResObj(hashMap, "사용가능한 ID 입니다").getObject();
+        if (hashMap == null) {
+            return new ResObj(ErrorMessage.DATA_DUPL_ERROR).getObject();
+        }
+
+        return new ResObj(hashMap).getObject();
     }
 }

@@ -1,4 +1,4 @@
-package com.example.transfolio.domain.login;
+package com.example.transfolio.domain.login.dao;
 
 import org.apache.ibatis.annotations.Mapper;
 

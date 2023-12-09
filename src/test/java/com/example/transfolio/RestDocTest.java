@@ -1,11 +1,14 @@
 package com.example.transfolio;
 
+import com.example.transfolio.common.utils.StringUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.util.HashMap;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
@@ -32,7 +35,18 @@ public class RestDocTest {
                         preprocessResponse(prettyPrint()))
 
                 );
+    }
 
+    @Test
+    void test() {
+        HashMap<String, String> Map = new HashMap<>();
+
+        Map = null;
+
+        if (StringUtils.IsNullOrEmpty(Map)) {
+            System.out.println("Map = " + Map);
+        }
+        System.out.println("Map = " + Map);
 
     }
 

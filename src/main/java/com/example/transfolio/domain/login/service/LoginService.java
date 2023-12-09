@@ -1,4 +1,4 @@
-package com.example.transfolio.domain.login;
+package com.example.transfolio.domain.login.service;
 
 import netscape.javascript.JSObject;
 import org.json.simple.JSONObject;
