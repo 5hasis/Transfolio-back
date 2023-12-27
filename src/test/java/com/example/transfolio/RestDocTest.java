@@ -37,17 +37,4 @@ public class RestDocTest {
                 );
     }
 
-    @Test
-    void test() {
-        HashMap<String, String> Map = new HashMap<>();
-
-        Map = null;
-
-        if (StringUtils.IsNullOrEmpty(Map)) {
-            System.out.println("Map = " + Map);
-        }
-        System.out.println("Map = " + Map);
-
-    }
-
 }

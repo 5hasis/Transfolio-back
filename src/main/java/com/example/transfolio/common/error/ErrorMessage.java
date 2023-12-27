@@ -6,7 +6,10 @@ import org.json.simple.JSONObject;
 
 public enum ErrorMessage implements ErrorEnum {
 
-    DATA_DUPL_ERROR("0001", "중복된 데이터 입니다"),
+
+    REQUIRED_PARAMETER_FIELD("001", "파라미터에 필수값이 존재하지 않습니다"),
+
+    REQUIRED_BODY_FIELD("002", "BODY에 필수값이 존재하지 않습니다")
     ;
 
     private String status = "200";
@@ -18,22 +21,12 @@ public enum ErrorMessage implements ErrorEnum {
     }
 
     @Override
-    public JSONObject getObject() {
-        JSONObject errorObj = new JSONObject();
-
-        errorObj.put("status", this.status);
-        errorObj.put("message", this.message);
-
-        return errorObj;
-    }
-
-    @Override
     public String getStatus() {
-        return null;
+        return this.status;
     }
 
     @Override
     public String getMessage() {
-        return null;
+        return this.message;
     }
 }

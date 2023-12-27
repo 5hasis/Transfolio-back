@@ -22,7 +22,7 @@ public class StringUtils {
         StringBuilder randomString = new StringBuilder();
         Random random = new Random();
 
-        for (int i = 0; i < length; i++) {
+        for (int i = 1; i < length; i++) {
             int randomStringIndex = random.nextInt(stringCharachters.length());
             char randomChar = stringCharachters.charAt(randomStringIndex);
 

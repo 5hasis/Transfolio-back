@@ -2,14 +2,31 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.example.transfolio.domain.login.dao.LoginDao">
+<mapper namespace="com.example.transfolio.domain.user.dao.UserDao">
 
     <!-- Id 검색 -->
-    <select id="SearchId" resultType="HashMap" parameterType="HashMap">
+    <select id="SelectByUserId" resultType="HashMap" parameterType="HashMap">
         SELECT
             *
-        FROM MB_INFRM
+        FROM MB_INFO_M
         WHERE id = #{userId}
     </select>
+
+    <!-- 회원가입 -->
+    <insert id="insertUserInfo" parameterType="HashMap">
+        INSERT INTO MB_INFO_M
+            (
+                id,
+                pwd,
+                email
+            )
+        VALUES
+            (
+                #{userId},
+                #{userPassword},
+                #{userEmail}
+            )
+
+    </insert>
 
 </mapper>

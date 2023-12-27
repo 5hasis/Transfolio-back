@@ -4,7 +4,6 @@ import org.json.simple.JSONObject;
 
 public interface ErrorEnum {
 
-    Object getObject();
     String getStatus();
     String getMessage();
 }
