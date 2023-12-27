@@ -1,0 +1,14 @@
+@startuml
+
+entity 회원정보_마스터 {
+
+}
+
+entity 회원정보_관심분야 {
+
+}
+
+
+
+@enduml
+
