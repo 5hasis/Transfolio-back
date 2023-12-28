@@ -41,11 +41,7 @@ public class ResObj {
             jsonObj.put("result", result);
         }
 
-        if (CommonUtils.isNullOrEmpty(this.message)) {
-            jsonObj.put("message", "정상적으로 처리되었습니다");
-        }
-
-        jsonObj.put("message", message);
+        jsonObj.put("message", this.message);
         jsonObj.put("status", status);
 
         return jsonObj;
@@ -55,7 +51,7 @@ public class ResObj {
     public static class Builder {
 
         private Object body;
-        private String message;
+        private String message = "정상적으로 처리되었습니다";
 
         public Builder message(String message) {
             this.message = message;
