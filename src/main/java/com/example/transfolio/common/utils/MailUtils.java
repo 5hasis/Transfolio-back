@@ -47,7 +47,7 @@ public class MailUtils {
      */
     public static boolean isValidEmail(String email) {
 
-        if (CommonUtils.IsNullOrEmpty(email)) {
+        if (CommonUtils.isNullOrEmpty(email)) {
             return true;
         }
 

@@ -4,6 +4,7 @@ import com.example.transfolio.common.error.ErrorObj;
 import com.example.transfolio.common.response.ResObj;
 import com.example.transfolio.common.utils.CommonUtils;
 import com.example.transfolio.common.utils.MailUtils;
+import com.example.transfolio.common.utils.StringUtils;
 import com.example.transfolio.domain.user.dao.UserDao;
 import com.example.transfolio.domain.user.error.UserError;
 import org.json.simple.JSONObject;
@@ -31,12 +32,12 @@ public class UserServiceImpl implements UserService {
      * 아이디 중복 체크
      */
     @Override
-    public JSONObject SearchById(HashMap params) {
+    public JSONObject searchById(HashMap params) {
 
-        List<HashMap> searchIdList = userDao.SelectByUserId(params);
+        List<HashMap> searchIdList = userDao.selectByUserId(params);
 
         // 이미 존재하는 ID가 있을경우
-        if (!CommonUtils.IsNullOrEmpty(searchIdList)) {
+        if (!CommonUtils.isZeroSize(searchIdList)) {
             return new ErrorObj(UserError.DUPLICATE_USER_ID).getObject();
         }
 
@@ -47,17 +48,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public JSONObject Join(HashMap body) {
+    public JSONObject join(HashMap body) {
 
-        List<HashMap> searchIdList = userDao.SelectByUserId(body);
+        List<HashMap> searchIdList = userDao.selectByUserId(body);
 
         // 이미 존재하는 ID가 있을경우
-        if (!CommonUtils.IsNullOrEmpty(searchIdList)) {
+        if (!CommonUtils.isZeroSize(searchIdList)) {
             return new ErrorObj(UserError.DUPLICATE_USER_ID).getObject();
         }
 
+        // 비밀번호 평문 Bcrypt 암호화
+        String bcryptUserPassword = StringUtils.bcrypt( (String) body.get("userPassword") );
+        body.put("userPassword", bcryptUserPassword);
         int insertResult = userDao.insertUserInfo(body);
 
+        // 회원가입 실패
         if (insertResult == 0) {
             return new ErrorObj(UserError.FAIL_JOIN).getObject();
         }

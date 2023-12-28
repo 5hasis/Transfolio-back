@@ -31,7 +31,7 @@ public class EmailAPI {
     public JSONObject LoginAuthEmail(@RequestBody HashMap body) {
 
         // Parameter 필수값 체크
-        if (CommonUtils.ValidRequestParam(body, authEmailValid)) {
+        if (CommonUtils.validRequestParam(body, authEmailValid)) {
             return new ErrorObj(ErrorMessage.REQUIRED_BODY_FIELD).getObject();
         }
 

@@ -27,7 +27,7 @@ public class ResObj {
 
     private String status = "200";
 
-    private String message = "정상적으로 처리되었습니다";
+    private String message;
 
     public ResObj(Builder build) {
         this.result = build.body;
@@ -37,11 +37,11 @@ public class ResObj {
     public JSONObject getObject() {
         JSONObject jsonObj = new JSONObject();
 
-        if (!CommonUtils.IsNullOrEmpty(result)) {
+        if (!CommonUtils.isNullOrEmpty(result)) {
             jsonObj.put("result", result);
         }
 
-        if (CommonUtils.IsNullOrEmpty(message)) {
+        if (CommonUtils.isNullOrEmpty(this.message)) {
             jsonObj.put("message", "정상적으로 처리되었습니다");
         }
 

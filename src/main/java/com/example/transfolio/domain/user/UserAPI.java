@@ -34,11 +34,11 @@ public class UserAPI {
     public JSONObject DuplicationID(@RequestParam HashMap param) {
 
         // Parameter 필수값 체크
-        if (CommonUtils.ValidRequestParam(param, userSearchValid)) {
+        if (CommonUtils.validRequestParam(param, userSearchValid)) {
            return new ErrorObj(ErrorMessage.REQUIRED_PARAMETER_FIELD).getObject();
         }
 
-        return userService.SearchById(param);
+        return userService.searchById(param);
     }
 
 
@@ -47,11 +47,11 @@ public class UserAPI {
     public JSONObject LoginSave(@RequestBody HashMap body) {
 
         // Parameter 필수값 체크
-        if (CommonUtils.ValidRequestParam(body, userJoinValid)) {
+        if (CommonUtils.validRequestParam(body, userJoinValid)) {
             return new ErrorObj(ErrorMessage.REQUIRED_PARAMETER_FIELD).getObject();
         }
 
-         return userService.Join(body);
+         return userService.join(body);
     }
 
 }

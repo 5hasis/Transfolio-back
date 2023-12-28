@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 public interface UserService {
 
-    JSONObject SearchById(HashMap body);
-    JSONObject Join(HashMap body);
+    JSONObject searchById(HashMap body);
+    JSONObject join(HashMap body);
 
 }

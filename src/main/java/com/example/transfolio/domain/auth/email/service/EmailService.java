@@ -35,7 +35,7 @@ public class EmailService {
      * 이메일 발송
      */
     public JSONObject sendEmail(HashMap body) {
-        String reandomString = StringUtils.RandomString(6);
+        String reandomString = StringUtils.randomString(6);
 
         String content = MailUtils.createText(reandomString);
         String userEmail = (String) body.get(userEmailKey[0]);

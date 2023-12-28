@@ -10,6 +10,6 @@ public interface UserDao {
 
     int insertUserInfo(HashMap body);
 
-    List<HashMap> SelectByUserId(HashMap param);
+    List<HashMap> selectByUserId(HashMap param);
 
 }

@@ -6,6 +6,7 @@ import com.example.transfolio.common.error.ErrorObj;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 public class CommonUtils {
 
@@ -14,10 +15,10 @@ public class CommonUtils {
      * @param param
      */
 
-    public static boolean ValidRequestParam(HashMap param) {
+    public static boolean validRequestParam(HashMap param) {
 
          // 공백 및 Null 검사
-         if (IsNullOrEmpty(param)) {
+         if (isNullOrEmpty(param)) {
              return true;
          }
 
@@ -36,15 +37,15 @@ public class CommonUtils {
      * @param param
      */
 
-    public static boolean ValidRequestParam(HashMap param, String[] validKeys) {
+    public static boolean validRequestParam(HashMap param, String[] validKeys) {
 
-        if (ValidRequestParam(param)) {
+        if (validRequestParam(param)) {
             return true;
         }
 
         // validKeys에 Key가 존재하지 않을경우
         boolean isValidKey = Arrays.stream(validKeys)
-                .anyMatch(validKey -> IsNullOrEmpty(param.get(validKey)));
+                .anyMatch(validKey -> isNullOrEmpty(param.get(validKey)));
         if (isValidKey) {
             return true;
         }
@@ -57,7 +58,14 @@ public class CommonUtils {
      * @param obj
      * @return
      */
-    public static boolean IsNullOrEmpty(Object obj) {
+    public static boolean isNullOrEmpty(Object obj) {
         return "".equals(obj) || obj == null;
+    }
+
+    /**
+     * List 의 사이즈가 0일경우
+     */
+    public static boolean isZeroSize(List list) {
+        return list.size() == 0;
     }
 }
