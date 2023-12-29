@@ -63,9 +63,16 @@ public class CommonUtils {
     }
 
     /**
-     * List 의 사이즈가 0일경우
+     * List의 사이즈가 0일경우
      */
     public static boolean isZeroSize(List list) {
         return list.size() == 0;
+    }
+
+    /**
+     * List의 사이즈가 2 이상일경우
+     */
+    public static boolean isTwoOverSize(List list) {
+        return list.size() >= 2;
     }
 }
