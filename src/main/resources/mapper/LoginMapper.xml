@@ -7,7 +7,9 @@
     <!-- Id 검색 -->
     <select id="selectByUserId" resultType="HashMap" parameterType="HashMap">
         SELECT
-            *
+            id as userId,
+            pwd as userPassword,
+            email as userEmail
         FROM MB_INFO_M
         WHERE id = #{userId}
     </select>
