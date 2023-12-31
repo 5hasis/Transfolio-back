@@ -3,6 +3,7 @@ package com.example.transfolio.domain.auth.login;
 import com.example.transfolio.common.error.ErrorMessage;
 import com.example.transfolio.common.error.ErrorObj;
 import com.example.transfolio.common.utils.CommonUtils;
+import com.example.transfolio.common.utils.JwtUtils;
 import com.example.transfolio.domain.auth.login.service.LoginService;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,7 +26,7 @@ public class LoginAPI {
     }
 
     @PostMapping("/login")
-    public JSONObject authLogin(@RequestBody HashMap body) {
+    public JSONObject authLogin(@RequestBody HashMap body) throws Exception {
 
         // Parameter 필수값 체크
         if (CommonUtils.validRequestParam(body, authLoginValid)) {

@@ -1,19 +1,24 @@
 package com.example.transfolio.common.utils;
 
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
+import javax.crypto.SecretKey;
+import java.time.Instant;
 import java.util.Date;
 
+
+@Component
 public class JwtUtils {
 
-    private static String SECRET_KEY;
-    private static long EXPIRATION_TIME;
+    public static String JWT_KEY;
+    public static long EXPIRATION_TIME;
 
     @Value("${jwt.secret.key}")
-            public void setSecretKey(String jwtSecretKey) {
-        SECRET_KEY = jwtSecretKey;
+    public void setSecretKey(String jwtKey) {
+        JWT_KEY = jwtKey;
     }
 
     @Value("${jwt.expriration.time}")
@@ -22,10 +27,15 @@ public class JwtUtils {
     }
 
     public static String generateToken(String username) {
-        return Jwts.builder()
-                .setSubject(username)
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
-                .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
+
+        SecretKey signKey = Jwts.SIG.HS256.key().build();
+
+        String jwtToken = Jwts.builder()
+                .subject("hi")
+                .signWith(signKey)
                 .compact();
+
+        return jwtToken;
+
     }
 }
