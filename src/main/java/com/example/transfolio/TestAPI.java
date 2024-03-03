@@ -17,7 +17,7 @@ public class TestAPI {
     @PostMapping("/test")
     public String PostTest() {
 
-        return "Test Post API Success";
+        return "Test Post API Success TEST";
 
     }
 
