@@ -1,4 +1,4 @@
-FROM openjdk11:alpine
+FROM adoptopenjdk/openjdk11
 
 ARG JAR_PATH=build/libs/Transfolio-0.1.jar
 
