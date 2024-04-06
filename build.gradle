@@ -3,7 +3,7 @@ plugins {
     id 'org.springframework.boot' version '2.7.17'
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 
-    // asciidoctor 플러그인
+    /* asciidoctor 플러그인 */
     id "org.asciidoctor.jvm.convert" version "3.3.2"
 }
 
@@ -14,30 +14,23 @@ java {
     sourceCompatibility = '11'
 }
 
+/* [REST DOC] Snippets 파일 저장 경로 선언 */
 ext {
     set('snippetsDir', file("build/generated-snippets"))
 }
 
+/* [REST DOC] AsciiDoctor 설정 task */
 asciidoctor {
-<<<<<<< Updated upstream
-    configurations 'asciidoctorExt' // (7)
-    baseDirFollowsSourceFile() // (8)
-    inputs.dir snippetsDir // (9)
-    dependsOn test // (10)
-=======
+    inputs.dir snippetsDir
     dependsOn test
-    inputs.dir file("/build/generated-snippets")
->>>>>>> Stashed changes
 }
 
 asciidoctor.doFirst {
-    delete file('src/main/resources/static/docs')  // (11)
+    delete file('src/main/resources/static/docs')
 }
 
-<<<<<<< Updated upstream
-task copyDocument(type: Copy) { // (12)
-=======
-bootJar {
+
+bootJar{
     dependsOn asciidoctor
     copy {
         from "${asciidoctor.outputDir}"
@@ -46,12 +39,14 @@ bootJar {
 }
 
 task copyDocument(type: Copy) {
->>>>>>> Stashed changes
     dependsOn asciidoctor
     from file("build/docs/asciidoc")
     into file("src/main/resources/static/docs")
 }
 
+build {
+    dependsOn copyDocument
+}
 
 configurations {
     asciidoctorExt
@@ -87,12 +82,8 @@ dependencies {
     asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor'
 }
 
-<<<<<<< Updated upstream
-tasks.named('test') {
-    useJUnitPlatform()
-    outputs.dir snippetsDir // (6)
-=======
+
 test {
     useJUnitPlatform()
->>>>>>> Stashed changes
 }
+
