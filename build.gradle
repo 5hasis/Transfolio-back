@@ -3,7 +3,7 @@ plugins {
     id 'org.springframework.boot' version '2.7.17'
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 
-    // asciidoctor 플러그인
+    /* asciidoctor 플러그인 */
     id "org.asciidoctor.jvm.convert" version "3.3.2"
 }
 
@@ -14,27 +14,38 @@ java {
     sourceCompatibility = '11'
 }
 
+/* [REST DOC] Snippets 파일 저장 경로 선언 */
 ext {
     snippetsDir = file('build/generated-snippets') // (5)
 }
 
+/* [REST DOC] AsciiDoctor 설정 task */
 asciidoctor {
-    configurations 'asciidoctorExt' // (7)
-    baseDirFollowsSourceFile() // (8)
-    inputs.dir snippetsDir // (9)
-    dependsOn test // (10)
+    dependsOn test
+    inputs.dir snippetsDir
 }
 
 asciidoctor.doFirst {
-    delete file('src/main/resources/static/docs')  // (11)
+    delete file('src/main/resources/static/docs')
 }
 
-task copyDocument(type: Copy) { // (12)
+bootJar{
+    dependsOn asciidoctor
+    copy {
+        from "${asciidoctor.outputDir}"
+        into 'BOOT-INF/classes/static/docs'
+    }
+}
+
+task copyDocument(type: Copy) {
     dependsOn asciidoctor
     from file("build/docs/asciidoc")
     into file("src/main/resources/static/docs")
 }
 
+build {
+    dependsOn copyDocument
+}
 
 configurations {
     asciidoctorExt
@@ -70,7 +81,3 @@ dependencies {
     asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor'
 }
 
-tasks.named('test') {
-    useJUnitPlatform()
-    outputs.dir snippetsDir // (6)
-}
