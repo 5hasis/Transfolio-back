@@ -15,21 +15,38 @@ java {
 }
 
 ext {
-    snippetsDir = file('build/generated-snippets') // (5)
+    set('snippetsDir', file("build/generated-snippets"))
 }
 
 asciidoctor {
+<<<<<<< Updated upstream
     configurations 'asciidoctorExt' // (7)
     baseDirFollowsSourceFile() // (8)
     inputs.dir snippetsDir // (9)
     dependsOn test // (10)
+=======
+    dependsOn test
+    inputs.dir file("/build/generated-snippets")
+>>>>>>> Stashed changes
 }
 
 asciidoctor.doFirst {
     delete file('src/main/resources/static/docs')  // (11)
 }
 
+<<<<<<< Updated upstream
 task copyDocument(type: Copy) { // (12)
+=======
+bootJar {
+    dependsOn asciidoctor
+    copy {
+        from "${asciidoctor.outputDir}"
+        into 'BOOT-INF/classes/static/docs'
+    }
+}
+
+task copyDocument(type: Copy) {
+>>>>>>> Stashed changes
     dependsOn asciidoctor
     from file("build/docs/asciidoc")
     into file("src/main/resources/static/docs")
@@ -70,7 +87,12 @@ dependencies {
     asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor'
 }
 
+<<<<<<< Updated upstream
 tasks.named('test') {
     useJUnitPlatform()
     outputs.dir snippetsDir // (6)
+=======
+test {
+    useJUnitPlatform()
+>>>>>>> Stashed changes
 }
