@@ -5,8 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.10">
-<meta name="author" content=":toclevels:2">
-<title>minlog API</title>
+<title>TRANS_FOLIO 테스트 API</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -440,52 +439,64 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="book toc2 toc-left">
 <div id="header">
-<h1>minlog API</h1>
+<h1>TRANS_FOLIO 테스트 API</h1>
 <div class="details">
-<span id="author" class="author">:toclevels:2</span><br>
 <span id="revnumber">version 0.1</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_글_단건_조회">글 단건 조회</a>
-<ul class="sectlevel2">
-<li><a href="#_요청">요청</a></li>
-</ul>
-</li>
+<li><a href="#_host_code">HOST Code</a></li>
+<li><a href="#_request_code">Request Code</a></li>
+<li><a href="#_response_code">Response Code</a></li>
+<li><a href="#_응답_결과">응답 결과</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_글_단건_조회"><a class="link" href="#_글_단건_조회">글 단건 조회</a></h2>
+<h2 id="_host_code"><a class="link" href="#_host_code">HOST Code</a></h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_요청"><a class="link" href="#_요청">요청</a></h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-none hljs"></code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /test HTTP/1.1
-Host: localhost:8080</code></pre>
-</div>
-</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ http GET 'http://localhost:8080/test'</code></pre>
 </div>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_request_code"><a class="link" href="#_request_code">Request Code</a></h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ http GET 'http://localhost:8080/test'</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_response_code"><a class="link" href="#_response_code">Response Code</a></h2>
+<div class="sectionbody">
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
 Content-Type: text/plain;charset=UTF-8
-Content-Length: 20
+Content-Length: 24
 
-Test Get API Success</code></pre>
+Test Get API1234 Success</code></pre>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_응답_결과"><a class="link" href="#_응답_결과">응답 결과</a></h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">Test Get API1234 Success</code></pre>
 </div>
 </div>
 </div>
@@ -494,7 +505,7 @@ Test Get API Success</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 0.1<br>
-Last updated 2023-11-18 23:38:22 +0900
+Last updated 2024-04-06 23:11:55 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
