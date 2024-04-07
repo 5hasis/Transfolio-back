@@ -1,4 +1,4 @@
-package com.example.transfolio.config;
+package com.example.transfolio.common.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
