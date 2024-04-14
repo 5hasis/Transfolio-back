@@ -46,7 +46,6 @@ public class MemberTest {
     private EntityManager entityManager;
 
     @Test
-    @DisplayName("회원 가입")
     @Transactional
     void saveMember() throws Exception {
 
