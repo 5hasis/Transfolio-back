@@ -1,4 +1,4 @@
-package com.example.transfolio;
+package com.example.transfolio.member;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 public class RestDocTest {
 
-
     @Autowired
     private MockMvc mockMvc;
 
@@ -28,7 +27,7 @@ public class RestDocTest {
     public void RestDocsTest() throws Exception {
         this.mockMvc.perform(get("/test"))
                 .andExpect(status().isOk())
-                .andDo(document("test-test"
+                .andDo(document("test"
                 ));
 
 
