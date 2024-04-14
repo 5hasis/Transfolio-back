@@ -46,7 +46,6 @@ public class MemberTest {
     private EntityManager entityManager;
 
     @Test
-    @Transactional
     void saveMember() throws Exception {
 
         UserIntrsDto userIntrsDto = new UserIntrsDto().builder()
