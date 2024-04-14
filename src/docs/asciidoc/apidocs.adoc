@@ -1,0 +1,22 @@
+= TRANS FOLIO API
+:toc: left
+:toc-title: 목차
+:toclevels: 2
+:source-highlighter: highlightjs
+
+[[USER]]
+
+== 유저 API
+HTTP request
+include::{snippets}/user/http-request.adoc[]
+
+요청 파라미터
+include::{snippets}/user/request-fields.adoc[]
+
+요청 바디
+include::{snippets}/user/request-body.adoc[]
+
+응답 결과
+include::{snippets}/user/response-body.adoc[]
+
+
