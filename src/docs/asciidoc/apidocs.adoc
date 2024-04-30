@@ -4,6 +4,8 @@
 :toclevels: 2
 :source-highlighter: highlightjs
 
+:snippets: {docdir}/build/generated-snippets
+
 [[USER]]
 
 == 유저 API
