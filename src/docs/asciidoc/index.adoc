@@ -1,0 +1,29 @@
+= TRANS FOLIO API
+:toc: left
+:toc-title: 목차
+:toclevels: 2
+:source-highlighter: highlightjs
+
+[[USER]]
+
+== 유저 회원가입 API
+
+요청 커맨드
+include::../../../build/generated-snippets/user/curl-request.adoc[]
+
+HTTP 요청
+include::../../../build/generated-snippets/user/http-request.adoc[]
+
+HTTP 응답
+include::../../../build/generated-snippets/user/http-response.adoc[]
+
+요청 BODY
+include::../../../build/generated-snippets/user/request-body.adoc[]
+
+요청 FIELDS
+include::../../../build/generated-snippets/user/request-fields.adoc[]
+
+응답 BODY
+include::../../../build/generated-snippets/user/response-body.adoc[]
+
+

@@ -5,6 +5,7 @@ import com.example.transfolio.domain.user.model.UserDto;
 import com.example.transfolio.domain.user.repository.UserRepository;
 import com.example.transfolio.domain.user.service.UserSerivce;
 import lombok.RequiredArgsConstructor;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,7 +23,7 @@ public class UserController {
      * 회원가입
      */
     @PostMapping("/sign-up")
-    public String registerUser(@RequestBody UserDto user) {
+    public JSONObject registerUser(@RequestBody UserDto user) {
 
         return userSerivce.registerUser(user);
     }

@@ -1,5 +1,8 @@
 package com.example.transfolio.domain.user.service;
 
+import com.example.transfolio.common.error.ErrorMessage;
+import com.example.transfolio.common.error.ErrorObj;
+import com.example.transfolio.common.response.ResObj;
 import com.example.transfolio.domain.user.entity.User;
 import com.example.transfolio.domain.user.entity.UserIntrs;
 import com.example.transfolio.domain.user.model.UserDto;
@@ -7,6 +10,7 @@ import com.example.transfolio.domain.user.model.UserIntrsDto;
 import com.example.transfolio.domain.user.repository.UserIntrsRepository;
 import com.example.transfolio.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,10 +32,10 @@ public class UserSerivce {
      * 회원가입
      */
     @Transactional
-    public String registerUser(UserDto userDto) {
+    public JSONObject registerUser(UserDto userDto) {
 
         if (!userRepository.findByUserId(userDto.getUserId()).isEmpty()) {
-            return "존재하는 아이디";
+            return new ErrorObj(ErrorMessage.REQUIRED_PARAMETER_FIELD).getObject();
         }
 
         User build = new User()
@@ -54,7 +58,7 @@ public class UserSerivce {
 
         userIntrsRepository.save(userIntrs);
 
-        return "success";
+        return new ResObj.Builder().message("success").build().getObject();
 
     }
 
