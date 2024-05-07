@@ -35,7 +35,7 @@ public class UserSerivce {
     public JSONObject registerUser(UserDto userDto) {
 
         if (!userRepository.findByUserId(userDto.getUserId()).isEmpty()) {
-            return new ErrorObj(ErrorMessage.REQUIRED_PARAMETER_FIELD).getObject();
+            return new ErrorObj(ErrorMessage.DUPLICATION_ID).getObject();
         }
 
         User build = new User()

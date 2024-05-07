@@ -9,7 +9,9 @@ public enum ErrorMessage implements ErrorEnum {
 
     REQUIRED_PARAMETER_FIELD("001", "파라미터에 필수값이 존재하지 않습니다"),
 
-    REQUIRED_BODY_FIELD("002", "BODY에 필수값이 존재하지 않습니다")
+    REQUIRED_BODY_FIELD("002", "BODY에 필수값이 존재하지 않습니다"),
+
+    DUPLICATION_ID("003", "이미 존재하는 아이디 입니다")
     ;
 
     private String status = "200";
