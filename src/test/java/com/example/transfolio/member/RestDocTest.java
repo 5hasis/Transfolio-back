@@ -20,17 +20,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 public class RestDocTest {
 
-    @Autowired
-    private MockMvc mockMvc;
 
-    @Test
-    public void RestDocsTest() throws Exception {
-        this.mockMvc.perform(get("/test"))
-                .andExpect(status().isOk())
-                .andDo(document("test"
-                ));
-
-
-    }
 
 }

@@ -29,9 +29,8 @@ public class ResObj {
 
     private String message;
 
-    public ResObj(Builder build) {
-        this.result = build.body;
-        this.message = build.message;
+    public ResObj(String message) {
+        this.message = message;
     }
 
     public JSONObject getObject() {
@@ -46,26 +45,6 @@ public class ResObj {
 
         return jsonObj;
 
-    }
-
-    public static class Builder {
-
-        private Object body;
-        private String message = "정상적으로 처리되었습니다";
-
-        public Builder message(String message) {
-            this.message = message;
-            return this;
-        }
-
-        public Builder body(Object body) {
-             this.body = body;
-             return this;
-        }
-
-        public ResObj build() {
-            return new ResObj(this);
-        }
     }
 
 }

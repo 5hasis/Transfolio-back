@@ -34,9 +34,9 @@ public class UserSerivce {
     @Transactional
     public JSONObject registerUser(UserDto userDto) {
 
-        if (!userRepository.findByUserId(userDto.getUserId()).isEmpty()) {
-            return new ErrorObj(ErrorMessage.DUPLICATION_ID).getObject();
-        }
+//        if (!userRepository.findByUserId(userDto.getUserId()).isEmpty()) {
+//            return new ErrorObj(ErrorMessage.DUPLICATION_ID).getObject();
+//        }
 
         User build = new User()
                 .builder()
@@ -58,7 +58,7 @@ public class UserSerivce {
 
         userIntrsRepository.save(userIntrs);
 
-        return new ResObj.Builder().message("success").build().getObject();
+        return new ResObj("success").getObject();
 
     }
 
