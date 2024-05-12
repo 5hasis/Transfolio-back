@@ -27,4 +27,16 @@ public class UserController {
 
         return userSerivce.registerUser(user);
     }
+
+
+    /**
+     * 로그인
+     */
+    @PostMapping("/sign-in")
+    public JSONObject loginUser(@RequestBody UserDto user) {
+
+        return userSerivce.login(user);
+    }
+
+
 }

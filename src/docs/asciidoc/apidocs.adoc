@@ -9,16 +9,18 @@
 [[USER]]
 
 == 유저 API
-HTTP request
-include::{snippets}/user/http-request.adoc[]
+=== 회원가입
+include::{snippets}/user/sign-in/http-request.adoc[]
+include::{snippets}/user/sign-in/http-response.adoc[]
+include::{snippets}/user/sign-in/request-fields.adoc[]
+include::{snippets}/user/sign-in/request-body.adoc[]
+include::{snippets}/user/sign-in/response-body.adoc[]
 
-요청 파라미터
-include::{snippets}/user/request-fields.adoc[]
+=== 로그인
+include::{snippets}/user/sign-up/http-request.adoc[]
+include::{snippets}/user/sign-up/http-response.adoc[]
+include::{snippets}/user/sign-up/request-fields.adoc[]
+include::{snippets}/user/sign-up/request-body.adoc[]
+include::{snippets}/user/sign-up/response-body.adoc[]
 
-요청 바디
-include::{snippets}/user/request-body.adoc[]
-
-응답 결과
-include::{snippets}/user/response-body.adoc[]
-
-
+=== 로그아웃

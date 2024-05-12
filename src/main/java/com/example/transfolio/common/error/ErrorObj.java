@@ -4,19 +4,18 @@ import org.json.simple.JSONObject;
 
 public class ErrorObj {
 
-
-    private String status = "200";
-    private String message = "에러가 발생하였습니다";
+    private final String status;
+    private final String error;
 
     public ErrorObj(ErrorEnum errorEnum) {
         this.status = errorEnum.getStatus();
-        this.message = errorEnum.getMessage();
+        this.error = errorEnum.getMessage();
     }
 
     public JSONObject getObject() {
         JSONObject errorObject = new JSONObject();
 
-        errorObject.put("message", this.message);
+        errorObject.put("message", this.error);
         errorObject.put("status", this.status);
 
         return errorObject;

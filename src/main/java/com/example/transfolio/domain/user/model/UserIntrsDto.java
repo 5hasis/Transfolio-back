@@ -10,9 +10,6 @@ import javax.persistence.*;
 @Builder
 public class UserIntrsDto {
 
-
-    private Long userPid;
-
     @NonNull
     private String intrsLanguage;
 

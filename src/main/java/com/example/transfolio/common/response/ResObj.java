@@ -27,10 +27,14 @@ public class ResObj {
 
     private String status = "200";
 
-    private String message;
+    private String message = "success";
 
-    public ResObj(String message) {
-        this.message = message;
+    public ResObj() {
+
+    }
+
+    public ResObj(Object result) {
+        this.result = result;
     }
 
     public JSONObject getObject() {

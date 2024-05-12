@@ -1,5 +1,6 @@
 package com.example.transfolio.member;
 
+import com.example.transfolio.domain.LoginDto;
 import com.example.transfolio.domain.user.entity.User;
 import com.example.transfolio.domain.user.entity.UserIntrs;
 import com.example.transfolio.domain.user.model.UserDto;
@@ -48,8 +49,7 @@ public class MemberTest {
     @Test
     void saveMember() throws Exception {
 
-        UserIntrsDto userIntrsDto = new UserIntrsDto().builder()
-                .userPid(999999L)
+        UserIntrsDto userIntrs = new UserIntrsDto().builder()
                 .intrsLanguage("한국어,영어,일본어")
                 .intrsMajor("공학,전공")
                 .intrsLiterature("고전시,고전소설")
@@ -61,7 +61,7 @@ public class MemberTest {
                 .userId("accountTest")
                 .email("test@test.account")
                 .password("password")
-                .userIntrsDto(userIntrsDto)
+                .userIntrsDto(userIntrs)
                 .build();
 
         this.mockMvc.perform(post("/user/sign-up")
@@ -69,18 +69,41 @@ public class MemberTest {
                         .content(objectMapper.writeValueAsString(user)))
                 .andExpect(status().isOk())
                 .andDo(document(
-                        "user",
+                        "user/sign-up",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint()),
                         requestFields(
                                 fieldWithPath("userId").type(JsonFieldType.STRING).description("유저 아이디"),
                                 fieldWithPath("password").type(JsonFieldType.STRING).description("유저 비밀번호"),
                                 fieldWithPath("email").type(JsonFieldType.STRING).description("유저 이메일"),
-                                fieldWithPath("userIntrsDto.userPid").type(JsonFieldType.STRING).description("").ignored(),
                                 fieldWithPath("userIntrsDto.intrsLanguage").type(JsonFieldType.STRING).description("유저의 관심 언어"),
                                 fieldWithPath("userIntrsDto.intrsMajor").type(JsonFieldType.STRING).description("유저의 관심 전공"),
                                 fieldWithPath("userIntrsDto.intrsLiterature").type(JsonFieldType.STRING).description("유저의 관심 문학"),
                                 fieldWithPath("userIntrsDto.intrsCorporation").type(JsonFieldType.STRING).description("유저의 관심 기업")
+                        )));
+
+    }
+
+    @Test
+    void signInMember() throws Exception {
+
+        // GIVEN
+        LoginDto login = new LoginDto().builder()
+                .userId("accountTest")
+                .password("password")
+                .build();
+
+        this.mockMvc.perform(post("/user/sign-in")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(login)))
+                .andExpect(status().isOk())
+                .andDo(document(
+                        "user/sign-in",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint()),
+                        requestFields(
+                                fieldWithPath("userId").type(JsonFieldType.STRING).description("유저 아이디"),
+                                fieldWithPath("password").type(JsonFieldType.STRING).description("유저 비밀번호")
                         )));
 
     }

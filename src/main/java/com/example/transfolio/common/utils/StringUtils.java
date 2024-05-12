@@ -5,7 +5,9 @@ package com.example.transfolio.common.utils;
 문자열과 관련된 도구메서드
 */
 
-import org.mindrot.jbcrypt.BCrypt;
+
+
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import java.util.Random;
 

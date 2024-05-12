@@ -1,5 +1,6 @@
 package com.example.transfolio.domain.user.entity;
 
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,7 +22,8 @@ public class UserIntrs {
     @Column(name = "USER_INTRS_PID")
     private Long pid;
 
-    private Long userPid;
+    @NotNull
+    private String userId;
 
     @NonNull
     private String intrsLanguage;

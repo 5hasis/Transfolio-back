@@ -11,7 +11,7 @@ public class TestAPI {
     @GetMapping("/docs")
     public String Test() {
 
-        return "/docs/apidocs.html";
+        return "docs/apidocs.html";
 
     }
 
