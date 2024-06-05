@@ -1,9 +1,14 @@
 package com.example.transfolio.domain.user.entity;
 
-import lombok.*;
+import com.example.transfolio.domain.board.entity.Board;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NonNull;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Builder
@@ -36,4 +41,7 @@ public class User {
     public User() {
 
     }
+
+    @OneToMany(mappedBy = "user")
+    private List<Board> boardList;
 }
