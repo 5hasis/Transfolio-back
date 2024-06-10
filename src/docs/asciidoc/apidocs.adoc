@@ -24,3 +24,10 @@ include::{snippets}/user/sign-up/request-body.adoc[]
 include::{snippets}/user/sign-up/response-body.adoc[]
 
 === 로그아웃
+
+=== 마이페이지
+include::{snippets}/mypage/http-request.adoc[]
+include::{snippets}/mypage/http-response.adoc[]
+include::{snippets}/mypage/request-fields.adoc[]
+include::{snippets}/mypage/request-body.adoc[]
+include::{snippets}/mypage/response-body.adoc[]

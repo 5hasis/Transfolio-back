@@ -24,8 +24,7 @@ import java.util.Optional;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
-import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
-import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
+import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -107,4 +106,25 @@ public class MemberTest {
                         )));
 
     }
+
+    @Test
+    void getMyPost() throws Exception{
+
+        UserDto userDto = new UserDto().builder()
+                .userId("accountTest")
+                .build();
+
+        this.mockMvc.perform(post("/mypage/")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(userDto)))
+                .andExpect(status().isOk())
+                .andDo(document("mypage",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint()),
+                        relaxedRequestFields(
+                                fieldWithPath("userId").type(JsonFieldType.STRING).description("유저 아이디")
+                        ))
+        );
+
+}
 }

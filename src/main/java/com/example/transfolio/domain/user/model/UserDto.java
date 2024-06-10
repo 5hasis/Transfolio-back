@@ -14,7 +14,7 @@ public class UserDto {
     @NonNull
     private String userId;
 
-    @NonNull
+    //@NonNull
     private String password;
 
     private String email;
