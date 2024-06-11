@@ -4,6 +4,7 @@ import com.example.transfolio.common.filter.JwtTokenFilter;
 import com.example.transfolio.common.utils.JwtUtil;
 import com.example.transfolio.domain.user.repository.UserRepository;
 import com.example.transfolio.domain.user.service.UserSerivce;
+import io.jsonwebtoken.JwtException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

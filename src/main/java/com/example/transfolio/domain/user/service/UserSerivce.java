@@ -29,7 +29,6 @@ public class UserSerivce {
     private final UserRepository userRepository;
     private final UserIntrsRepository userIntrsRepository;
     private final PasswordEncoder encoder;
-    private final ModelMapper modelMapper;
 
     /**
      * 회원가입
@@ -72,18 +71,23 @@ public class UserSerivce {
      */
     public JSONObject login(UserDto userDto) {
 
-        List<User> byUserId = userRepository.findByUserId(userDto.getUserId());
-        User user = byUserId.get(0);
+        List<User> userList = userRepository.findByUserId(userDto.getUserId());
 
-        // 로그인 아이디나 비밀번호가 틀린 경우 global error return
-        if(user == null) {
-            return null;
+        boolean isSearchUser = userList.isEmpty();
+        if(isSearchUser) {
+            return new ErrorObj(ErrorMessage.REQUIRED_ID_PASSWORD).getObject();
+        }
+
+        User user = userList.get(0);
+
+        boolean isPasswordMatches = encoder.matches(userDto.getPassword(), user.getPassword());
+        if (!isPasswordMatches) {
+            return new ErrorObj(ErrorMessage.REQUIRED_ID_PASSWORD).getObject();
         }
 
         // 로그인 성공 => Jwt Token 발급
-
         String secretKey = "my-secret-key-123123";
-        long expireTimeMs = 1000 * 60 * 60;     // Token 유효 시간 = 60분
+        long expireTimeMs = 500000;     // Token 유효 시간 = 60분
 
         String jwtToken = JwtUtil.createToken(user.getUserId(), secretKey, expireTimeMs);
 
