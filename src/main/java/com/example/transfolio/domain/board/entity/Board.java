@@ -19,9 +19,7 @@ public class Board {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long boardPid;
 
-    @ManyToOne
-    @JoinColumn(name = "user_pid")
-    private User user;
+
 
     @NonNull
     private String boardTitle; //제목

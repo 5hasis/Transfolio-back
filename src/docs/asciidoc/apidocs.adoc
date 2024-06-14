@@ -9,14 +9,14 @@
 [[USER]]
 
 == 유저 API
-=== 회원가입
+=== 로그인
 include::{snippets}/user/sign-in/http-request.adoc[]
 include::{snippets}/user/sign-in/http-response.adoc[]
 include::{snippets}/user/sign-in/request-fields.adoc[]
 include::{snippets}/user/sign-in/request-body.adoc[]
 include::{snippets}/user/sign-in/response-body.adoc[]
 
-=== 로그인
+=== 회원가입
 include::{snippets}/user/sign-up/http-request.adoc[]
 include::{snippets}/user/sign-up/http-response.adoc[]
 include::{snippets}/user/sign-up/request-fields.adoc[]
@@ -24,6 +24,14 @@ include::{snippets}/user/sign-up/request-body.adoc[]
 include::{snippets}/user/sign-up/response-body.adoc[]
 
 === 로그아웃
+
+== 게시글 API
+=== 게시글 등록
+include::{snippets}/board/http-request.adoc[]
+include::{snippets}/board/http-response.adoc[]
+include::{snippets}/board/request-fields.adoc[]
+include::{snippets}/board/request-body.adoc[]
+include::{snippets}/board/response-body.adoc[]
 
 === 마이페이지
 include::{snippets}/mypage/http-request.adoc[]

@@ -13,9 +13,33 @@ import lombok.*;
 public class BoardDto {
 
     private Long boardPid;
+
+    private String userId;
+
     private String boardTitle;
-    private String boardAfterLang;
-    private String boardBeforeLang;
+
+    private String afterLang;
+
+    private String beforeLang;
+
+    private String boardSubTitle;
+
+    private String boardDescription;
+
+    private String highCtg;
+
+    private String lowCtg;
+
+    private String boardAuthor;
+
+    private String boardContent;
+
+    private boolean tempStorageAt;
+
+    private int fontSize;
+
+    private String fontType;
+
     private User user;
 
     /* DTO -> Entity */
@@ -23,8 +47,8 @@ public class BoardDto {
         Board board = Board.builder()
                 .boardPid(boardPid)
                 .boardTitle(boardTitle)
-                .boardAfterLang(boardAfterLang)
-                .boardBeforeLang(boardBeforeLang)
+                .boardAfterLang(afterLang)
+                .boardBeforeLang(beforeLang)
                 .user(user)
                 .build();
 

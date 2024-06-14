@@ -43,6 +43,7 @@ public class JwtUtil {
 
     // 밝급된 Token이 만료 시간이 지났는지 체크
     public static boolean isExpired(String token, String secretKey) {
+
         Date expiredDate = extractClaims(token, secretKey).getExpiration();
         // Token의 만료 날짜가 지금보다 이전인지 check
         return expiredDate.before(new Date());
@@ -50,6 +51,7 @@ public class JwtUtil {
 
     // SecretKey를 사용해 Token Parsing
     private static Claims extractClaims(String token, String secretKey) {
+        Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
     }
 
