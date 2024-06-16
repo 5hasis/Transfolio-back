@@ -5,7 +5,6 @@ import com.example.transfolio.domain.user.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NonNull;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -23,11 +22,8 @@ public class BoardEntity {
     private Long boardPid;
 
     @ManyToOne
-    @JoinColumn(name = "user_pid")
+    @JoinColumn(name = "user_id")
     private User user;
-
-    @NonNull
-    private String userId;
 
     private String boardTitle;
 
@@ -59,7 +55,7 @@ public class BoardEntity {
     private LocalDateTime updatedAt;
 
     public BoardEntity(BoardDto boardDto) {
-        this.userId = boardDto.getUserId();
+        this.user = boardDto.getUser();
         this.boardTitle = boardDto.getBoardTitle();
         this.boardSubTitle = boardDto.getBoardSubTitle();
         this.beforeLang = boardDto.getBeforeLang();

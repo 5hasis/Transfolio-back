@@ -1,6 +1,6 @@
 package com.example.transfolio.domain.user.entity;
 
-import com.example.transfolio.domain.board.entity.Board;
+import com.example.transfolio.domain.board.entity.BoardEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,9 +19,11 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_pid")
     private Long userPid;
 
     @NonNull
+    @Column(name = "user_id", unique = true)
     private String userId;
 
     @NonNull
@@ -30,8 +32,7 @@ public class User {
     @NonNull
     private String email;
 
-    @OneToOne
-    @JoinColumn(name = "user_pid")
+    @OneToOne(mappedBy = "user")
     private UserIntrs userIntrs;
 
     private LocalDateTime createdAt;
@@ -43,5 +44,5 @@ public class User {
     }
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    private List<Board> boardList;
+    private List<BoardEntity> boardList;
 }

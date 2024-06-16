@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface BoardRepository extends JpaRepository<BoardEntity, String> {
 
-    List<BoardEntity> findByUserId(String userId);
+    List<BoardEntity> findByUserUserId(String userId);
+
+    List<BoardEntity> findAllByOrderByCreatedAtDesc();
 
 }

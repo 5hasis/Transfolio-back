@@ -4,8 +4,6 @@ import com.example.transfolio.common.response.ResObj;
 import com.example.transfolio.domain.board.entity.BoardEntity;
 import com.example.transfolio.domain.board.model.BoardDto;
 import com.example.transfolio.domain.board.repository.BoardRepository;
-import com.example.transfolio.domain.user.model.UserDto;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -29,8 +27,9 @@ public class BoardService {
         return new ResObj(save);
     }
 
-    public List<BoardDto> getBoardListById(UserDto userDto) {
-        List<BoardEntity> boardList = boardRepository.findByUserId(userDto.getUserId());
+    /* 아이디로 게시물 조회 */
+    public List<BoardDto> getBoardListById(String userId) {
+        List<BoardEntity> boardList = boardRepository.findByUserUserId(userId);
 
         List<BoardDto> boardDtoList = new ArrayList<>();
         for (BoardEntity board : boardList) {
@@ -45,6 +44,11 @@ public class BoardService {
         }
 
         return boardDtoList;
+    }
+
+    /* 모든 게시물 조회 */
+    public List<BoardEntity> getAllPostsSortedByCreatedAtDesc() {
+        return boardRepository.findAllByOrderByCreatedAtDesc();
     }
 
 }

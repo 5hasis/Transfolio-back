@@ -18,12 +18,17 @@ import java.time.LocalDateTime;
 @Table(name = "tr_member_intrs")
 public class UserIntrs {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "USER_INTRS_PID")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_intrs_pid")
     private Long pid;
 
-    @NotNull
-    private String userId;
+//    @NotNull
+//    private String userId;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
 
     @NonNull
     private String intrsLanguage;

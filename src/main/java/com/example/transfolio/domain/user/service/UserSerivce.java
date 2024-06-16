@@ -7,20 +7,14 @@ import com.example.transfolio.common.utils.JwtUtil;
 import com.example.transfolio.domain.user.entity.User;
 import com.example.transfolio.domain.user.entity.UserIntrs;
 import com.example.transfolio.domain.user.model.UserDto;
-import com.example.transfolio.domain.user.model.UserIntrsDto;
 import com.example.transfolio.domain.user.repository.UserIntrsRepository;
 import com.example.transfolio.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONObject;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -53,7 +47,7 @@ public class UserSerivce {
 
         UserIntrs userIntrs = UserIntrs
                 .builder()
-                .userId(userDto.getUserId())
+                .user(build)
                 .intrsLanguage(userDto.getUserIntrsDto().getIntrsLanguage())
                 .intrsMajor(userDto.getUserIntrsDto().getIntrsMajor())
                 .intrsCorporation(userDto.getUserIntrsDto().getIntrsCorporation())

@@ -1,7 +1,12 @@
 package com.example.transfolio.domain.board.model;
 
-import com.example.transfolio.domain.board.entity.Board;
+import com.example.transfolio.domain.board.entity.BoardEntity;
 import com.example.transfolio.domain.user.entity.User;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+
+
 import lombok.*;
 
 @Builder
@@ -43,12 +48,12 @@ public class BoardDto {
     private User user;
 
     /* DTO -> Entity */
-    public Board toEntity(){
-        Board board = Board.builder()
+    public BoardEntity toEntity(){
+        BoardEntity board = BoardEntity.builder()
                 .boardPid(boardPid)
                 .boardTitle(boardTitle)
-                .boardAfterLang(afterLang)
-                .boardBeforeLang(beforeLang)
+                .afterLang(afterLang)
+                .beforeLang(beforeLang)
                 .user(user)
                 .build();
 
