@@ -5,6 +5,9 @@ import com.example.transfolio.domain.user.entity.User;
 import com.example.transfolio.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -12,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -52,13 +56,17 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         List<User> byUserId = userRepository.findByUserId(loginId);
         User user = byUserId.get(0);
 
-//        // loginUser 정보로 UsernamePasswordAuthenticationToken 발급
-//        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-//                user.getUserId(), null, List.of(new SimpleGrantedAuthority(user.getRole().name())));
-//        authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+//      loginUser 정보로 UsernamePasswordAuthenticationToken 발급
+        UsernamePasswordAuthenticationToken authenticationToken =
+                new UsernamePasswordAuthenticationToken(
+                        user.getUserId(),
+                        null,
+                        Collections.emptyList() // 권한이 없는 사용자
+                );
+        authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 //
-//        // 권한 부여
-//        SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-//        filterChain.doFilter(request, response);
+//      권한 부여
+        SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+        filterChain.doFilter(request, response);
     }
 }
