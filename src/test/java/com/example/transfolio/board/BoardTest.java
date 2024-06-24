@@ -1,11 +1,8 @@
 package com.example.transfolio.board;
 
-import com.example.transfolio.domain.LoginDto;
 import com.example.transfolio.domain.board.model.BoardDto;
+import com.example.transfolio.domain.board.model.BoardRegistDto;
 import com.example.transfolio.domain.board.repository.BoardRepository;
-import com.example.transfolio.domain.user.model.UserDto;
-import com.example.transfolio.domain.user.model.UserIntrsDto;
-import com.example.transfolio.domain.user.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.MockMvc;
-
-import javax.persistence.EntityManager;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
@@ -42,7 +37,7 @@ public class BoardTest {
     @Test
     void registerBoard() throws Exception {
 
-        BoardDto board = new BoardDto().builder()
+        BoardRegistDto board = new BoardRegistDto().builder()
                 .userId("test")
                 .boardTitle("제목을 입력해주세요")
                 .boardSubTitle("Hi welcome/안녕 어서와")
@@ -64,7 +59,7 @@ public class BoardTest {
                         .content(objectMapper.writeValueAsString(board)))
                 .andExpect(status().isOk())
                 .andDo(document(
-                        "/board",
+                        "board",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint()),
                         requestFields(
