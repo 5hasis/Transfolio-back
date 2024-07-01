@@ -8,9 +8,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-    @Value("${url.cors.main}")
-    private String CORS_URL;
-
     /**
      * CORS 설정
      */
@@ -21,7 +18,6 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("Authorization", "Content-Type")
                 .exposedHeaders("Custom-Header")
-                .allowCredentials(true)
                 .maxAge(3600);
     }
 }
