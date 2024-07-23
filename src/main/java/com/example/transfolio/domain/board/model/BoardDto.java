@@ -10,7 +10,6 @@ import lombok.Data;
 import lombok.*;
 
 @Builder
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -45,7 +44,7 @@ public class BoardDto {
 
     private String fontType;
 
-    private User user;
+    //private String userId;
 
     /* DTO -> Entity */
     public BoardEntity toEntity(){
@@ -54,7 +53,7 @@ public class BoardDto {
                 .boardTitle(boardTitle)
                 .afterLang(afterLang)
                 .beforeLang(beforeLang)
-                .user(user)
+                .userId(userId)
                 .build();
 
         return board;

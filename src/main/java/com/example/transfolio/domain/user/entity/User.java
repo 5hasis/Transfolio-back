@@ -1,21 +1,26 @@
 package com.example.transfolio.domain.user.entity;
 
 import com.example.transfolio.domain.board.entity.BoardEntity;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NonNull;
+import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
 @Builder
-@Data
+@Getter
+@Setter
+@RequiredArgsConstructor
+@ToString(exclude = "userIntrs")
+@EqualsAndHashCode(exclude = "userIntrs")
 @AllArgsConstructor
+
 @Table(name = "tr_member")
-public class User {
+public class User implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

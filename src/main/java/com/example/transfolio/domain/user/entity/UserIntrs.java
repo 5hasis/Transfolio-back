@@ -1,22 +1,23 @@
 package com.example.transfolio.domain.user.entity;
 
-import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NonNull;
-import org.hibernate.annotations.Generated;
-import org.hibernate.annotations.GenerationTime;
+import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
 @Builder
-@Data
+@Getter
+@Setter
+@RequiredArgsConstructor
 @AllArgsConstructor
+@ToString(exclude = "user")
+@EqualsAndHashCode(exclude = "user")
 @Table(name = "tr_member_intrs")
-public class UserIntrs {
+public class UserIntrs implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +27,7 @@ public class UserIntrs {
 //    @NotNull
 //    private String userId;
     @OneToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_pid")
     private User user;
 
 
