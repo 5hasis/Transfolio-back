@@ -1,13 +1,11 @@
 package com.example.transfolio.member;
 
+import com.example.transfolio.common.utils.JwtUtil;
 import com.example.transfolio.domain.LoginDto;
-import com.example.transfolio.domain.user.entity.User;
-import com.example.transfolio.domain.user.entity.UserIntrs;
 import com.example.transfolio.domain.user.model.UserDto;
 import com.example.transfolio.domain.user.model.UserIntrsDto;
 import com.example.transfolio.domain.user.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
@@ -16,11 +14,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import java.util.List;
-import java.util.Optional;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
@@ -110,20 +105,24 @@ public class MemberTest {
     @Test
     void getMyPost() throws Exception{
 
-        UserDto userDto = new UserDto().builder()
-                .userId("accountTest")
-                .build();
+        String userId = "accountTest";
+        String jsonUserId = "{\"userId\":\"" + userId + "\"}";
+
+        String token = JwtUtil.createToken(userId,"my-secret-key-123123", 500000); // 테스트용 사용자 계정
 
         this.mockMvc.perform(post("/mypage/")
+                        .header("Authorization", "Bearer " + token)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(userDto)))
+                    .content(jsonUserId)
+                )
                 .andExpect(status().isOk())
                 .andDo(document("mypage",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint()),
                         relaxedRequestFields(
                                 fieldWithPath("userId").type(JsonFieldType.STRING).description("유저 아이디")
-                        ))
+                        )
+                )
         );
 
 }

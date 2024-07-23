@@ -36,6 +36,4 @@ include::{snippets}/board/response-body.adoc[]
 === 마이페이지
 include::{snippets}/mypage/http-request.adoc[]
 include::{snippets}/mypage/http-response.adoc[]
-include::{snippets}/mypage/request-fields.adoc[]
-include::{snippets}/mypage/request-body.adoc[]
 include::{snippets}/mypage/response-body.adoc[]
