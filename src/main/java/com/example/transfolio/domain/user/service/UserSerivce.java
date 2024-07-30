@@ -99,7 +99,7 @@ public class UserSerivce {
     /**
      * 회원정보 조회
      */
-    public User getUserByUserId(String loginId){
+    public UserEntity getUserByUserId(String loginId){
         return userRepository.findByUserId(loginId).get(0);
     }
 

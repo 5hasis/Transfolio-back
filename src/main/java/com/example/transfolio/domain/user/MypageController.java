@@ -2,7 +2,7 @@ package com.example.transfolio.domain.user;
 
 import com.example.transfolio.domain.board.model.BoardDto;
 import com.example.transfolio.domain.board.service.BoardService;
-import com.example.transfolio.domain.user.entity.User;
+import com.example.transfolio.domain.user.entity.UserEntity;
 import com.example.transfolio.domain.user.model.UserInfoDto;
 import com.example.transfolio.domain.user.service.UserSerivce;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,7 +92,7 @@ public class MypageController {
                 loginId = (String)principal;
             }
             if (loginId != null && !loginId.equals("")) {
-                User user = userSerivce.getUserByUserId(loginId);
+                UserEntity user = userSerivce.getUserByUserId(loginId);
                 userinfoDto.setUserId(user.getUserId());
                 userinfoDto.setUserIntrs(user.getUserIntrs());
             }

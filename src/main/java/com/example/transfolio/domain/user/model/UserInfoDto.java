@@ -1,6 +1,6 @@
 package com.example.transfolio.domain.user.model;
 
-import com.example.transfolio.domain.user.entity.UserIntrs;
+import com.example.transfolio.domain.user.entity.UserIntrsEntity;
 import lombok.*;
 
 @Builder
@@ -14,6 +14,6 @@ public class UserInfoDto {
 
     private String email;
 
-    private UserIntrs userIntrs;
+    private UserIntrsEntity userIntrs;
 
 }
