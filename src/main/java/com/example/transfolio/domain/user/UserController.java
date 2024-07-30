@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -28,10 +31,10 @@ public class UserController {
      * 로그인
      */
     @PostMapping("/sign-in")
-    public JSONObject loginUser(@RequestBody UserDto user, @RequestHeader HttpHeaders httpHeaders) {
+    public JSONObject loginUser(@RequestBody UserDto user, @RequestHeader HttpHeaders httpHeaders, HttpServletResponse response) {
 
 
-        return userSerivce.login(user);
+        return userSerivce.login(user, response);
     }
 
 

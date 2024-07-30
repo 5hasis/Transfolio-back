@@ -11,9 +11,13 @@ import com.example.transfolio.domain.user.repository.UserIntrsRepository;
 import com.example.transfolio.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONObject;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Service
@@ -63,7 +67,7 @@ public class UserSerivce {
     /**
      * 로그인
      */
-    public JSONObject login(UserDto userDto) {
+    public JSONObject login(UserDto userDto, HttpServletResponse response) {
 
         List<UserEntity> userList = userRepository.findByUserId(userDto.getUserId());
 
@@ -84,6 +88,8 @@ public class UserSerivce {
         long expireTimeMs = 5000000;     // Token 유효 시간 = 60분
 
         String jwtToken = JwtUtil.createToken(user.getUserId(), secretKey, expireTimeMs);
+
+        response.setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + jwtToken);
 
         return new ResObj(jwtToken).getObject();
 
