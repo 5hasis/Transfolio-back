@@ -18,7 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 
 @Table(name = "tr_member")
-public class User implements Serializable {
+public class UserEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -38,13 +38,13 @@ public class User implements Serializable {
     private String email;
 
     @OneToOne(mappedBy = "user")
-    private UserIntrs userIntrs;
+    private UserIntrsEntity userIntrs;
 
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
 
-    public User() {
+    public UserEntity() {
 
     }
 

@@ -1,10 +1,8 @@
 package com.example.transfolio.domain.board.model;
 
 import com.example.transfolio.domain.board.entity.BoardEntity;
-import com.example.transfolio.domain.user.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 
 
 import lombok.*;

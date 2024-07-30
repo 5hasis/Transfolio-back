@@ -5,6 +5,8 @@ import com.example.transfolio.domain.board.entity.BoardEntity;
 import com.example.transfolio.domain.board.model.BoardDto;
 import com.example.transfolio.domain.board.service.BoardService;
 import org.springframework.http.HttpHeaders;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,9 +23,9 @@ public class BoardController {
     public ResObj createBoard(@RequestBody BoardDto board, @RequestHeader HttpHeaders httpHeaders) {
 
 
-
         return boardService.registerBoard(board);
     }
+
 
 
 }

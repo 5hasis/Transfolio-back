@@ -4,8 +4,8 @@ import com.example.transfolio.common.error.ErrorMessage;
 import com.example.transfolio.common.error.ErrorObj;
 import com.example.transfolio.common.response.ResObj;
 import com.example.transfolio.common.utils.JwtUtil;
-import com.example.transfolio.domain.user.entity.User;
-import com.example.transfolio.domain.user.entity.UserIntrs;
+import com.example.transfolio.domain.user.entity.UserEntity;
+import com.example.transfolio.domain.user.entity.UserIntrsEntity;
 import com.example.transfolio.domain.user.model.UserDto;
 import com.example.transfolio.domain.user.repository.UserIntrsRepository;
 import com.example.transfolio.domain.user.repository.UserRepository;
@@ -36,7 +36,7 @@ public class UserSerivce {
         String userPassword = userDto.getPassword();
         String encodePassword = encoder.encode(userPassword);
 
-        User build = User
+        UserEntity build = UserEntity
                 .builder()
                 .userId(userDto.getUserId())
                 .email(userDto.getEmail())
@@ -45,7 +45,7 @@ public class UserSerivce {
 
         userRepository.save(build);
 
-        UserIntrs userIntrs = UserIntrs
+        UserIntrsEntity userIntrs = UserIntrsEntity
                 .builder()
                 .user(build)
                 .intrsLanguage(userDto.getUserIntrsDto().getIntrsLanguage())
@@ -65,14 +65,14 @@ public class UserSerivce {
      */
     public JSONObject login(UserDto userDto) {
 
-        List<User> userList = userRepository.findByUserId(userDto.getUserId());
+        List<UserEntity> userList = userRepository.findByUserId(userDto.getUserId());
 
         boolean isSearchUser = userList.isEmpty();
         if(isSearchUser) {
             return new ErrorObj(ErrorMessage.REQUIRED_ID_PASSWORD).getObject();
         }
 
-        User user = userList.get(0);
+        UserEntity user = userList.get(0);
 
         boolean isPasswordMatches = encoder.matches(userDto.getPassword(), user.getPassword());
         if (!isPasswordMatches) {
@@ -81,7 +81,7 @@ public class UserSerivce {
 
         // 로그인 성공 => Jwt Token 발급
         String secretKey = "my-secret-key-123123";
-        long expireTimeMs = 500000;     // Token 유효 시간 = 60분
+        long expireTimeMs = 5000000;     // Token 유효 시간 = 60분
 
         String jwtToken = JwtUtil.createToken(user.getUserId(), secretKey, expireTimeMs);
 

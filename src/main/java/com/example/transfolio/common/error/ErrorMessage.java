@@ -15,7 +15,8 @@ public enum ErrorMessage implements ErrorEnum {
 
     REQUIRED_ID_PASSWORD("004", "아이디 또는 비밀번호가 일치하지 않습니다"),
 
-    EXPIRED_JWT_TOKEN("005", "토큰이 만료되었습니다")
+    EXPIRED_JWT_TOKEN("005", "만료된 토큰입니다"),
+
     ;
 
     private String status = "200";

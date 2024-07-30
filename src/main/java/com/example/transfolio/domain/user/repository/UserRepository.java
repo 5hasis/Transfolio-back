@@ -1,13 +1,12 @@
 package com.example.transfolio.domain.user.repository;
 
-import com.example.transfolio.domain.user.entity.User;
-import com.example.transfolio.domain.user.model.UserDto;
+import com.example.transfolio.domain.user.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface UserRepository extends JpaRepository<User, String> {
+public interface UserRepository extends JpaRepository<UserEntity, String> {
 
-    List<User> findByUserId(String userId);
+    List<UserEntity> findByUserId(String userId);
 
 }

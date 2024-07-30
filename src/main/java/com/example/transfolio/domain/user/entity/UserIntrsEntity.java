@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @ToString(exclude = "user")
 @EqualsAndHashCode(exclude = "user")
 @Table(name = "tr_member_intrs")
-public class UserIntrs implements Serializable {
+public class UserIntrsEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -28,7 +28,7 @@ public class UserIntrs implements Serializable {
 //    private String userId;
     @OneToOne
     @JoinColumn(name = "user_pid")
-    private User user;
+    private UserEntity user;
 
 
     @NonNull
@@ -47,7 +47,7 @@ public class UserIntrs implements Serializable {
 
     private LocalDateTime updatedAt;
 
-    public UserIntrs() {
+    public UserIntrsEntity() {
 
     }
 }

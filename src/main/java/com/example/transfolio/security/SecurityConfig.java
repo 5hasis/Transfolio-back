@@ -1,15 +1,16 @@
 package com.example.transfolio.security;
 
 import com.example.transfolio.common.filter.JwtTokenFilter;
-import com.example.transfolio.common.utils.JwtUtil;
 import com.example.transfolio.domain.user.repository.UserRepository;
 import com.example.transfolio.domain.user.service.UserSerivce;
 import io.jsonwebtoken.JwtException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -37,13 +38,15 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .antMatchers("/jwt-login/info").authenticated()
                 //.antMatchers("/jwt-login/admin/**").hasAuthority(UserRole.ADMIN.name())
-                .and().build();
+                .and()
+                .build();
     }
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
 
 
 }
