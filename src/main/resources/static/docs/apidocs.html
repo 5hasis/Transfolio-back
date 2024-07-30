@@ -471,8 +471,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /user/sign-in HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 57
-Host: localhost:8080
+Content-Length: 60
+Host: 3.36.105.195
 
 {
   "userId" : "accountTest",
@@ -493,10 +493,10 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 208
+Content-Length: 212
 
 {
-  "result" : "eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3MjE3Mjk4MTksImV4cCI6MTcyMTczMDMxOX0.1zvBvocKZTOzn-XVORPWP7JAQ2p5UhBNUDdS9l1t1nI",
+  "result" : "eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3MjIzMjgyODUsImV4cCI6MTcyMjMzMzI4NX0.3tROyCDKRKPyUffqSNHIMzOgjZ1YnOrWygS2h8jZ_6A",
   "message" : "success",
   "status" : "200"
 }</code></pre>
@@ -539,7 +539,7 @@ Content-Length: 208
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
-  "result" : "eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3MjE3Mjk4MTksImV4cCI6MTcyMTczMDMxOX0.1zvBvocKZTOzn-XVORPWP7JAQ2p5UhBNUDdS9l1t1nI",
+  "result" : "eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3MjIzMjgyODUsImV4cCI6MTcyMjMzMzI4NX0.3tROyCDKRKPyUffqSNHIMzOgjZ1YnOrWygS2h8jZ_6A",
   "message" : "success",
   "status" : "200"
 }</code></pre>
@@ -552,8 +552,8 @@ Content-Length: 208
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /user/sign-up HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 301
-Host: localhost:8080
+Content-Length: 311
+Host: 3.36.105.195
 
 {
   "userId" : "accountTest",
@@ -581,7 +581,7 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 79
+Content-Length: 82
 
 {
   "message" : "이미 존재하는 아이디 입니다",
@@ -679,8 +679,8 @@ Content-Length: 79
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /board HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 679
-Host: localhost:8080
+Content-Length: 693
+Host: 3.36.105.195
 
 {
   "userId" : "test",
@@ -712,12 +712,12 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 942
+Content-Length: 967
 
 {
   "object" : {
     "result" : {
-      "boardPid" : 25,
+      "boardPid" : 27,
       "user" : null,
       "userId" : "test",
       "boardTitle" : "제목을 입력해주세요",
@@ -732,7 +732,7 @@ Content-Length: 942
       "tempStorageAt" : false,
       "fontSize" : 13,
       "fontType" : "Noto Sanz",
-      "createdAt" : "2024-07-23T19:16:58.198615",
+      "createdAt" : "2024-07-30T17:31:24.8704386",
       "updatedAt" : null
     },
     "message" : "success",
@@ -846,7 +846,7 @@ Content-Length: 942
 <pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
   "object" : {
     "result" : {
-      "boardPid" : 25,
+      "boardPid" : 27,
       "user" : null,
       "userId" : "test",
       "boardTitle" : "제목을 입력해주세요",
@@ -861,7 +861,7 @@ Content-Length: 942
       "tempStorageAt" : false,
       "fontSize" : 13,
       "fontType" : "Noto Sanz",
-      "createdAt" : "2024-07-23T19:16:58.198615",
+      "createdAt" : "2024-07-30T17:31:24.8704386",
       "updatedAt" : null
     },
     "message" : "success",
@@ -877,9 +877,9 @@ Content-Length: 942
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /mypage/ HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3MjE3Mjk4MTgsImV4cCI6MTcyMTczMDMxOH0.pEkS8adf7cOW18NbrpMTgNTwJf6mviR5-h8vla9OObo
-Content-Length: 30
-Host: localhost:8080
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3MjIzMjgyODUsImV4cCI6MTcyMjMyODc4NX0.tDzXdJhrcmjkFW3c2vxTkd0kSM4WNpgw68RsC3fzcYE
+Content-Length: 32
+Host: 3.36.105.195
 
 {
   "userId" : "accountTest"
@@ -899,7 +899,7 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 357
+Content-Length: 372
 
 [ {
   "boardPid" : 1,
@@ -946,7 +946,7 @@ Content-Length: 357
 <div id="footer">
 <div id="footer-text">
 Version 0.1<br>
-Last updated 2024-07-23 17:10:06 +0900
+Last updated 2024-07-30 15:37:24 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">

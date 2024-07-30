@@ -23,7 +23,7 @@ import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@AutoConfigureRestDocs
+@AutoConfigureRestDocs(uriHost = "3.36.105.195", uriPort = 8080)
 @AutoConfigureMockMvc
 @SpringBootTest
 public class MemberTest {
