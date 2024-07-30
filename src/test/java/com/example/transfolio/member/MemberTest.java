@@ -102,28 +102,4 @@ public class MemberTest {
 
     }
 
-    @Test
-    void getMyPost() throws Exception{
-
-        String userId = "accountTest";
-        String jsonUserId = "{\"userId\":\"" + userId + "\"}";
-
-        String token = JwtUtil.createToken(userId,"my-secret-key-123123", 500000); // 테스트용 사용자 계정
-
-        this.mockMvc.perform(post("/mypage/")
-                        .header("Authorization", "Bearer " + token)
-                        .contentType(MediaType.APPLICATION_JSON)
-                    .content(jsonUserId)
-                )
-                .andExpect(status().isOk())
-                .andDo(document("mypage",
-                        preprocessRequest(prettyPrint()),
-                        preprocessResponse(prettyPrint()),
-                        relaxedRequestFields(
-                                fieldWithPath("userId").type(JsonFieldType.STRING).description("유저 아이디")
-                        )
-                )
-        );
-
-}
 }

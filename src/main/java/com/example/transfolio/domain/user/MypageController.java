@@ -2,6 +2,8 @@ package com.example.transfolio.domain.user;
 
 import com.example.transfolio.domain.board.model.BoardDto;
 import com.example.transfolio.domain.board.service.BoardService;
+import com.example.transfolio.domain.user.entity.User;
+import com.example.transfolio.domain.user.model.UserInfoDto;
 import com.example.transfolio.domain.user.service.UserSerivce;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -25,10 +27,10 @@ public class MypageController {
     private BoardService boardService;
 
     /**
-     * 마이페이지 조회
+     * 마이페이지 포트폴리오 탭 조회
      */
-    @PostMapping("/")
-    public List<BoardDto> getMyInfo() {
+    @PostMapping("/portfolio")
+    public List<BoardDto> getMyPortfolio() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String loginId = null;
         List<BoardDto> boardDtoList = new ArrayList<>();
@@ -48,4 +50,57 @@ public class MypageController {
 
         return boardDtoList;
     }
+
+    /**
+     * 마이페이지 경력 탭 조회
+     */
+    @PostMapping("/career")
+    public List<BoardDto> getMyCareer() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String loginId = null;
+        List<BoardDto> boardDtoList = new ArrayList<>();
+
+        if (authentication != null && authentication.isAuthenticated()) {
+            Object principal = authentication.getPrincipal();
+            if (principal instanceof String) {
+                loginId = (String)principal;
+            }
+            if (loginId != null && !loginId.equals("")) {
+
+                //boardDtoList = boardService.getBoardListById(loginId);
+            }
+        }else {
+            throw new IllegalStateException("Unexpected authentication principal type: " + authentication.getPrincipal().getClass());
+        }
+
+        return boardDtoList;
+    }
+
+    /**
+     * 마이페이지 사용자 정보
+     */
+    @PostMapping("/myInfo")
+    public UserInfoDto getMyInfo() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String loginId = null;
+
+        UserInfoDto userinfoDto = new UserInfoDto();
+
+        if (authentication != null && authentication.isAuthenticated()) {
+            Object principal = authentication.getPrincipal();
+            if (principal instanceof String) {
+                loginId = (String)principal;
+            }
+            if (loginId != null && !loginId.equals("")) {
+                User user = userSerivce.getUserByUserId(loginId);
+                userinfoDto.setUserId(user.getUserId());
+                userinfoDto.setUserIntrs(user.getUserIntrs());
+            }
+        }else {
+            throw new IllegalStateException("Unexpected authentication principal type: " + authentication.getPrincipal().getClass());
+        }
+
+        return userinfoDto;
+    }
+
 }
