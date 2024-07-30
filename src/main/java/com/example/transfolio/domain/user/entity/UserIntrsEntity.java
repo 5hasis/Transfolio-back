@@ -1,5 +1,6 @@
 package com.example.transfolio.domain.user.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -28,6 +29,7 @@ public class UserIntrsEntity implements Serializable {
 //    private String userId;
     @OneToOne
     @JoinColumn(name = "user_pid")
+    @JsonBackReference
     private UserEntity user;
 
 

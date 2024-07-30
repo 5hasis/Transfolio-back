@@ -1,6 +1,7 @@
 package com.example.transfolio.domain.user.entity;
 
 import com.example.transfolio.domain.board.entity.BoardEntity;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -16,7 +17,6 @@ import java.util.List;
 @ToString(exclude = "userIntrs")
 @EqualsAndHashCode(exclude = "userIntrs")
 @AllArgsConstructor
-
 @Table(name = "tr_member")
 public class UserEntity implements Serializable {
 
@@ -38,6 +38,7 @@ public class UserEntity implements Serializable {
     private String email;
 
     @OneToOne(mappedBy = "user")
+    @JsonManagedReference
     private UserIntrsEntity userIntrs;
 
     private LocalDateTime createdAt;
