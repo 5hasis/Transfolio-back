@@ -4,8 +4,6 @@ import com.example.transfolio.common.response.ResObj;
 import com.example.transfolio.domain.board.entity.BoardEntity;
 import com.example.transfolio.domain.board.model.BoardDto;
 import com.example.transfolio.domain.board.repository.BoardRepository;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -48,14 +46,9 @@ public class BoardService {
         return boardDtoList;
     }
 
-    /* 모든 게시물 조회 */
-    public List<BoardEntity> getAllPostsSortedByCreatedAtDesc() {
+    /* 홈화면 게시물 조회(관심분야 9개) */
+    public List<BoardEntity> getHomeBoard() {
         return boardRepository.findAllByOrderByCreatedAtDesc();
-    }
-
-    public List<BoardEntity> getBoardsPaged(int page, int size) {
-        PageRequest pageRequest = PageRequest.of(page, size, Sort.by("createdAt").descending());
-        return boardRepository.findAll(pageRequest).getContent();
     }
 
 }
