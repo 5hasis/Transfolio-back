@@ -1,4 +1,4 @@
-package com.example.transfolio.mypage;
+package com.example.transfolio.profile;
 
 import com.example.transfolio.common.utils.JwtUtil;
 import com.example.transfolio.domain.user.repository.UserRepository;
@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureRestDocs
 @AutoConfigureMockMvc
 @SpringBootTest
-public class MyPageTest {
+public class ProfileTest {
 
     @Autowired
     UserRepository userRepository;
@@ -41,13 +41,13 @@ public class MyPageTest {
 
         String token = JwtUtil.createToken(userId,"my-secret-key-123123", 500000); // 테스트용 사용자 계정
 
-        this.mockMvc.perform(post("/mypage/portfolio")
+        this.mockMvc.perform(post("/profile/portfolio")
                         .header("Authorization", "Bearer " + token)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonUserId)
                 )
                 .andExpect(status().isOk())
-                .andDo(document("mypage/portfolio",
+                .andDo(document("profile/portfolio",
                                 preprocessRequest(prettyPrint()),
                                 preprocessResponse(prettyPrint()),
                                 relaxedRequestFields(
@@ -65,13 +65,13 @@ public class MyPageTest {
 //
 //        String token = JwtUtil.createToken(userId,"my-secret-key-123123", 500000); // 테스트용 사용자 계정
 //
-//        this.mockMvc.perform(post("/mypage/career")
+//        this.mockMvc.perform(post("/profile/career")
 //                        .header("Authorization", "Bearer " + token)
 //                        .contentType(MediaType.APPLICATION_JSON)
 //                        .content(jsonUserId)
 //                )
 //                .andExpect(status().isOk())
-//                .andDo(document("mypage/career",
+//                .andDo(document("profile/career",
 //                                preprocessRequest(prettyPrint()),
 //                                preprocessResponse(prettyPrint()),
 //                                relaxedRequestFields(
@@ -89,13 +89,13 @@ public class MyPageTest {
 
         String token = JwtUtil.createToken(userId,"my-secret-key-123123", 500000); // 테스트용 사용자 계정
 
-        this.mockMvc.perform(post("/mypage/myInfo")
+        this.mockMvc.perform(post("/profile/myInfo")
                         .header("Authorization", "Bearer " + token)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonUserId)
                 )
                 .andExpect(status().isOk())
-                .andDo(document("mypage/myInfo",
+                .andDo(document("profile/myInfo",
                                 preprocessRequest(prettyPrint()),
                                 preprocessResponse(prettyPrint()),
                                 relaxedRequestFields(

@@ -34,6 +34,6 @@ include::{snippets}/board/request-body.adoc[]
 include::{snippets}/board/response-body.adoc[]
 
 === 마이페이지
-include::{snippets}/mypage/http-request.adoc[]
-include::{snippets}/mypage/http-response.adoc[]
-include::{snippets}/mypage/response-body.adoc[]
+include::{snippets}/profile/http-request.adoc[]
+include::{snippets}/profile/http-response.adoc[]
+include::{snippets}/profile/response-body.adoc[]

@@ -1,4 +1,4 @@
-package com.example.transfolio.domain.user;
+package com.example.transfolio.domain.profile;
 
 import com.example.transfolio.domain.board.model.BoardDto;
 import com.example.transfolio.domain.board.service.BoardService;
@@ -17,8 +17,8 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/mypage")
-public class MypageController {
+@RequestMapping("/profile")
+public class ProfileController {
 
     @Autowired
     private UserSerivce userSerivce;
@@ -27,7 +27,7 @@ public class MypageController {
     private BoardService boardService;
 
     /**
-     * 마이페이지 포트폴리오 탭 조회
+     * 프로필 포트폴리오 탭 조회
      */
     @PostMapping("/portfolio")
     public List<BoardDto> getMyPortfolio() {
@@ -52,7 +52,7 @@ public class MypageController {
     }
 
     /**
-     * 마이페이지 경력 탭 조회
+     * 프로필 경력 탭 조회
      */
     @PostMapping("/career")
     public List<BoardDto> getMyCareer() {
@@ -77,7 +77,7 @@ public class MypageController {
     }
 
     /**
-     * 마이페이지 사용자 정보
+     * 프로필 사용자 정보
      */
     @PostMapping("/myInfo")
     public UserInfoDto getMyInfo() {
