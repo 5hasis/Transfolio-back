@@ -10,6 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -30,23 +31,9 @@ public class ProfileController {
      * 프로필 포트폴리오 탭 조회
      */
     @PostMapping("/portfolio")
-    public List<BoardDto> getMyPortfolio() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String loginId = null;
-        List<BoardDto> boardDtoList = new ArrayList<>();
+    public List<BoardDto> getMyPortfolio(@RequestParam String userId) {
 
-        if (authentication != null && authentication.isAuthenticated()) {
-            Object principal = authentication.getPrincipal();
-            if (principal instanceof String) {
-                loginId = (String)principal;
-            }
-            if (loginId != null && !loginId.equals("")) {
-
-                boardDtoList = boardService.getBoardListById(loginId);
-            }
-        }else {
-            throw new IllegalStateException("Unexpected authentication principal type: " + authentication.getPrincipal().getClass());
-        }
+        List<BoardDto> boardDtoList = boardService.getBoardListById(userId);
 
         return boardDtoList;
     }

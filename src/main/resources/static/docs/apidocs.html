@@ -471,8 +471,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /user/sign-in HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 60
-Host: 3.36.105.195
+Content-Length: 57
+Host: 3.36.105.195:8080
 
 {
   "userId" : "accountTest",
@@ -486,6 +486,7 @@ Host: 3.36.105.195
 Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3MjM0NjQzNTIsImV4cCI6MTcyMzQ2OTM1Mn0.o2dZsym0-AIrPoGVhqk0bGALrgecZ6Yd7DDO9KecYzA
 Content-Type: application/json
 X-Content-Type-Options: nosniff
 X-XSS-Protection: 1; mode=block
@@ -493,10 +494,10 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 212
+Content-Length: 208
 
 {
-  "result" : "eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3MjIzMjgyODUsImV4cCI6MTcyMjMzMzI4NX0.3tROyCDKRKPyUffqSNHIMzOgjZ1YnOrWygS2h8jZ_6A",
+  "result" : "eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3MjM0NjQzNTIsImV4cCI6MTcyMzQ2OTM1Mn0.o2dZsym0-AIrPoGVhqk0bGALrgecZ6Yd7DDO9KecYzA",
   "message" : "success",
   "status" : "200"
 }</code></pre>
@@ -539,7 +540,7 @@ Content-Length: 212
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
-  "result" : "eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3MjIzMjgyODUsImV4cCI6MTcyMjMzMzI4NX0.3tROyCDKRKPyUffqSNHIMzOgjZ1YnOrWygS2h8jZ_6A",
+  "result" : "eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3MjM0NjQzNTIsImV4cCI6MTcyMzQ2OTM1Mn0.o2dZsym0-AIrPoGVhqk0bGALrgecZ6Yd7DDO9KecYzA",
   "message" : "success",
   "status" : "200"
 }</code></pre>
@@ -552,8 +553,8 @@ Content-Length: 212
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /user/sign-up HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 311
-Host: 3.36.105.195
+Content-Length: 301
+Host: 3.36.105.195:8080
 
 {
   "userId" : "accountTest",
@@ -581,7 +582,7 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 82
+Content-Length: 79
 
 {
   "message" : "이미 존재하는 아이디 입니다",
@@ -679,8 +680,8 @@ Content-Length: 82
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /board HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 693
-Host: 3.36.105.195
+Content-Length: 679
+Host: 3.36.105.195:8080
 
 {
   "userId" : "test",
@@ -712,12 +713,12 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 967
+Content-Length: 942
 
 {
   "object" : {
     "result" : {
-      "boardPid" : 27,
+      "boardPid" : 49,
       "user" : null,
       "userId" : "test",
       "boardTitle" : "제목을 입력해주세요",
@@ -732,7 +733,7 @@ Content-Length: 967
       "tempStorageAt" : false,
       "fontSize" : 13,
       "fontType" : "Noto Sanz",
-      "createdAt" : "2024-07-30T17:31:24.8704386",
+      "createdAt" : "2024-08-12T21:05:51.477648",
       "updatedAt" : null
     },
     "message" : "success",
@@ -846,7 +847,7 @@ Content-Length: 967
 <pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
   "object" : {
     "result" : {
-      "boardPid" : 27,
+      "boardPid" : 49,
       "user" : null,
       "userId" : "test",
       "boardTitle" : "제목을 입력해주세요",
@@ -861,7 +862,7 @@ Content-Length: 967
       "tempStorageAt" : false,
       "fontSize" : 13,
       "fontType" : "Noto Sanz",
-      "createdAt" : "2024-07-30T17:31:24.8704386",
+      "createdAt" : "2024-08-12T21:05:51.477648",
       "updatedAt" : null
     },
     "message" : "success",
@@ -873,71 +874,10 @@ Content-Length: 967
 </div>
 <div class="sect2">
 <h3 id="_마이페이지">마이페이지</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /profile/ HTTP/1.1
-Content-Type: application/json;charset=UTF-8
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3MjIzMjgyODUsImV4cCI6MTcyMjMyODc4NX0.tDzXdJhrcmjkFW3c2vxTkd0kSM4WNpgw68RsC3fzcYE
-Content-Length: 32
-Host: 3.36.105.195
-
-{
-  "userId" : "accountTest"
-}</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
-Vary: Origin
-Vary: Access-Control-Request-Method
-Vary: Access-Control-Request-Headers
-Content-Type: application/json
-X-Content-Type-Options: nosniff
-X-XSS-Protection: 1; mode=block
-Cache-Control: no-cache, no-store, max-age=0, must-revalidate
-Pragma: no-cache
-Expires: 0
-X-Frame-Options: DENY
-Content-Length: 372
-
-[ {
-  "boardPid" : 1,
-  "userId" : null,
-  "boardTitle" : "제목을 입력해주세요",
-  "afterLang" : "한국어",
-  "beforeLang" : "영어",
-  "boardSubTitle" : null,
-  "boardDescription" : null,
-  "highCtg" : null,
-  "lowCtg" : null,
-  "boardAuthor" : null,
-  "boardContent" : null,
-  "tempStorageAt" : false,
-  "fontSize" : 0,
-  "fontType" : null
-} ]</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-none hljs">[ {
-  "boardPid" : 1,
-  "userId" : null,
-  "boardTitle" : "제목을 입력해주세요",
-  "afterLang" : "한국어",
-  "beforeLang" : "영어",
-  "boardSubTitle" : null,
-  "boardDescription" : null,
-  "highCtg" : null,
-  "lowCtg" : null,
-  "boardAuthor" : null,
-  "boardContent" : null,
-  "tempStorageAt" : false,
-  "fontSize" : 0,
-  "fontType" : null
-} ]</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in apidocs.adoc - include::/Users/ohasis/study/Transfolio-server/build/generated-snippets/profile/http-request.adoc[]
+Unresolved directive in apidocs.adoc - include::/Users/ohasis/study/Transfolio-server/build/generated-snippets/profile/http-response.adoc[]
+Unresolved directive in apidocs.adoc - include::/Users/ohasis/study/Transfolio-server/build/generated-snippets/profile/response-body.adoc[]</p>
 </div>
 </div>
 </div>
@@ -946,7 +886,7 @@ Content-Length: 372
 <div id="footer">
 <div id="footer-text">
 Version 0.1<br>
-Last updated 2024-07-30 15:37:24 +0900
+Last updated 2024-08-12 18:34:54 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
