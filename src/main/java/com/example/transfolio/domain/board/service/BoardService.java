@@ -35,9 +35,13 @@ public class BoardService {
         for (BoardEntity board : boardList) {
             BoardDto boardDto = BoardDto.builder()
                     .boardPid(board.getBoardPid())
+                    .userId(board.getUserId())
                     .boardTitle(board.getBoardTitle())
+                    .boardDescription(board.getBoardDescription())
                     .afterLang(board.getAfterLang())
                     .beforeLang(board.getBeforeLang())
+                    .foldCnt(board.getFoldCnt())
+                    .tempStorageYn(board.getTempStorageYn())
                     .build();
 
             boardDtoList.add(boardDto);
@@ -47,8 +51,22 @@ public class BoardService {
     }
 
     /* 홈화면 게시물 조회(관심분야 9개) */
-    public List<BoardEntity> getHomeBoard() {
-        return boardRepository.findAllByOrderByCreatedAtDesc();
+    public List<BoardDto> getHomeIntrsBoard(String userId) {
+        List<BoardEntity> boardList = boardRepository.findByOrderByCreatedAtDesc(userId);
+
+        List<BoardDto> boardDtoList = new ArrayList<>();
+        for (BoardEntity board : boardList) {
+            BoardDto boardDto = BoardDto.builder()
+                    .boardPid(board.getBoardPid())
+                    .boardTitle(board.getBoardTitle())
+                    .afterLang(board.getAfterLang())
+                    .beforeLang(board.getBeforeLang())
+                    .build();
+
+            boardDtoList.add(boardDto);
+        }
+
+        return boardDtoList;
     }
 
 }

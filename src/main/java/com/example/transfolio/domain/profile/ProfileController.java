@@ -2,16 +2,15 @@ package com.example.transfolio.domain.profile;
 
 import com.example.transfolio.domain.board.model.BoardDto;
 import com.example.transfolio.domain.board.service.BoardService;
+import com.example.transfolio.domain.career.model.CareerDto;
 import com.example.transfolio.domain.user.entity.UserEntity;
+import com.example.transfolio.domain.user.model.UserDto;
 import com.example.transfolio.domain.user.model.UserInfoDto;
 import com.example.transfolio.domain.user.service.UserSerivce;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,9 +30,9 @@ public class ProfileController {
      * 프로필 포트폴리오 탭 조회
      */
     @PostMapping("/portfolio")
-    public List<BoardDto> getMyPortfolio(@RequestParam String userId) {
+    public List<BoardDto> getUserPortfolio(@RequestBody UserDto userDto) {
 
-        List<BoardDto> boardDtoList = boardService.getBoardListById(userId);
+        List<BoardDto> boardDtoList = boardService.getBoardListById(userDto.getUserId());
 
         return boardDtoList;
     }
@@ -42,51 +41,39 @@ public class ProfileController {
      * 프로필 경력 탭 조회
      */
     @PostMapping("/career")
-    public List<BoardDto> getMyCareer() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String loginId = null;
-        List<BoardDto> boardDtoList = new ArrayList<>();
+    public List<CareerDto> getUserCareer(@RequestBody UserDto userDto) throws Exception {
 
-        if (authentication != null && authentication.isAuthenticated()) {
-            Object principal = authentication.getPrincipal();
-            if (principal instanceof String) {
-                loginId = (String)principal;
-            }
-            if (loginId != null && !loginId.equals("")) {
+        String userId = userDto.getUserId();
+        List<CareerDto> CareerDtoList = new ArrayList<>();
 
-                //boardDtoList = boardService.getBoardListById(loginId);
-            }
-        }else {
-            throw new IllegalStateException("Unexpected authentication principal type: " + authentication.getPrincipal().getClass());
+        if (userId != null && !userId.equals("")) {
+            //CareerDtoList = careerService.getCareerListById(userId);
+         }else {
+            throw new Exception();
         }
 
-        return boardDtoList;
+        return CareerDtoList;
     }
 
     /**
      * 프로필 사용자 정보
      */
     @PostMapping("/myInfo")
-    public UserInfoDto getMyInfo() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String loginId = null;
+    public UserInfoDto getUserInfo(@RequestBody UserDto userDto) throws Exception {
 
+        String userId = userDto.getUserId();
         UserInfoDto userinfoDto = new UserInfoDto();
 
-        if (authentication != null && authentication.isAuthenticated()) {
-            Object principal = authentication.getPrincipal();
-            if (principal instanceof String) {
-                loginId = (String)principal;
-            }
-            if (loginId != null && !loginId.equals("")) {
-                UserEntity user = userSerivce.getUserByUserId(loginId);
-                userinfoDto.setUserId(user.getUserId());
-                userinfoDto.setUserIntrs(user.getUserIntrs());
-            }
+        if (userId != null && !userId.equals("")) {
+            UserEntity user = userSerivce.getUserByUserId(userId);
+            userinfoDto.setUserId(user.getUserId());
+            userinfoDto.setUserIntrs(user.getUserIntrs());
         }else {
-            throw new IllegalStateException("Unexpected authentication principal type: " + authentication.getPrincipal().getClass());
+            throw new Exception();
         }
 
+        //접기 숫자 하드코딩
+        userinfoDto.setFoldCnt("708");
         return userinfoDto;
     }
 

@@ -61,6 +61,10 @@ public class BoardEntity implements Serializable {
 
     private LocalDateTime updatedAt;
 
+    private String foldCnt;
+
+    private String tempStorageYn;
+
     public BoardEntity(BoardDto boardDto) {
         this.userId = boardDto.getUserId();
         this.boardTitle = boardDto.getBoardTitle();
@@ -75,6 +79,8 @@ public class BoardEntity implements Serializable {
         this.tempStorageAt = boardDto.isTempStorageAt();
         this.fontSize = boardDto.getFontSize();
         this.fontType = boardDto.getFontType();
+        this.foldCnt = boardDto.getFoldCnt();
+        this.tempStorageYn = boardDto.getTempStorageYn();
     }
 
     public BoardEntity() {

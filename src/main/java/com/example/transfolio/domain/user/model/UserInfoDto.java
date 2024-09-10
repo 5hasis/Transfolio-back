@@ -14,6 +14,8 @@ public class UserInfoDto {
 
     private String email;
 
+    private String foldCnt;
+
     private UserIntrsEntity userIntrs;
 
 }

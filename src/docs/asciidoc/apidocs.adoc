@@ -33,7 +33,25 @@ include::{snippets}/board/request-fields.adoc[]
 include::{snippets}/board/request-body.adoc[]
 include::{snippets}/board/response-body.adoc[]
 
-=== 마이페이지
-include::{snippets}/profile/http-request.adoc[]
-include::{snippets}/profile/http-response.adoc[]
-include::{snippets}/profile/response-body.adoc[]
+== 프로필
+=== 사용자 프로필 정보
+include::{snippets}/profile/myInfo/http-request.adoc[]
+include::{snippets}/profile/myInfo/http-response.adoc[]
+include::{snippets}/profile/myInfo/response-body.adoc[]
+
+=== 포트폴리오
+include::{snippets}/profile/portfolio/http-request.adoc[]
+include::{snippets}/profile/portfolio/http-response.adoc[]
+include::{snippets}/profile/portfolio/response-body.adoc[]
+
+=== 경력
+include::{snippets}/profile/career/http-request.adoc[]
+include::{snippets}/profile/career/http-response.adoc[]
+include::{snippets}/profile/career/response-body.adoc[]
+
+
+== 홈화면
+=== 관심분야 게시물
+include::{snippets}/homeIntrs/http-request.adoc[]
+include::{snippets}/homeIntrs/http-response.adoc[]
+include::{snippets}/homeIntrs/response-body.adoc[]

@@ -36,7 +36,7 @@ public class ProfileTest {
     private ObjectMapper objectMapper;
 
     @Test
-    void getMyPortFolio() throws Exception{
+    void getUserPortFolio() throws Exception{
 
         String userId = "accountTest";
         String jsonUserId = "{\"userId\":\"" + userId + "\"}";
@@ -44,53 +44,50 @@ public class ProfileTest {
 
         this.mockMvc.perform(post("/profile/portfolio")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .param("userId", userId)
+                        .content(jsonUserId)
                 )
                 .andExpect(status().isOk())
                 .andDo(document("profile/portfolio",
                                 preprocessRequest(prettyPrint()),
                                 preprocessResponse(prettyPrint()),
-                                requestParameters(  // 쿼리 매개변수 문서화
-                                        parameterWithName("userId").description("유저 아이디")
+                                relaxedRequestFields(
+                                        fieldWithPath("userId").type(JsonFieldType.STRING).description("유저 아이디")
                                 )
                         )
                 );
     }
 
     @Test
-    void getMyCareer() throws Exception{
-
-//        String userId = "accountTest";
-//        String jsonUserId = "{\"userId\":\"" + userId + "\"}";
-//
-//        String token = JwtUtil.createToken(userId,"my-secret-key-123123", 500000); // 테스트용 사용자 계정
-//
-//        this.mockMvc.perform(post("/profile/career")
-//                        .header("Authorization", "Bearer " + token)
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .content(jsonUserId)
-//                )
-//                .andExpect(status().isOk())
-//                .andDo(document("profile/career",
-//                                preprocessRequest(prettyPrint()),
-//                                preprocessResponse(prettyPrint()),
-//                                relaxedRequestFields(
-//                                        fieldWithPath("userId").type(JsonFieldType.STRING).description("유저 아이디")
-//                                )
-//                        )
-//                );
-    }
-
-    @Test
-    void getMyInfo() throws Exception{
+    void getUserCareer() throws Exception{
 
         String userId = "accountTest";
         String jsonUserId = "{\"userId\":\"" + userId + "\"}";
 
-        String token = JwtUtil.createToken(userId,"my-secret-key-123123", 500000); // 테스트용 사용자 계정
+
+        this.mockMvc.perform(post("/profile/career")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonUserId)
+                )
+                .andExpect(status().isOk())
+                .andDo(document("profile/career",
+                                preprocessRequest(prettyPrint()),
+                                preprocessResponse(prettyPrint()),
+                                relaxedRequestFields(
+                                        fieldWithPath("userId").type(JsonFieldType.STRING).description("유저 아이디")
+                                )
+                        )
+                );
+    }
+
+    @Test
+    void getUserInfo() throws Exception{
+
+        String userId = "accountTest";
+        String jsonUserId = "{\"userId\":\"" + userId + "\"}";
+
+        //String token = JwtUtil.createToken(userId,"my-secret-key-123123", 500000); // 테스트용 사용자 계정
 
         this.mockMvc.perform(post("/profile/myInfo")
-                        .header("Authorization", "Bearer " + token)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonUserId)
                 )

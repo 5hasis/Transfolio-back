@@ -12,6 +12,8 @@ public interface BoardRepository extends JpaRepository<BoardEntity, String> {
     @Query(value = "SELECT * FROM tr_board WHERE user_id = :userId", nativeQuery = true)
     List<BoardEntity> findByUserUserIdNative(@Param("userId") String userId);
 
-    List<BoardEntity> findAllByOrderByCreatedAtDesc();
+    //쿼리 작성 필요
+    @Query(value = "SELECT * FROM tr_board WHERE user_id = :userId", nativeQuery = true)
+    List<BoardEntity> findByOrderByCreatedAtDesc(@Param("userId") String userId);
 
 }

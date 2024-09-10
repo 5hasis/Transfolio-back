@@ -42,6 +42,10 @@ public class BoardDto {
 
     private String fontType;
 
+    private String foldCnt;
+
+    private String tempStorageYn;
+
     //private String userId;
 
     /* DTO -> Entity */
