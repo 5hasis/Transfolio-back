@@ -4,6 +4,7 @@ import com.example.transfolio.common.response.ResObj;
 import com.example.transfolio.domain.board.entity.BoardEntity;
 import com.example.transfolio.domain.board.model.BoardDto;
 import com.example.transfolio.domain.board.repository.BoardRepository;
+import com.example.transfolio.security.AuthenticationUtil;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -29,7 +30,18 @@ public class BoardService {
 
     /* 아이디로 게시물 조회 */
     public List<BoardDto> getBoardListById(String userId) {
-        List<BoardEntity> boardList = boardRepository.findByUserUserIdNative(userId);
+
+        String loginId = AuthenticationUtil.getLoginIdFromAuthentication();
+        String isSelf = "";
+
+        //본인이 아니면 임시저장된 글은 제외하고 조회
+        if(loginId != null && !loginId.equals("") && loginId.equals(userId)){
+            isSelf = "Y";
+        }
+        else{
+            isSelf = "N";
+        }
+        List<BoardEntity> boardList = boardRepository.findByUserUserIdNative(userId, isSelf);
 
         List<BoardDto> boardDtoList = new ArrayList<>();
         for (BoardEntity board : boardList) {

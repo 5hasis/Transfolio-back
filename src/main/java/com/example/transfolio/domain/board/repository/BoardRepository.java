@@ -9,8 +9,8 @@ import java.util.List;
 
 public interface BoardRepository extends JpaRepository<BoardEntity, String> {
 
-    @Query(value = "SELECT * FROM tr_board WHERE user_id = :userId", nativeQuery = true)
-    List<BoardEntity> findByUserUserIdNative(@Param("userId") String userId);
+    @Query(value = "SELECT * FROM tr_board WHERE user_id = :userId AND (:isSelf = 'Y' OR (temp_storage_yn = 'N' AND :isSelf = 'N'))", nativeQuery = true)
+    List<BoardEntity> findByUserUserIdNative(@Param("userId") String userId, @Param("isSelf") String isSelf);
 
     //쿼리 작성 필요
     @Query(value = "SELECT * FROM tr_board WHERE user_id = :userId", nativeQuery = true)
