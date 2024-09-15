@@ -3,14 +3,16 @@ package com.example.transfolio.domain.profile;
 import com.example.transfolio.domain.board.model.BoardDto;
 import com.example.transfolio.domain.board.service.BoardService;
 import com.example.transfolio.domain.career.model.CareerDto;
+import com.example.transfolio.domain.career.service.CareerService;
 import com.example.transfolio.domain.user.entity.UserEntity;
 import com.example.transfolio.domain.user.model.UserDto;
 import com.example.transfolio.domain.user.model.UserInfoDto;
 import com.example.transfolio.domain.user.service.UserSerivce;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +27,9 @@ public class ProfileController {
 
     @Autowired
     private BoardService boardService;
+
+    @Autowired
+    private CareerService careerService;
 
     /**
      * 프로필 포트폴리오 탭 조회
@@ -47,7 +52,7 @@ public class ProfileController {
         List<CareerDto> CareerDtoList = new ArrayList<>();
 
         if (userId != null && !userId.equals("")) {
-            //CareerDtoList = careerService.getCareerListById(userId);
+            CareerDtoList = careerService.getCareerListById(userId);
          }else {
             throw new Exception();
         }
