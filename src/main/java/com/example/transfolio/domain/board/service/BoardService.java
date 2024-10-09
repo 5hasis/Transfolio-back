@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BoardService {
@@ -88,14 +89,28 @@ public class BoardService {
         return boardDtoList;
     }
 
-    /* 게시물 찜하기 저장 */
+    /* 게시물 찜하기 저장 및 취소(삭제)*/
     @Transactional
     public JSONObject saveBookmark(BoardFoldHistDto boardFoldHistDto){
-        int result = boardRepository.addBoardFoldCnt(String.valueOf(boardFoldHistDto.getBoardPid()));
 
+        int result = 0;
         BoardFoldHistEntity boardFoldHistEntity = new BoardFoldHistEntity(boardFoldHistDto);
 
-        boardFoldHistRepository.save(boardFoldHistEntity);
+        String boardPid = boardFoldHistDto.getBoardPid();
+        String userId = boardFoldHistDto.getUserId();
+
+        Optional<BoardFoldHistEntity> existingHist = boardFoldHistRepository.findByBoardPidAndUserId(boardPid, userId);
+
+        //기존 찜하기한 이력이 있으면 찜 취소(이력 삭제)
+        if (existingHist.isPresent()) {
+            boardFoldHistRepository.delete(existingHist.get());
+
+        }else{
+            result = boardRepository.addBoardFoldCnt(String.valueOf(boardFoldHistDto.getBoardPid()));
+
+            boardFoldHistRepository.save(boardFoldHistEntity);
+        }
+
 
         return new ResObj(result).getObject();
     }
