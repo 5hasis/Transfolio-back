@@ -33,6 +33,11 @@ include::{snippets}/board/request-fields.adoc[]
 include::{snippets}/board/request-body.adoc[]
 include::{snippets}/board/response-body.adoc[]
 
+=== 찜하기(접기)
+include::{snippets}/board/bookmark/http-request.adoc[]
+include::{snippets}/board/bookmark/http-response.adoc[]
+include::{snippets}/board/bookmark/response-body.adoc[]
+
 == 프로필
 === 사용자 프로필 정보
 include::{snippets}/profile/myInfo/http-request.adoc[]

@@ -2,10 +2,15 @@ package com.example.transfolio.domain.board.service;
 
 import com.example.transfolio.common.response.ResObj;
 import com.example.transfolio.domain.board.entity.BoardEntity;
+import com.example.transfolio.domain.board.entity.BoardFoldHistEntity;
 import com.example.transfolio.domain.board.model.BoardDto;
+import com.example.transfolio.domain.board.model.BoardFoldHistDto;
+import com.example.transfolio.domain.board.repository.BoardFoldHistRepository;
 import com.example.transfolio.domain.board.repository.BoardRepository;
 import com.example.transfolio.security.AuthenticationUtil;
+import org.json.simple.JSONObject;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,9 +19,11 @@ import java.util.List;
 public class BoardService {
 
     private final BoardRepository boardRepository;
+    private final BoardFoldHistRepository boardFoldHistRepository;
 
-    public BoardService(BoardRepository boardRepository) {
+    public BoardService(BoardRepository boardRepository, BoardFoldHistRepository boardFoldHistRepository) {
         this.boardRepository = boardRepository;
+        this.boardFoldHistRepository = boardFoldHistRepository;
     }
 
     /* 게시글 저장 */
@@ -79,6 +86,18 @@ public class BoardService {
         }
 
         return boardDtoList;
+    }
+
+    /* 게시물 찜하기 저장 */
+    @Transactional
+    public JSONObject saveBookmark(BoardFoldHistDto boardFoldHistDto){
+        int result = boardRepository.addBoardFoldCnt(String.valueOf(boardFoldHistDto.getBoardPid()));
+
+        BoardFoldHistEntity boardFoldHistEntity = new BoardFoldHistEntity(boardFoldHistDto);
+
+        boardFoldHistRepository.save(boardFoldHistEntity);
+
+        return new ResObj(result).getObject();
     }
 
 }

@@ -1,9 +1,9 @@
 package com.example.transfolio.board;
 
-import com.example.transfolio.domain.board.model.BoardDto;
 import com.example.transfolio.domain.board.model.BoardRegistDto;
 import com.example.transfolio.domain.board.repository.BoardRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
@@ -15,8 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
-import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
-import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
+import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -78,5 +77,32 @@ public class BoardTest {
                                 fieldWithPath("tempStorageAt").type(JsonFieldType.BOOLEAN).description("임시저장 여부(false: 저장, true: 임시저장)")
                         )));
 
+    }
+
+    @Test
+    void saveBookmark() throws Exception {
+
+        /*BoardFoldHistDto foldHistDto = new BoardFoldHistDto().builder()
+                .boardPid("1")
+                .userId("accountTest")
+                .build();*/
+
+        ObjectNode json = objectMapper.createObjectNode();
+        json.put("boardPid", "1");
+        json.put("userId", "accountTest");
+
+        this.mockMvc.perform(post("/board/bookmark")
+                        .contentType(MediaType.APPLICATION_JSON)
+                .content(json.toString()))
+                .andExpect(status().isOk())
+                .andDo(document(
+                        "board/bookmark",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint()),
+                        relaxedRequestFields(
+                                fieldWithPath("boardPid").type(JsonFieldType.STRING).description("게시물 고유번호"),
+                                fieldWithPath("userId").type(JsonFieldType.STRING).description("유저 아이디"))
+
+                ));
     }
 }
