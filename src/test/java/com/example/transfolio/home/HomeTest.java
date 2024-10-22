@@ -3,6 +3,7 @@ package com.example.transfolio.home;
 import com.example.transfolio.common.utils.JwtUtil;
 import com.example.transfolio.domain.HomeController;
 import com.example.transfolio.domain.board.entity.BoardEntity;
+import com.example.transfolio.domain.board.repository.BoardRepository;
 import com.example.transfolio.domain.board.service.BoardService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,7 +25,10 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.relaxedRequestFields;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @AutoConfigureRestDocs
@@ -35,14 +39,10 @@ public class HomeTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
-    private BoardService boardService;
 
-    private List<BoardEntity> mockInitialPosts;
-    private Page<BoardEntity> mockPagedPosts;
+    @Autowired
+    BoardRepository boardRepository;
 
-    @InjectMocks
-    private HomeController homeController;
 
     @BeforeEach
     void setUp() {
@@ -78,17 +78,15 @@ public class HomeTest {
     }
 
     @Test
-    public void getTodayTranslate() throws Exception {
-
-        /*//구현 진행중 ...
-
-        this.mockMvc.perform(post("/todayTranslate")
-                )
+    public void testGetTop9BoardsByFoldCntWithRestDocs() throws Exception {
+        this.mockMvc.perform(get("/todaysTranslator")
+                        .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andDo(document("/todayTranslate",
-                                preprocessRequest(prettyPrint()),
-                                preprocessResponse(prettyPrint())
-                        )
-                );*/
+                .andExpect(jsonPath("$.length()").value(9))  // 상위 9개 게시글만
+                .andDo(print())
+                .andDo(document("todaysTranslator",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint()))
+                );
     }
 }

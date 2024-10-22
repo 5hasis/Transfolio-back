@@ -13,6 +13,8 @@ import org.springframework.http.MediaType;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import javax.transaction.Transactional;
+
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
@@ -80,6 +82,7 @@ public class BoardTest {
     }
 
     @Test
+    @Transactional
     void saveBookmark() throws Exception {
 
         /*BoardFoldHistDto foldHistDto = new BoardFoldHistDto().builder()

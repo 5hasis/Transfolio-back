@@ -1,7 +1,9 @@
 package com.example.transfolio.domain.board.repository;
 
 import com.example.transfolio.domain.board.entity.BoardEntity;
+import com.example.transfolio.domain.board.model.BoardDto;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -21,6 +23,31 @@ public interface BoardRepository extends JpaRepository<BoardEntity, String> {
     @Modifying
     @Query(value = "UPDATE tr_board SET fold_cnt = fold_cnt + 1 WHERE board_pid = :boardPid", nativeQuery = true)
     int addBoardFoldCnt(@Param("boardPid") String boardPid);
+
+    @Query(value = """
+            SELECT 
+                new com.example.transfolio.domain.board.model.BoardDto(
+                    b.boardPid,
+                    b.user.userId,
+                    b.boardTitle,
+                    b.afterLang,
+                    b.beforeLang,
+                    b.boardSubTitle,
+                    b.boardDescription,
+                    b.highCtg,
+                    b.lowCtg,
+                    b.boardAuthor,
+                    b.boardContent,
+                    b.tempStorageAt,
+                    b.fontSize,
+                    b.fontType,
+                    b.foldCnt,
+                    b.tempStorageYn
+                )
+            FROM BoardEntity b
+            ORDER BY b.foldCnt DESC, b.createdAt DESC
+            """)
+    List<BoardDto> findTop9ByOrderByFoldCntAndCreatedAtDesc(Pageable pageable);
 
 
 

@@ -3,8 +3,10 @@ package com.example.transfolio.domain;
 import com.example.transfolio.domain.board.model.BoardDto;
 import com.example.transfolio.domain.board.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,8 +43,9 @@ public class HomeController {
         return boardDtoList;
     }
 
-    @PostMapping("/todayTranslate")
-    public List<BoardDto> todayTranslate() {
-        return new ArrayList<BoardDto>();
+    @GetMapping("/todaysTranslator")
+    public ResponseEntity<List<BoardDto>> getTopBoards() {
+        List<BoardDto> topBoards = boardService.getTop9Boards();
+        return ResponseEntity.ok(topBoards);
     }
 }

@@ -9,12 +9,16 @@ import com.example.transfolio.domain.board.repository.BoardFoldHistRepository;
 import com.example.transfolio.domain.board.repository.BoardRepository;
 import com.example.transfolio.security.AuthenticationUtil;
 import org.json.simple.JSONObject;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class BoardService {
@@ -114,5 +118,26 @@ public class BoardService {
 
         return new ResObj(result).getObject();
     }
+
+    public List<BoardDto> getTop9Boards() {
+        try {
+
+            Pageable pageable = PageRequest.of(0, 9); // 0페이지의 9개 결과를 요청
+            List<BoardDto> topBoards = boardRepository.findTop9ByOrderByFoldCntAndCreatedAtDesc(pageable);
+
+            topBoards = topBoards.stream()
+                    .distinct() // 중복 제거
+                    .collect(Collectors.toList()); // 리스트로 변환
+
+            return topBoards;
+            // return topBoards.stream().distinct().limit(9).toList(); // 중복 제거 후 최대 9개로 제한
+        } catch (Exception e) {
+            // 예외 처리: 로그를 남기거나 다른 오류 응답을 보낼 수 있음
+            System.err.println("Error occurred while fetching top boards: " + e.getMessage());
+            // 예외 발생 시 빈 리스트 반환 또는 적절한 오류 처리
+            return Collections.emptyList();
+        }
+    }
+
 
 }
