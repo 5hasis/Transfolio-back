@@ -1,6 +1,7 @@
 package com.example.transfolio.domain.user.entity;
 
 import com.example.transfolio.domain.board.entity.BoardEntity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
@@ -50,5 +51,6 @@ public class UserEntity implements Serializable {
     }
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @JsonBackReference
     private List<BoardEntity> boardList;
 }

@@ -2,6 +2,7 @@ package com.example.transfolio.domain.board.entity;
 
 import com.example.transfolio.domain.board.model.BoardDto;
 import com.example.transfolio.domain.user.entity.UserEntity;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -27,6 +28,7 @@ public class BoardEntity implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    @JsonManagedReference
     private UserEntity user;
 
     @Column(name = "user_id", insertable = false, updatable = false)
