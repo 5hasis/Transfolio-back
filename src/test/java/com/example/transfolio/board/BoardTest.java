@@ -145,7 +145,7 @@ public class BoardTest {
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andDo(document(
-                        "board/get",
+                        "board/{boardPid}",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint()),
                         responseFields(

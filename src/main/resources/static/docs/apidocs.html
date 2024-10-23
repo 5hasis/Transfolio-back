@@ -499,8 +499,8 @@ Host: 3.36.105.195:8080
 Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3Mjk2ODA4NjMsImV4cCI6MTcyOTY4NTg2M30.FQz-Sc0Bzd02GJOU-b24UxWgV5x5pEmF7ah4aaqPydY
-Set-Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3Mjk2ODA4NjMsImV4cCI6MTcyOTY4NTg2M30.FQz-Sc0Bzd02GJOU-b24UxWgV5x5pEmF7ah4aaqPydY; Path=/; Max-Age=3600; Expires=Wed, 23 Oct 2024 11:54:23 GMT; Secure; HttpOnly
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3Mjk2ODE2NTcsImV4cCI6MTcyOTY4NjY1N30.7o6ABSawmfSBH_fq9-rYNGN84WsCeoCSCg76vsWEc3I
+Set-Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3Mjk2ODE2NTcsImV4cCI6MTcyOTY4NjY1N30.7o6ABSawmfSBH_fq9-rYNGN84WsCeoCSCg76vsWEc3I; Path=/; Max-Age=3600; Expires=Wed, 23 Oct 2024 12:07:37 GMT; Secure; HttpOnly
 Content-Type: application/json
 X-Content-Type-Options: nosniff
 X-XSS-Protection: 1; mode=block
@@ -511,7 +511,7 @@ X-Frame-Options: DENY
 Content-Length: 208
 
 {
-  "result" : "eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3Mjk2ODA4NjMsImV4cCI6MTcyOTY4NTg2M30.FQz-Sc0Bzd02GJOU-b24UxWgV5x5pEmF7ah4aaqPydY",
+  "result" : "eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3Mjk2ODE2NTcsImV4cCI6MTcyOTY4NjY1N30.7o6ABSawmfSBH_fq9-rYNGN84WsCeoCSCg76vsWEc3I",
   "message" : "success",
   "status" : "200"
 }</code></pre>
@@ -554,7 +554,7 @@ Content-Length: 208
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
-  "result" : "eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3Mjk2ODA4NjMsImV4cCI6MTcyOTY4NTg2M30.FQz-Sc0Bzd02GJOU-b24UxWgV5x5pEmF7ah4aaqPydY",
+  "result" : "eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3Mjk2ODE2NTcsImV4cCI6MTcyOTY4NjY1N30.7o6ABSawmfSBH_fq9-rYNGN84WsCeoCSCg76vsWEc3I",
   "message" : "success",
   "status" : "200"
 }</code></pre>
@@ -836,12 +836,81 @@ X-Frame-Options: DENY</code></pre>
 </div>
 <div class="sect2">
 <h3 id="_게시글_조회">게시글 조회</h3>
-<div class="paragraph">
-<p>Unresolved directive in apidocs.adoc - include::/Users/ohasis/study/Transfolio-server/build/generated-snippets/board/{boardPid}/http-request.adoc[]
-Unresolved directive in apidocs.adoc - include::/Users/ohasis/study/Transfolio-server/build/generated-snippets/board/{boardPid}/http-response.adoc[]
-Unresolved directive in apidocs.adoc - include::/Users/ohasis/study/Transfolio-server/build/generated-snippets/board/{boardPid}/request-fields.adoc[]
-Unresolved directive in apidocs.adoc - include::/Users/ohasis/study/Transfolio-server/build/generated-snippets/board/{boardPid}/request-body.adoc[]
-Unresolved directive in apidocs.adoc - include::/Users/ohasis/study/Transfolio-server/build/generated-snippets/board/{boardPid}/response-body.adoc[]</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>GET /board/{boardPid}</code>: 지정된 게시물 ID(<code>boardPid</code>)에 대한 게시글 정보를 조회</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>GET /board/1 HTTP/1.1
+Accept: application/json
+Host: 3.36.105.195:8080</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Content-Type: application/json
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Length: 742
+
+{
+  "boardPid" : 1,
+  "userId" : "test",
+  "boardTitle" : "제목을 입력해주세요",
+  "afterLang" : "한국어",
+  "beforeLang" : "영어",
+  "boardSubTitle" : "Hi welcome/안녕 어서와",
+  "boardDescription" : "작품에 대한 설명",
+  "highCtg" : "대분류",
+  "lowCtg" : "하위카테고리",
+  "boardAuthor" : "작가이름",
+  "boardContent" : "Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다$Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다",
+  "tempStorageAt" : false,
+  "fontSize" : 13,
+  "fontType" : "Noto Sanz",
+  "foldCnt" : "78",
+  "tempStorageYn" : "N"
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs"></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "boardPid" : 1,
+  "userId" : "test",
+  "boardTitle" : "제목을 입력해주세요",
+  "afterLang" : "한국어",
+  "beforeLang" : "영어",
+  "boardSubTitle" : "Hi welcome/안녕 어서와",
+  "boardDescription" : "작품에 대한 설명",
+  "highCtg" : "대분류",
+  "lowCtg" : "하위카테고리",
+  "boardAuthor" : "작가이름",
+  "boardContent" : "Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다$Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다",
+  "tempStorageAt" : false,
+  "fontSize" : 13,
+  "fontType" : "Noto Sanz",
+  "foldCnt" : "78",
+  "tempStorageYn" : "N"
+}</code></pre>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -1385,7 +1454,7 @@ Content-Length: 5959
 <div id="footer">
 <div id="footer-text">
 Version 0.1<br>
-Last updated 2024-10-23 19:46:49 +0900
+Last updated 2024-10-23 20:07:28 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
