@@ -6,6 +6,7 @@ import com.example.transfolio.domain.board.model.BoardFoldHistDto;
 import com.example.transfolio.domain.board.service.BoardService;
 import org.json.simple.JSONObject;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,7 +19,7 @@ public class BoardController {
         this.boardService = boardService;
     }
 
-    @PostMapping()
+    @PostMapping("/regist")
     public ResObj createBoard(@RequestBody BoardDto board, @RequestHeader HttpHeaders httpHeaders) {
 
 
@@ -31,7 +32,11 @@ public class BoardController {
         return jsonObject;
     }
 
-
+    @GetMapping("/{boardPid}")
+    public ResponseEntity<BoardDto> getBoardDetails(@PathVariable Long boardPid) {
+        BoardDto boardDetails = boardService.getBoardDetailsByBoardPid(boardPid);
+        return ResponseEntity.ok(boardDetails);
+    }
 
 
 

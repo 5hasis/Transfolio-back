@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface BoardRepository extends JpaRepository<BoardEntity, String> {
 
@@ -50,5 +51,28 @@ public interface BoardRepository extends JpaRepository<BoardEntity, String> {
     List<BoardDto> findTop9ByOrderByFoldCntAndCreatedAtDesc(Pageable pageable);
 
 
+    @Query("""
+            SELECT new com.example.transfolio.domain.board.model.BoardDto
+            (
+                b.boardPid,
+                b.user.userId,
+                b.boardTitle,
+                b.afterLang,
+                b.beforeLang,
+                b.boardSubTitle,
+                b.boardDescription,
+                b.highCtg,
+                b.lowCtg,
+                b.boardAuthor,
+                b.boardContent,
+                b.tempStorageAt,
+                b.fontSize,
+                b.fontType,
+                b.foldCnt,
+                b.tempStorageYn
+                ) 
+            FROM BoardEntity b WHERE b.boardPid = :boardPid
+            """)
+    Optional<BoardDto> findBoardByBoardPid(@Param("boardPid") Long boardPid);
 
 }

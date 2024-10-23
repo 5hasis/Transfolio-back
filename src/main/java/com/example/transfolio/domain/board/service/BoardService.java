@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -139,5 +140,10 @@ public class BoardService {
         }
     }
 
+    public BoardDto getBoardDetailsByBoardPid(Long boardPid) {
+        return boardRepository.findBoardByBoardPid(boardPid)
+                .orElseThrow(() -> new EntityNotFoundException //값이 없을 때
+                        ("Board not found with pid: " + boardPid));
+    }
 
 }

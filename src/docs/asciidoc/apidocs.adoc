@@ -27,16 +27,24 @@ include::{snippets}/user/sign-up/response-body.adoc[]
 
 == 게시글 API
 === 게시글 등록
-include::{snippets}/board/http-request.adoc[]
-include::{snippets}/board/http-response.adoc[]
-include::{snippets}/board/request-fields.adoc[]
-include::{snippets}/board/request-body.adoc[]
-include::{snippets}/board/response-body.adoc[]
+include::{snippets}/board/regist/http-request.adoc[]
+include::{snippets}/board/regist/http-response.adoc[]
+include::{snippets}/board/regist/request-fields.adoc[]
+include::{snippets}/board/regist/request-body.adoc[]
+include::{snippets}/board/regist/response-body.adoc[]
+
+=== 게시글 조회
+include::{snippets}/board/{boardPid}/http-request.adoc[]
+include::{snippets}/board/{boardPid}/http-response.adoc[]
+include::{snippets}/board/{boardPid}/request-fields.adoc[]
+include::{snippets}/board/{boardPid}/request-body.adoc[]
+include::{snippets}/board/{boardPid}/response-body.adoc[]
 
 === 찜하기(접기)
 include::{snippets}/board/bookmark/http-request.adoc[]
 include::{snippets}/board/bookmark/http-response.adoc[]
 include::{snippets}/board/bookmark/response-body.adoc[]
+
 
 == 프로필
 === 사용자 프로필 정보
@@ -47,7 +55,7 @@ include::{snippets}/profile/myInfo/response-body.adoc[]
 === 포트폴리오
 include::{snippets}/profile/portfolio/http-request.adoc[]
 include::{snippets}/profile/portfolio/http-response.adoc[]
-include::{snippets}/profile/portfolio/response-body.adoc[]
+include:{snippets}/profile/portfolio/response-body.adoc[]
 
 === 경력
 include::{snippets}/profile/career/http-request.adoc[]
