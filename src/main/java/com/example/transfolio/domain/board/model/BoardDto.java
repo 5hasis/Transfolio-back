@@ -7,6 +7,8 @@ import lombok.Builder;
 
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -40,11 +42,9 @@ public class BoardDto {
 
     private String fontType;
 
-    private String foldCnt;
+    private int foldCnt;
 
     private String tempStorageYn;
-
-    //private String userId;
 
     /* DTO -> Entity */
     public BoardEntity toEntity(){

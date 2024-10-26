@@ -14,8 +14,14 @@ public class UserInfoDto {
 
     private String email;
 
-    private String foldCnt;
+    private String intrsCorporation;
 
-    private UserIntrsEntity userIntrs;
+    private String intrsLiterature;
+
+    private String intrsMajor;
+
+    private String intrsLanguage;
+
+    private long totalFoldCnt;
 
 }

@@ -38,7 +38,7 @@ public class UserEntity implements Serializable {
     @NonNull
     private String email;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
     @JsonManagedReference
     private UserIntrsEntity userIntrs;
 

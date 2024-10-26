@@ -70,16 +70,11 @@ public class ProfileController {
         UserInfoDto userinfoDto = new UserInfoDto();
 
         if (userId != null && !userId.equals("")) {
-            UserEntity user = userSerivce.getUserByUserId(userId);
-            userinfoDto.setUserId(user.getUserId());
-            userinfoDto.setEmail(user.getEmail());
-            userinfoDto.setUserIntrs(user.getUserIntrs());
+            userinfoDto = userSerivce.getUserByUserId(userId);
         }else {
             throw new Exception();
         }
 
-        //접기 숫자 하드코딩
-        userinfoDto.setFoldCnt("708");
         return userinfoDto;
     }
 

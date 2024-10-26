@@ -61,7 +61,7 @@ public class BoardEntity implements Serializable {
 
     private LocalDateTime updatedAt;
 
-    private String foldCnt;
+    private int foldCnt;
 
     private String tempStorageYn;
 

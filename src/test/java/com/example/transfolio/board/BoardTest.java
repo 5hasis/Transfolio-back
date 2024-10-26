@@ -135,7 +135,7 @@ public class BoardTest {
                 .fontSize(13)
                 .fontType("Noto Sanz")
                 .tempStorageYn("N")
-                .foldCnt("78")
+                .foldCnt(78)
                 .build();
 
         when(boardService.getBoardDetailsByBoardPid(boardPid)).thenReturn(mockBoardDto);
@@ -157,7 +157,7 @@ public class BoardTest {
                                 fieldWithPath("highCtg").optional().type(JsonFieldType.STRING).description("대분류"),
                                 fieldWithPath("lowCtg").optional().type(JsonFieldType.STRING).description("하위 카테고리"),
                                 fieldWithPath("userId").type(JsonFieldType.STRING).description("사용자 ID"),
-                                fieldWithPath("foldCnt").type(JsonFieldType.STRING).description("게시물 접기 수"),
+                                fieldWithPath("foldCnt").type(JsonFieldType.NUMBER).description("게시물 접기 수"),
                                 fieldWithPath("afterLang").type(JsonFieldType.STRING).description("게시물 후원 언어"),
                                 fieldWithPath("beforeLang").type(JsonFieldType.STRING).description("게시물 전언 언어"),
                                 fieldWithPath("fontSize").type(JsonFieldType.NUMBER).description("글꼴 크기"),

@@ -7,6 +7,7 @@ import com.example.transfolio.common.utils.JwtUtil;
 import com.example.transfolio.domain.user.entity.UserEntity;
 import com.example.transfolio.domain.user.entity.UserIntrsEntity;
 import com.example.transfolio.domain.user.model.UserDto;
+import com.example.transfolio.domain.user.model.UserInfoDto;
 import com.example.transfolio.domain.user.repository.UserIntrsRepository;
 import com.example.transfolio.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,7 @@ import org.json.simple.JSONObject;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -107,8 +109,9 @@ public class UserSerivce {
     /**
      * 회원정보 조회
      */
-    public UserEntity getUserByUserId(String loginId){
-        return userRepository.findByUserId(loginId).get(0);
+    @Transactional
+    public UserInfoDto getUserByUserId(String loginId){
+        return userRepository.findInfoByUserId(loginId);
     }
 
 }

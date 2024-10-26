@@ -29,7 +29,7 @@ public interface BoardRepository extends JpaRepository<BoardEntity, String> {
             SELECT 
                 new com.example.transfolio.domain.board.model.BoardDto(
                     b.boardPid,
-                    b.user.userId,
+                    b.userId,
                     b.boardTitle,
                     b.afterLang,
                     b.beforeLang,
@@ -41,7 +41,7 @@ public interface BoardRepository extends JpaRepository<BoardEntity, String> {
                     b.boardContent,
                     b.fontSize,
                     b.fontType,
-                    b.foldCnt,
+                    COALESCE(b.foldCnt, 0),
                     b.tempStorageYn
                 )
             FROM BoardEntity b

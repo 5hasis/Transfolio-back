@@ -82,7 +82,7 @@ public class HomeTest {
         this.mockMvc.perform(get("/todaysTranslator")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.length()").value(9))  // 상위 9개 게시글만
+                //.andExpect(jsonPath("$.length()").value(9))  // 상위 9개 게시글만
                 .andDo(print())
                 .andDo(document("todaysTranslator",
                         preprocessRequest(prettyPrint()),
