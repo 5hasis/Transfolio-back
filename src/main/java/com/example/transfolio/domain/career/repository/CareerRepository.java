@@ -10,6 +10,15 @@ import java.util.List;
 
 public interface CareerRepository extends JpaRepository<BoardEntity, String> {
 
-    @Query(value = "SELECT new com.example.transfolio.domain.career.model.CareerDto(c.careerTitle, c.careerDate, c.careerContent) FROM CareerEntity c WHERE c.userId = :userId")
+    @Query(value = """
+    SELECT new com.example.transfolio.domain.career.model.CareerDto(
+        c.careerTitle
+        , c.careerDate
+        , c.careerContent
+        , c.updatedAt
+        , c.createdAt
+        , c.userId
+    ) FROM CareerEntity c WHERE c.userId = :userId
+    """)
     List<CareerDto> getCareerListById(@Param("userId") String userId);
 }

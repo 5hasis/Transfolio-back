@@ -2,6 +2,8 @@ package com.example.transfolio.domain.career.model;
 
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,14 +20,9 @@ public class CareerDto {
 
     private String updatedAt;
 
-    private String createdAt;
+    private LocalDateTime createdAt;
 
     private String userId;
 
-    public CareerDto(String careerTitle, String careerContent, String careerDate) {
-        this.careerTitle = careerTitle;
-        this.careerContent = careerContent;
-        this.careerDate = careerDate;
-    }
 
 }

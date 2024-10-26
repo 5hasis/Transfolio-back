@@ -72,6 +72,7 @@ public class ProfileController {
         if (userId != null && !userId.equals("")) {
             UserEntity user = userSerivce.getUserByUserId(userId);
             userinfoDto.setUserId(user.getUserId());
+            userinfoDto.setEmail(user.getEmail());
             userinfoDto.setUserIntrs(user.getUserIntrs());
         }else {
             throw new Exception();

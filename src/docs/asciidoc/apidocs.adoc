@@ -55,12 +55,10 @@ include::{snippets}/profile/myInfo/response-body.adoc[]
 === 포트폴리오
 include::{snippets}/profile/portfolio/http-request.adoc[]
 include::{snippets}/profile/portfolio/http-response.adoc[]
-include:{snippets}/profile/portfolio/response-body.adoc[]
 
 === 경력
 include::{snippets}/profile/career/http-request.adoc[]
 include::{snippets}/profile/career/http-response.adoc[]
-include::{snippets}/profile/career/response-body.adoc[]
 
 
 == 홈화면
