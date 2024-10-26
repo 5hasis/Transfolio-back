@@ -1,0 +1,9 @@
+package com.example.transfolio.domain.career;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/career")
+public class CareerController {
+}
