@@ -36,8 +36,6 @@ public class BoardDto {
 
     private String boardContent;
 
-    private boolean tempStorageAt;
-
     private int fontSize;
 
     private String fontType;

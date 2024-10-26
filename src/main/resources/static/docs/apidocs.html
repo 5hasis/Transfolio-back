@@ -499,8 +499,8 @@ Host: 3.36.105.195:8080
 Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3Mjk2ODE2NTcsImV4cCI6MTcyOTY4NjY1N30.7o6ABSawmfSBH_fq9-rYNGN84WsCeoCSCg76vsWEc3I
-Set-Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3Mjk2ODE2NTcsImV4cCI6MTcyOTY4NjY1N30.7o6ABSawmfSBH_fq9-rYNGN84WsCeoCSCg76vsWEc3I; Path=/; Max-Age=3600; Expires=Wed, 23 Oct 2024 12:07:37 GMT; Secure; HttpOnly
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3Mjk5MjgzNTEsImV4cCI6MTcyOTkzMzM1MX0.OuHtY8PAAbZHiX9JArfo-j0QP7Ox-vCIl_0FdRp2AZk
+Set-Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3Mjk5MjgzNTEsImV4cCI6MTcyOTkzMzM1MX0.OuHtY8PAAbZHiX9JArfo-j0QP7Ox-vCIl_0FdRp2AZk; Path=/; Max-Age=3600; Expires=Sat, 26 Oct 2024 08:39:11 GMT; Secure; HttpOnly
 Content-Type: application/json
 X-Content-Type-Options: nosniff
 X-XSS-Protection: 1; mode=block
@@ -511,7 +511,7 @@ X-Frame-Options: DENY
 Content-Length: 208
 
 {
-  "result" : "eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3Mjk2ODE2NTcsImV4cCI6MTcyOTY4NjY1N30.7o6ABSawmfSBH_fq9-rYNGN84WsCeoCSCg76vsWEc3I",
+  "result" : "eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3Mjk5MjgzNTEsImV4cCI6MTcyOTkzMzM1MX0.OuHtY8PAAbZHiX9JArfo-j0QP7Ox-vCIl_0FdRp2AZk",
   "message" : "success",
   "status" : "200"
 }</code></pre>
@@ -554,7 +554,7 @@ Content-Length: 208
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
-  "result" : "eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3Mjk2ODE2NTcsImV4cCI6MTcyOTY4NjY1N30.7o6ABSawmfSBH_fq9-rYNGN84WsCeoCSCg76vsWEc3I",
+  "result" : "eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3Mjk5MjgzNTEsImV4cCI6MTcyOTkzMzM1MX0.OuHtY8PAAbZHiX9JArfo-j0QP7Ox-vCIl_0FdRp2AZk",
   "message" : "success",
   "status" : "200"
 }</code></pre>
@@ -694,7 +694,7 @@ Content-Length: 79
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /board/regist HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 679
+Content-Length: 652
 Host: 3.36.105.195:8080
 
 {
@@ -708,7 +708,6 @@ Host: 3.36.105.195:8080
   "lowCtg" : "하위카테고리",
   "boardAuthor" : "작가이름",
   "boardContent" : "Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다$Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다",
-  "tempStorageAt" : false,
   "fontSize" : 13,
   "fontType" : "Noto Sanz"
 }</code></pre>
@@ -802,11 +801,6 @@ X-Frame-Options: DENY</code></pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">본문</p></td>
 </tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tempStorageAt</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">임시저장 여부(false: 저장, true: 임시저장)</p></td>
-</tr>
 </tbody>
 </table>
 <div class="listingblock">
@@ -822,7 +816,6 @@ X-Frame-Options: DENY</code></pre>
   "lowCtg" : "하위카테고리",
   "boardAuthor" : "작가이름",
   "boardContent" : "Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다$Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다",
-  "tempStorageAt" : false,
   "fontSize" : 13,
   "fontType" : "Noto Sanz"
 }</code></pre>
@@ -863,7 +856,7 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 742
+Content-Length: 715
 
 {
   "boardPid" : 1,
@@ -877,7 +870,6 @@ Content-Length: 742
   "lowCtg" : "하위카테고리",
   "boardAuthor" : "작가이름",
   "boardContent" : "Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다$Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다",
-  "tempStorageAt" : false,
   "fontSize" : 13,
   "fontType" : "Noto Sanz",
   "foldCnt" : "78",
@@ -904,7 +896,6 @@ Content-Length: 742
   "lowCtg" : "하위카테고리",
   "boardAuthor" : "작가이름",
   "boardContent" : "Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다$Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다",
-  "tempStorageAt" : false,
   "fontSize" : 13,
   "fontType" : "Noto Sanz",
   "foldCnt" : "78",
@@ -1044,7 +1035,7 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 431
+Content-Length: 404
 
 [ {
   "boardPid" : 2,
@@ -1058,7 +1049,6 @@ Content-Length: 431
   "lowCtg" : null,
   "boardAuthor" : null,
   "boardContent" : null,
-  "tempStorageAt" : false,
   "fontSize" : 0,
   "fontType" : null,
   "foldCnt" : "4",
@@ -1131,7 +1121,7 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 5959
+Content-Length: 5716
 
 [ {
   "boardPid" : 1,
@@ -1145,7 +1135,6 @@ Content-Length: 5959
   "lowCtg" : "하위카테고리",
   "boardAuthor" : "작가이름",
   "boardContent" : "Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다$Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다",
-  "tempStorageAt" : false,
   "fontSize" : 13,
   "fontType" : "Noto Sanz",
   "foldCnt" : "34",
@@ -1162,7 +1151,6 @@ Content-Length: 5959
   "lowCtg" : "하위카테고리",
   "boardAuthor" : "작가이름",
   "boardContent" : "Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다$Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다",
-  "tempStorageAt" : false,
   "fontSize" : 13,
   "fontType" : "Noto Sanz",
   "foldCnt" : "4",
@@ -1179,7 +1167,6 @@ Content-Length: 5959
   "lowCtg" : "하위카테고리",
   "boardAuthor" : "작가이름",
   "boardContent" : "Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다$Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다",
-  "tempStorageAt" : false,
   "fontSize" : 13,
   "fontType" : "Noto Sanz",
   "foldCnt" : null,
@@ -1196,7 +1183,6 @@ Content-Length: 5959
   "lowCtg" : "하위카테고리",
   "boardAuthor" : "작가이름",
   "boardContent" : "Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다$Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다",
-  "tempStorageAt" : false,
   "fontSize" : 13,
   "fontType" : "Noto Sanz",
   "foldCnt" : null,
@@ -1213,7 +1199,6 @@ Content-Length: 5959
   "lowCtg" : "하위카테고리",
   "boardAuthor" : "작가이름",
   "boardContent" : "Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다$Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다",
-  "tempStorageAt" : false,
   "fontSize" : 13,
   "fontType" : "Noto Sanz",
   "foldCnt" : null,
@@ -1230,7 +1215,6 @@ Content-Length: 5959
   "lowCtg" : "하위카테고리",
   "boardAuthor" : "작가이름",
   "boardContent" : "Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다$Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다",
-  "tempStorageAt" : false,
   "fontSize" : 13,
   "fontType" : "Noto Sanz",
   "foldCnt" : null,
@@ -1247,7 +1231,6 @@ Content-Length: 5959
   "lowCtg" : "인문",
   "boardAuthor" : "",
   "boardContent" : "[{\"id\":1,\"focused\":false,\"original\":\"test\",\"translated\":\"test111\"}]",
-  "tempStorageAt" : false,
   "fontSize" : 0,
   "fontType" : "Pretendard",
   "foldCnt" : null,
@@ -1264,7 +1247,6 @@ Content-Length: 5959
   "lowCtg" : "사회",
   "boardAuthor" : "",
   "boardContent" : "[{\"id\":1,\"focused\":false,\"original\":\"test1111\",\"translated\":\"test2222\"}]",
-  "tempStorageAt" : false,
   "fontSize" : 0,
   "fontType" : "Pretendard",
   "foldCnt" : null,
@@ -1281,7 +1263,6 @@ Content-Length: 5959
   "lowCtg" : "서정 시",
   "boardAuthor" : "test author",
   "boardContent" : "[{\"id\":1,\"focused\":false,\"original\":\"111\",\"translated\":\"222\"}]",
-  "tempStorageAt" : false,
   "fontSize" : 0,
   "fontType" : "Pretendard",
   "foldCnt" : null,
@@ -1303,7 +1284,6 @@ Content-Length: 5959
   "lowCtg" : "하위카테고리",
   "boardAuthor" : "작가이름",
   "boardContent" : "Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다$Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다",
-  "tempStorageAt" : false,
   "fontSize" : 13,
   "fontType" : "Noto Sanz",
   "foldCnt" : "34",
@@ -1320,7 +1300,6 @@ Content-Length: 5959
   "lowCtg" : "하위카테고리",
   "boardAuthor" : "작가이름",
   "boardContent" : "Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다$Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다",
-  "tempStorageAt" : false,
   "fontSize" : 13,
   "fontType" : "Noto Sanz",
   "foldCnt" : "4",
@@ -1337,7 +1316,6 @@ Content-Length: 5959
   "lowCtg" : "하위카테고리",
   "boardAuthor" : "작가이름",
   "boardContent" : "Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다$Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다",
-  "tempStorageAt" : false,
   "fontSize" : 13,
   "fontType" : "Noto Sanz",
   "foldCnt" : null,
@@ -1354,7 +1332,6 @@ Content-Length: 5959
   "lowCtg" : "하위카테고리",
   "boardAuthor" : "작가이름",
   "boardContent" : "Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다$Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다",
-  "tempStorageAt" : false,
   "fontSize" : 13,
   "fontType" : "Noto Sanz",
   "foldCnt" : null,
@@ -1371,7 +1348,6 @@ Content-Length: 5959
   "lowCtg" : "하위카테고리",
   "boardAuthor" : "작가이름",
   "boardContent" : "Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다$Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다",
-  "tempStorageAt" : false,
   "fontSize" : 13,
   "fontType" : "Noto Sanz",
   "foldCnt" : null,
@@ -1388,7 +1364,6 @@ Content-Length: 5959
   "lowCtg" : "하위카테고리",
   "boardAuthor" : "작가이름",
   "boardContent" : "Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다$Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다",
-  "tempStorageAt" : false,
   "fontSize" : 13,
   "fontType" : "Noto Sanz",
   "foldCnt" : null,
@@ -1405,7 +1380,6 @@ Content-Length: 5959
   "lowCtg" : "인문",
   "boardAuthor" : "",
   "boardContent" : "[{\"id\":1,\"focused\":false,\"original\":\"test\",\"translated\":\"test111\"}]",
-  "tempStorageAt" : false,
   "fontSize" : 0,
   "fontType" : "Pretendard",
   "foldCnt" : null,
@@ -1422,7 +1396,6 @@ Content-Length: 5959
   "lowCtg" : "사회",
   "boardAuthor" : "",
   "boardContent" : "[{\"id\":1,\"focused\":false,\"original\":\"test1111\",\"translated\":\"test2222\"}]",
-  "tempStorageAt" : false,
   "fontSize" : 0,
   "fontType" : "Pretendard",
   "foldCnt" : null,
@@ -1439,7 +1412,6 @@ Content-Length: 5959
   "lowCtg" : "서정 시",
   "boardAuthor" : "test author",
   "boardContent" : "[{\"id\":1,\"focused\":false,\"original\":\"111\",\"translated\":\"222\"}]",
-  "tempStorageAt" : false,
   "fontSize" : 0,
   "fontType" : "Pretendard",
   "foldCnt" : null,

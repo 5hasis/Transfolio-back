@@ -29,9 +29,9 @@ public class BoardRegistDto {
 
     private String boardContent;
 
-    private boolean tempStorageAt;
-
     private int fontSize;
 
     private String fontType;
+
+    private String tempStorageYn;
 }

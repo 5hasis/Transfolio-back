@@ -57,9 +57,9 @@ public class BoardTest {
                 .lowCtg("하위카테고리")
                 .boardAuthor("작가이름")
                 .boardContent("Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다$Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다")
-                .tempStorageAt(false)
                 .fontSize(13)
                 .fontType("Noto Sanz")
+                .tempStorageYn("N")
                 .build();
 
 
@@ -84,7 +84,7 @@ public class BoardTest {
                                 fieldWithPath("fontSize").type(JsonFieldType.NUMBER).description("글씨 크기"),
                                 fieldWithPath("fontType").type(JsonFieldType.STRING).description("글꼴"),
                                 fieldWithPath("boardContent").type(JsonFieldType.STRING).description("본문"),
-                                fieldWithPath("tempStorageAt").type(JsonFieldType.BOOLEAN).description("임시저장 여부(false: 저장, true: 임시저장)")
+                                fieldWithPath("tempStorageYn").type(JsonFieldType.STRING).description("임시저장여부(Y/N)")
                         )));
 
     }
@@ -132,7 +132,6 @@ public class BoardTest {
                 .lowCtg("하위카테고리")
                 .boardAuthor("작가이름")
                 .boardContent("Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다$Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다")
-                .tempStorageAt(false)
                 .fontSize(13)
                 .fontType("Noto Sanz")
                 .tempStorageYn("N")
@@ -161,7 +160,6 @@ public class BoardTest {
                                 fieldWithPath("foldCnt").type(JsonFieldType.STRING).description("게시물 접기 수"),
                                 fieldWithPath("afterLang").type(JsonFieldType.STRING).description("게시물 후원 언어"),
                                 fieldWithPath("beforeLang").type(JsonFieldType.STRING).description("게시물 전언 언어"),
-                                fieldWithPath("tempStorageAt").type(JsonFieldType.BOOLEAN).description("임시 저장 여부"),
                                 fieldWithPath("fontSize").type(JsonFieldType.NUMBER).description("글꼴 크기"),
                                 fieldWithPath("fontType").type(JsonFieldType.STRING).description("글꼴 유형"),
                                 fieldWithPath("tempStorageYn").type(JsonFieldType.STRING).description("임시 저장 여부 Y/N")

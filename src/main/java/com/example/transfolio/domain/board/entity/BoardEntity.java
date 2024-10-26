@@ -52,8 +52,6 @@ public class BoardEntity implements Serializable {
 
     private String boardContent;
 
-    private boolean tempStorageAt;
-
     private int fontSize;
 
     private String fontType;
@@ -78,7 +76,6 @@ public class BoardEntity implements Serializable {
         this.lowCtg = boardDto.getLowCtg();
         this.boardAuthor = boardDto.getBoardAuthor();
         this.boardContent = boardDto.getBoardContent();
-        this.tempStorageAt = boardDto.isTempStorageAt();
         this.fontSize = boardDto.getFontSize();
         this.fontType = boardDto.getFontType();
         this.foldCnt = boardDto.getFoldCnt();
