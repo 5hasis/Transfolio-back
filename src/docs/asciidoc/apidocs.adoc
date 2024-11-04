@@ -30,8 +30,6 @@ include::{snippets}/user/sign-up/response-body.adoc[]
 include::{snippets}/board/regist/http-request.adoc[]
 include::{snippets}/board/regist/http-response.adoc[]
 include::{snippets}/board/regist/request-fields.adoc[]
-include::{snippets}/board/regist/request-body.adoc[]
-include::{snippets}/board/regist/response-body.adoc[]
 
 === 게시글 조회
 * `GET /board/{boardPid}`: 지정된 게시물 ID(`boardPid`)에 대한 게시글 정보를 조회
@@ -41,9 +39,9 @@ include::{snippets}/board/{boardPid}/request-body.adoc[]
 include::{snippets}/board/{boardPid}/response-body.adoc[]
 
 === 찜하기(접기)
+* `userId 는 Token에서 가져옴`
 include::{snippets}/board/bookmark/http-request.adoc[]
 include::{snippets}/board/bookmark/http-response.adoc[]
-include::{snippets}/board/bookmark/response-body.adoc[]
 
 
 == 프로필
@@ -53,6 +51,7 @@ include::{snippets}/profile/myInfo/http-response.adoc[]
 include::{snippets}/profile/myInfo/response-body.adoc[]
 
 === 포트폴리오
+* `userId 는 Token에서 가져옴`
 include::{snippets}/profile/portfolio/http-request.adoc[]
 include::{snippets}/profile/portfolio/http-response.adoc[]
 

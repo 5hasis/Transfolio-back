@@ -1,11 +1,16 @@
 package com.example.transfolio.board;
 
+import com.example.transfolio.common.response.ResObj;
+import com.example.transfolio.common.utils.JwtUtil;
+import com.example.transfolio.domain.board.entity.BoardEntity;
 import com.example.transfolio.domain.board.model.BoardDto;
+import com.example.transfolio.domain.board.model.BoardFoldHistDto;
 import com.example.transfolio.domain.board.model.BoardRegistDto;
 import com.example.transfolio.domain.board.repository.BoardRepository;
 import com.example.transfolio.domain.board.service.BoardService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.json.simple.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
@@ -18,12 +23,14 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import javax.transaction.Transactional;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @AutoConfigureRestDocs(uriHost = "3.36.105.195", uriPort = 8080)
@@ -43,10 +50,11 @@ public class BoardTest {
     @MockBean
     private BoardService boardService;
 
+
     @Test
     void registerBoard() throws Exception {
 
-        BoardRegistDto board = new BoardRegistDto().builder()
+        BoardRegistDto board = BoardRegistDto.builder()
                 .userId("test")
                 .boardTitle("제목을 입력해주세요")
                 .boardSubTitle("Hi welcome/안녕 어서와")
@@ -62,6 +70,11 @@ public class BoardTest {
                 .tempStorageYn("N")
                 .build();
 
+        BoardEntity mockBoardEntity = new BoardEntity(board);
+
+        ResObj mockResponse = new ResObj(mockBoardEntity);
+
+        when(boardService.registerBoard(board)).thenReturn(mockResponse);
 
         this.mockMvc.perform(post("/board/regist")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -93,26 +106,45 @@ public class BoardTest {
     @Transactional
     void saveBookmark() throws Exception {
 
-        /*BoardFoldHistDto foldHistDto = new BoardFoldHistDto().builder()
+        BoardFoldHistDto foldHistDto = BoardFoldHistDto.builder()
                 .boardPid("1")
-                .userId("accountTest")
-                .build();*/
+                .build();
+
+        String userId = "accountTest";
+        String token = JwtUtil.createToken(userId,"my-secret-key-123123", 500000); // 테스트용 사용자 계정
+
+        // Expected response
+        JSONObject mockResponse = new JSONObject();
+        mockResponse.put("status", "200");
+        mockResponse.put("result", 1);
+        mockResponse.put("message", "success");
 
         ObjectNode json = objectMapper.createObjectNode();
         json.put("boardPid", "1");
-        json.put("userId", "accountTest");
+
+        System.out.println("~~~~~");
+        System.out.println(mockResponse.toString());
+
+        when(boardService.saveBookmark(any(BoardFoldHistDto.class))).thenReturn(mockResponse);
 
         this.mockMvc.perform(post("/board/bookmark")
+                        .header("Authorization", "Bearer " + token)
                         .contentType(MediaType.APPLICATION_JSON)
-                .content(json.toString()))
+                        .content(json.toString()))
                 .andExpect(status().isOk())
                 .andDo(document(
                         "board/bookmark",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint()),
                         relaxedRequestFields(
-                                fieldWithPath("boardPid").type(JsonFieldType.STRING).description("게시물 고유번호"),
-                                fieldWithPath("userId").type(JsonFieldType.STRING).description("유저 아이디"))
+                                fieldWithPath("boardPid").type(JsonFieldType.STRING).description("게시물 고유번호")
+                                //, fieldWithPath("userId").type(JsonFieldType.STRING).description("유저 아이디")
+                        ),
+                        responseFields( // 응답 필드 문서화 추가
+                                fieldWithPath("result").type(JsonFieldType.NUMBER).description("결과 데이터"),
+                                fieldWithPath("message").type(JsonFieldType.STRING).description("응답 메시지"),
+                                fieldWithPath("status").type(JsonFieldType.STRING).description("응답 상태 코드")
+                        )
 
                 ));
     }
@@ -120,7 +152,7 @@ public class BoardTest {
     @Test
     public void testGetBoardDetailsByBoardPid() throws Exception {
         Long boardPid = 1L;
-        BoardDto mockBoardDto = new BoardDto().builder()
+        BoardDto mockBoardDto = BoardDto.builder()
                 .boardPid(boardPid)
                 .userId("test")
                 .boardTitle("제목을 입력해주세요")

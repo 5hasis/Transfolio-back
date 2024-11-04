@@ -1,6 +1,7 @@
 package com.example.transfolio.domain.board.entity;
 
 import com.example.transfolio.domain.board.model.BoardDto;
+import com.example.transfolio.domain.board.model.BoardRegistDto;
 import com.example.transfolio.domain.user.entity.UserEntity;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
@@ -80,6 +81,22 @@ public class BoardEntity implements Serializable {
         this.fontType = boardDto.getFontType();
         this.foldCnt = boardDto.getFoldCnt();
         this.tempStorageYn = boardDto.getTempStorageYn();
+    }
+
+    public BoardEntity(BoardRegistDto boardRegistDto) {
+        this.userId = boardRegistDto.getUserId();
+        this.boardTitle = boardRegistDto.getBoardTitle();
+        this.boardSubTitle = boardRegistDto.getBoardSubTitle();
+        this.beforeLang = boardRegistDto.getBeforeLang();
+        this.afterLang = boardRegistDto.getAfterLang();
+        this.boardDescription = boardRegistDto.getBoardDescription();
+        this.highCtg = boardRegistDto.getHighCtg();
+        this.lowCtg = boardRegistDto.getLowCtg();
+        this.boardAuthor = boardRegistDto.getBoardAuthor();
+        this.boardContent = boardRegistDto.getBoardContent();
+        this.fontSize = boardRegistDto.getFontSize();
+        this.fontType = boardRegistDto.getFontType();
+        this.tempStorageYn = boardRegistDto.getTempStorageYn();
     }
 
     public BoardEntity() {

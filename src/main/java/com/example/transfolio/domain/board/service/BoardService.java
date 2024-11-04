@@ -5,6 +5,7 @@ import com.example.transfolio.domain.board.entity.BoardEntity;
 import com.example.transfolio.domain.board.entity.BoardFoldHistEntity;
 import com.example.transfolio.domain.board.model.BoardDto;
 import com.example.transfolio.domain.board.model.BoardFoldHistDto;
+import com.example.transfolio.domain.board.model.BoardRegistDto;
 import com.example.transfolio.domain.board.repository.BoardFoldHistRepository;
 import com.example.transfolio.domain.board.repository.BoardRepository;
 import com.example.transfolio.security.AuthenticationUtil;
@@ -33,7 +34,7 @@ public class BoardService {
     }
 
     /* 게시글 저장 */
-    public ResObj registerBoard(BoardDto board) {
+    public ResObj registerBoard(BoardRegistDto board) {
 
         BoardEntity boardEntity = new BoardEntity(board);
         BoardEntity save = boardRepository.save(boardEntity);

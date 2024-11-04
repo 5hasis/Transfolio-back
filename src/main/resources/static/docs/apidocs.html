@@ -499,8 +499,8 @@ Host: 3.36.105.195:8080
 Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3Mjk5MzkxOTAsImV4cCI6MTcyOTk0NDE5MH0.5pfKXbk4yykZdN5gfYKh-m_k9jkpbRZ0R3BONs2J330
-Set-Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3Mjk5MzkxOTAsImV4cCI6MTcyOTk0NDE5MH0.5pfKXbk4yykZdN5gfYKh-m_k9jkpbRZ0R3BONs2J330; Path=/; Max-Age=3600; Expires=Sat, 26 Oct 2024 11:39:50 GMT; Secure; HttpOnly
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3MzA3MjI4MzcsImV4cCI6MTczMDcyNzgzN30.iKrNF-fvp41JWu5pKP8XmPVgy_qesUpeWx_NWkQO6c8
+Set-Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3MzA3MjI4MzcsImV4cCI6MTczMDcyNzgzN30.iKrNF-fvp41JWu5pKP8XmPVgy_qesUpeWx_NWkQO6c8; Path=/; Max-Age=3600; Expires=Mon, 04 Nov 2024 13:20:37 GMT; HttpOnly
 Content-Type: application/json
 X-Content-Type-Options: nosniff
 X-XSS-Protection: 1; mode=block
@@ -511,7 +511,7 @@ X-Frame-Options: DENY
 Content-Length: 208
 
 {
-  "result" : "eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3Mjk5MzkxOTAsImV4cCI6MTcyOTk0NDE5MH0.5pfKXbk4yykZdN5gfYKh-m_k9jkpbRZ0R3BONs2J330",
+  "result" : "eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3MzA3MjI4MzcsImV4cCI6MTczMDcyNzgzN30.iKrNF-fvp41JWu5pKP8XmPVgy_qesUpeWx_NWkQO6c8",
   "message" : "success",
   "status" : "200"
 }</code></pre>
@@ -554,7 +554,7 @@ Content-Length: 208
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
-  "result" : "eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3Mjk5MzkxOTAsImV4cCI6MTcyOTk0NDE5MH0.5pfKXbk4yykZdN5gfYKh-m_k9jkpbRZ0R3BONs2J330",
+  "result" : "eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3MzA3MjI4MzcsImV4cCI6MTczMDcyNzgzN30.iKrNF-fvp41JWu5pKP8XmPVgy_qesUpeWx_NWkQO6c8",
   "message" : "success",
   "status" : "200"
 }</code></pre>
@@ -720,12 +720,41 @@ Host: 3.36.105.195:8080
 Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
+Content-Type: application/json
 X-Content-Type-Options: nosniff
 X-XSS-Protection: 1; mode=block
 Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
-X-Frame-Options: DENY</code></pre>
+X-Frame-Options: DENY
+Content-Length: 939
+
+{
+  "object" : {
+    "result" : {
+      "boardPid" : null,
+      "user" : null,
+      "userId" : "test",
+      "boardTitle" : "제목을 입력해주세요",
+      "boardSubTitle" : "Hi welcome/안녕 어서와",
+      "beforeLang" : "영어",
+      "afterLang" : "한국어",
+      "boardDescription" : "작품에 대한 설명",
+      "highCtg" : "대분류",
+      "lowCtg" : "하위카테고리",
+      "boardAuthor" : "작가이름",
+      "boardContent" : "Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다$Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다",
+      "fontSize" : 13,
+      "fontType" : "Noto Sanz",
+      "createdAt" : null,
+      "updatedAt" : null,
+      "foldCnt" : 0,
+      "tempStorageYn" : "N"
+    },
+    "message" : "success",
+    "status" : "200"
+  }
+}</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
@@ -809,30 +838,6 @@ X-Frame-Options: DENY</code></pre>
 </tr>
 </tbody>
 </table>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
-  "userId" : "test",
-  "boardTitle" : "제목을 입력해주세요",
-  "boardSubTitle" : "Hi welcome/안녕 어서와",
-  "beforeLang" : "영어",
-  "afterLang" : "한국어",
-  "boardDescription" : "작품에 대한 설명",
-  "highCtg" : "대분류",
-  "lowCtg" : "하위카테고리",
-  "boardAuthor" : "작가이름",
-  "boardContent" : "Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다$Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다",
-  "fontSize" : 13,
-  "fontType" : "Noto Sanz",
-  "tempStorageYn" : "N"
-}</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-none hljs"></code></pre>
-</div>
-</div>
 </div>
 <div class="sect2">
 <h3 id="_게시글_조회">게시글 조회</h3>
@@ -913,17 +918,24 @@ Content-Length: 713
 </div>
 <div class="sect2">
 <h3 id="_찜하기접기">찜하기(접기)</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><code>userId 는 Token에서 가져옴</code></p>
+</li>
+</ul>
+</div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /board/bookmark HTTP/1.1
+<pre>POST /board/bookmark HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 50
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3MzA3MjI4MzUsImV4cCI6MTczMDcyMzMzNX0.6BAYUfzIRHWVJrox_URkWr9KTbyUcdyo4EAFE1QxfzY
+Content-Length: 22
 Host: 3.36.105.195:8080
 
 {
-  "boardPid" : "1",
-  "userId" : "accountTest"
-}</code></pre>
+  "boardPid" : "1"
+}</pre>
 </div>
 </div>
 <div class="listingblock">
@@ -932,17 +944,20 @@ Host: 3.36.105.195:8080
 Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
+Content-Type: application/json
 X-Content-Type-Options: nosniff
 X-XSS-Protection: 1; mode=block
 Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
-X-Frame-Options: DENY</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-none hljs"></code></pre>
+X-Frame-Options: DENY
+Content-Length: 63
+
+{
+  "result" : 1,
+  "message" : "success",
+  "status" : "200"
+}</code></pre>
 </div>
 </div>
 </div>
@@ -1007,16 +1022,23 @@ Content-Length: 264
 </div>
 <div class="sect2">
 <h3 id="_포트폴리오">포트폴리오</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><code>userId 는 Token에서 가져옴</code></p>
+</li>
+</ul>
+</div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /profile/portfolio HTTP/1.1
+<pre>POST /profile/portfolio HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Content-Length: 30
 Host: localhost:8080
 
 {
   "userId" : "accountTest"
-}</code></pre>
+}</pre>
 </div>
 </div>
 <div class="listingblock">
@@ -1081,21 +1103,21 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 550
+Content-Length: 551
 
 [ {
   "careerTitle" : "소년은 온다 번역",
   "careerContent" : "번역번역번역번역번역번역번역번역번역번역번역번역",
   "careerDate" : "2022-01-01",
   "updatedAt" : null,
-  "createdAt" : "2024-10-26T19:39:51.242104",
+  "createdAt" : "2024-11-04T21:20:37.616986",
   "userId" : "accountTest"
 }, {
   "careerTitle" : "고전시 번역 ~.~",
   "careerContent" : "번역번역번역번역번역번역번역번역번역번역번역번역",
   "careerDate" : "2021-05-10",
   "updatedAt" : "2021-05-11",
-  "createdAt" : "2024-10-26T19:39:51.24213",
+  "createdAt" : "2024-11-04T21:20:37.617018",
   "userId" : "accountTest"
 } ]</code></pre>
 </div>
@@ -1128,7 +1150,7 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 5691
+Content-Length: 5280
 
 [ {
   "boardPid" : 1,
@@ -1163,7 +1185,7 @@ Content-Length: 5691
   "foldCnt" : 4,
   "tempStorageYn" : "N"
 }, {
-  "boardPid" : 303,
+  "boardPid" : 313,
   "userId" : null,
   "boardTitle" : "제목을 입력해주세요",
   "afterLang" : "한국어",
@@ -1177,103 +1199,103 @@ Content-Length: 5691
   "fontSize" : 13,
   "fontType" : "Noto Sanz",
   "foldCnt" : 0,
-  "tempStorageYn" : null
+  "tempStorageYn" : "N"
 }, {
-  "boardPid" : 302,
+  "boardPid" : 312,
   "userId" : null,
-  "boardTitle" : "제목을 입력해주세요",
-  "afterLang" : "한국어",
-  "beforeLang" : "영어",
-  "boardSubTitle" : "Hi welcome/안녕 어서와",
-  "boardDescription" : "작품에 대한 설명",
-  "highCtg" : "대분류",
-  "lowCtg" : "하위카테고리",
-  "boardAuthor" : "작가이름",
-  "boardContent" : "Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다$Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다",
-  "fontSize" : 13,
-  "fontType" : "Noto Sanz",
-  "foldCnt" : 0,
-  "tempStorageYn" : null
-}, {
-  "boardPid" : 301,
-  "userId" : null,
-  "boardTitle" : "제목을 입력해주세요",
-  "afterLang" : "한국어",
-  "beforeLang" : "영어",
-  "boardSubTitle" : "Hi welcome/안녕 어서와",
-  "boardDescription" : "작품에 대한 설명",
-  "highCtg" : "대분류",
-  "lowCtg" : "하위카테고리",
-  "boardAuthor" : "작가이름",
-  "boardContent" : "Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다$Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다",
-  "fontSize" : 13,
-  "fontType" : "Noto Sanz",
-  "foldCnt" : 0,
-  "tempStorageYn" : null
-}, {
-  "boardPid" : 300,
-  "userId" : null,
-  "boardTitle" : "제목을 입력해주세요",
-  "afterLang" : "한국어",
-  "beforeLang" : "영어",
-  "boardSubTitle" : "Hi welcome/안녕 어서와",
-  "boardDescription" : "작품에 대한 설명",
-  "highCtg" : "대분류",
-  "lowCtg" : "하위카테고리",
-  "boardAuthor" : "작가이름",
-  "boardContent" : "Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다$Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다",
-  "fontSize" : 13,
-  "fontType" : "Noto Sanz",
-  "foldCnt" : 0,
-  "tempStorageYn" : null
-}, {
-  "boardPid" : 299,
-  "userId" : null,
-  "boardTitle" : "test241022 - 2",
+  "boardTitle" : "테스트1111",
   "afterLang" : "불어",
-  "beforeLang" : "영어",
-  "boardSubTitle" : "test241022 - 2",
-  "boardDescription" : "",
-  "highCtg" : "전공",
-  "lowCtg" : "인문",
-  "boardAuthor" : "",
-  "boardContent" : "[{\"id\":1,\"focused\":false,\"original\":\"test\",\"translated\":\"test111\"}]",
-  "fontSize" : 0,
-  "fontType" : "Pretendard",
-  "foldCnt" : 0,
-  "tempStorageYn" : null
-}, {
-  "boardPid" : 298,
-  "userId" : null,
-  "boardTitle" : "test241022 - 1",
-  "afterLang" : "일본어",
-  "beforeLang" : "영어",
-  "boardSubTitle" : "test241022 - 1",
-  "boardDescription" : "",
-  "highCtg" : "전공",
-  "lowCtg" : "사회",
-  "boardAuthor" : "",
-  "boardContent" : "[{\"id\":1,\"focused\":false,\"original\":\"test1111\",\"translated\":\"test2222\"}]",
-  "fontSize" : 0,
-  "fontType" : "Pretendard",
-  "foldCnt" : 0,
-  "tempStorageYn" : null
-}, {
-  "boardPid" : 85,
-  "userId" : null,
-  "boardTitle" : "test111",
-  "afterLang" : "한국어",
   "beforeLang" : "일본어",
-  "boardSubTitle" : "test111",
-  "boardDescription" : "123123",
+  "boardSubTitle" : "테스트1111",
+  "boardDescription" : "test",
   "highCtg" : "문학",
   "lowCtg" : "서정 시",
-  "boardAuthor" : "test author",
-  "boardContent" : "[{\"id\":1,\"focused\":false,\"original\":\"111\",\"translated\":\"222\"}]",
-  "fontSize" : 0,
-  "fontType" : "Pretendard",
+  "boardAuthor" : "test",
+  "boardContent" : "向う側の斜めに水から出ている半畳敷程の石に黒い小さいものがいた。向う側の斜めに水から出ている半畳敷程の石に黒い小さいものがいた。/맞은편 비스듬히 물에서 나온, 다다미 깔개 정도의 돌에 검은색 작은 것이 있었다.\n맞은편 비스듬히!!!맞은편 비스듬히 물에서 나온, 다다미 깔개 정도의 돌에 검은색 작은 것이 있었다.\n맞은편 비스듬히!!!$向う側の斜めに水から出ている半畳敷程の石に黒い小さいも/$1/2",
+  "fontSize" : 16,
+  "fontType" : "Nanum Myeangjo",
   "foldCnt" : 0,
-  "tempStorageYn" : null
+  "tempStorageYn" : "N"
+}, {
+  "boardPid" : 311,
+  "userId" : null,
+  "boardTitle" : "제목 test temp storage title",
+  "afterLang" : "불어",
+  "beforeLang" : "일본어",
+  "boardSubTitle" : "제목 test temp storage title",
+  "boardDescription" : "test temp storage description",
+  "highCtg" : "전공",
+  "lowCtg" : "공학",
+  "boardAuthor" : "test temp storage author",
+  "boardContent" : "test1/test2$1/2$/$2/3",
+  "fontSize" : 18,
+  "fontType" : "Nanum Myeangjo",
+  "foldCnt" : 0,
+  "tempStorageYn" : "Y"
+}, {
+  "boardPid" : 310,
+  "userId" : null,
+  "boardTitle" : "test20241029-3",
+  "afterLang" : "영어",
+  "beforeLang" : "아랍어",
+  "boardSubTitle" : "test20241029-3",
+  "boardDescription" : "test11111",
+  "highCtg" : "기업",
+  "lowCtg" : "스타트업",
+  "boardAuthor" : "test author",
+  "boardContent" : "1/11112$2/2$2/3$2/3$1/",
+  "fontSize" : 20,
+  "fontType" : "Noto Sans",
+  "foldCnt" : 0,
+  "tempStorageYn" : "N"
+}, {
+  "boardPid" : 309,
+  "userId" : null,
+  "boardTitle" : "test20241029-2",
+  "afterLang" : "아랍어",
+  "beforeLang" : "불어",
+  "boardSubTitle" : "test20241029-2",
+  "boardDescription" : "test",
+  "highCtg" : "기업",
+  "lowCtg" : "공기업",
+  "boardAuthor" : "test 1111",
+  "boardContent" : "1/2",
+  "fontSize" : 20,
+  "fontType" : "Nanum Barun Gothic",
+  "foldCnt" : 0,
+  "tempStorageYn" : "N"
+}, {
+  "boardPid" : 308,
+  "userId" : null,
+  "boardTitle" : "test20241029-1",
+  "afterLang" : "한국어",
+  "beforeLang" : "일본어",
+  "boardSubTitle" : "test20241029-1",
+  "boardDescription" : "테스트",
+  "highCtg" : "문학",
+  "lowCtg" : "고전 소설",
+  "boardAuthor" : "테스트 작가",
+  "boardContent" : "태/스$트/중",
+  "fontSize" : 18,
+  "fontType" : "Nanum Myeangjo",
+  "foldCnt" : 0,
+  "tempStorageYn" : "N"
+}, {
+  "boardPid" : 307,
+  "userId" : null,
+  "boardTitle" : "test20241028-4",
+  "afterLang" : "한국어",
+  "beforeLang" : "일본어",
+  "boardSubTitle" : "test20241028-4",
+  "boardDescription" : "test test",
+  "highCtg" : "언어",
+  "lowCtg" : "영어",
+  "boardAuthor" : "test",
+  "boardContent" : "tes1/test22",
+  "fontSize" : 18,
+  "fontType" : "Nanum Myeangjo",
+  "foldCnt" : 0,
+  "tempStorageYn" : "N"
 } ]</code></pre>
 </div>
 </div>
@@ -1312,7 +1334,7 @@ Content-Length: 5691
   "foldCnt" : 4,
   "tempStorageYn" : "N"
 }, {
-  "boardPid" : 303,
+  "boardPid" : 313,
   "userId" : null,
   "boardTitle" : "제목을 입력해주세요",
   "afterLang" : "한국어",
@@ -1326,103 +1348,103 @@ Content-Length: 5691
   "fontSize" : 13,
   "fontType" : "Noto Sanz",
   "foldCnt" : 0,
-  "tempStorageYn" : null
+  "tempStorageYn" : "N"
 }, {
-  "boardPid" : 302,
+  "boardPid" : 312,
   "userId" : null,
-  "boardTitle" : "제목을 입력해주세요",
-  "afterLang" : "한국어",
-  "beforeLang" : "영어",
-  "boardSubTitle" : "Hi welcome/안녕 어서와",
-  "boardDescription" : "작품에 대한 설명",
-  "highCtg" : "대분류",
-  "lowCtg" : "하위카테고리",
-  "boardAuthor" : "작가이름",
-  "boardContent" : "Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다$Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다",
-  "fontSize" : 13,
-  "fontType" : "Noto Sanz",
-  "foldCnt" : 0,
-  "tempStorageYn" : null
-}, {
-  "boardPid" : 301,
-  "userId" : null,
-  "boardTitle" : "제목을 입력해주세요",
-  "afterLang" : "한국어",
-  "beforeLang" : "영어",
-  "boardSubTitle" : "Hi welcome/안녕 어서와",
-  "boardDescription" : "작품에 대한 설명",
-  "highCtg" : "대분류",
-  "lowCtg" : "하위카테고리",
-  "boardAuthor" : "작가이름",
-  "boardContent" : "Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다$Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다",
-  "fontSize" : 13,
-  "fontType" : "Noto Sanz",
-  "foldCnt" : 0,
-  "tempStorageYn" : null
-}, {
-  "boardPid" : 300,
-  "userId" : null,
-  "boardTitle" : "제목을 입력해주세요",
-  "afterLang" : "한국어",
-  "beforeLang" : "영어",
-  "boardSubTitle" : "Hi welcome/안녕 어서와",
-  "boardDescription" : "작품에 대한 설명",
-  "highCtg" : "대분류",
-  "lowCtg" : "하위카테고리",
-  "boardAuthor" : "작가이름",
-  "boardContent" : "Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다$Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다",
-  "fontSize" : 13,
-  "fontType" : "Noto Sanz",
-  "foldCnt" : 0,
-  "tempStorageYn" : null
-}, {
-  "boardPid" : 299,
-  "userId" : null,
-  "boardTitle" : "test241022 - 2",
+  "boardTitle" : "테스트1111",
   "afterLang" : "불어",
-  "beforeLang" : "영어",
-  "boardSubTitle" : "test241022 - 2",
-  "boardDescription" : "",
-  "highCtg" : "전공",
-  "lowCtg" : "인문",
-  "boardAuthor" : "",
-  "boardContent" : "[{\"id\":1,\"focused\":false,\"original\":\"test\",\"translated\":\"test111\"}]",
-  "fontSize" : 0,
-  "fontType" : "Pretendard",
-  "foldCnt" : 0,
-  "tempStorageYn" : null
-}, {
-  "boardPid" : 298,
-  "userId" : null,
-  "boardTitle" : "test241022 - 1",
-  "afterLang" : "일본어",
-  "beforeLang" : "영어",
-  "boardSubTitle" : "test241022 - 1",
-  "boardDescription" : "",
-  "highCtg" : "전공",
-  "lowCtg" : "사회",
-  "boardAuthor" : "",
-  "boardContent" : "[{\"id\":1,\"focused\":false,\"original\":\"test1111\",\"translated\":\"test2222\"}]",
-  "fontSize" : 0,
-  "fontType" : "Pretendard",
-  "foldCnt" : 0,
-  "tempStorageYn" : null
-}, {
-  "boardPid" : 85,
-  "userId" : null,
-  "boardTitle" : "test111",
-  "afterLang" : "한국어",
   "beforeLang" : "일본어",
-  "boardSubTitle" : "test111",
-  "boardDescription" : "123123",
+  "boardSubTitle" : "테스트1111",
+  "boardDescription" : "test",
   "highCtg" : "문학",
   "lowCtg" : "서정 시",
-  "boardAuthor" : "test author",
-  "boardContent" : "[{\"id\":1,\"focused\":false,\"original\":\"111\",\"translated\":\"222\"}]",
-  "fontSize" : 0,
-  "fontType" : "Pretendard",
+  "boardAuthor" : "test",
+  "boardContent" : "向う側の斜めに水から出ている半畳敷程の石に黒い小さいものがいた。向う側の斜めに水から出ている半畳敷程の石に黒い小さいものがいた。/맞은편 비스듬히 물에서 나온, 다다미 깔개 정도의 돌에 검은색 작은 것이 있었다.\n맞은편 비스듬히!!!맞은편 비스듬히 물에서 나온, 다다미 깔개 정도의 돌에 검은색 작은 것이 있었다.\n맞은편 비스듬히!!!$向う側の斜めに水から出ている半畳敷程の石に黒い小さいも/$1/2",
+  "fontSize" : 16,
+  "fontType" : "Nanum Myeangjo",
   "foldCnt" : 0,
-  "tempStorageYn" : null
+  "tempStorageYn" : "N"
+}, {
+  "boardPid" : 311,
+  "userId" : null,
+  "boardTitle" : "제목 test temp storage title",
+  "afterLang" : "불어",
+  "beforeLang" : "일본어",
+  "boardSubTitle" : "제목 test temp storage title",
+  "boardDescription" : "test temp storage description",
+  "highCtg" : "전공",
+  "lowCtg" : "공학",
+  "boardAuthor" : "test temp storage author",
+  "boardContent" : "test1/test2$1/2$/$2/3",
+  "fontSize" : 18,
+  "fontType" : "Nanum Myeangjo",
+  "foldCnt" : 0,
+  "tempStorageYn" : "Y"
+}, {
+  "boardPid" : 310,
+  "userId" : null,
+  "boardTitle" : "test20241029-3",
+  "afterLang" : "영어",
+  "beforeLang" : "아랍어",
+  "boardSubTitle" : "test20241029-3",
+  "boardDescription" : "test11111",
+  "highCtg" : "기업",
+  "lowCtg" : "스타트업",
+  "boardAuthor" : "test author",
+  "boardContent" : "1/11112$2/2$2/3$2/3$1/",
+  "fontSize" : 20,
+  "fontType" : "Noto Sans",
+  "foldCnt" : 0,
+  "tempStorageYn" : "N"
+}, {
+  "boardPid" : 309,
+  "userId" : null,
+  "boardTitle" : "test20241029-2",
+  "afterLang" : "아랍어",
+  "beforeLang" : "불어",
+  "boardSubTitle" : "test20241029-2",
+  "boardDescription" : "test",
+  "highCtg" : "기업",
+  "lowCtg" : "공기업",
+  "boardAuthor" : "test 1111",
+  "boardContent" : "1/2",
+  "fontSize" : 20,
+  "fontType" : "Nanum Barun Gothic",
+  "foldCnt" : 0,
+  "tempStorageYn" : "N"
+}, {
+  "boardPid" : 308,
+  "userId" : null,
+  "boardTitle" : "test20241029-1",
+  "afterLang" : "한국어",
+  "beforeLang" : "일본어",
+  "boardSubTitle" : "test20241029-1",
+  "boardDescription" : "테스트",
+  "highCtg" : "문학",
+  "lowCtg" : "고전 소설",
+  "boardAuthor" : "테스트 작가",
+  "boardContent" : "태/스$트/중",
+  "fontSize" : 18,
+  "fontType" : "Nanum Myeangjo",
+  "foldCnt" : 0,
+  "tempStorageYn" : "N"
+}, {
+  "boardPid" : 307,
+  "userId" : null,
+  "boardTitle" : "test20241028-4",
+  "afterLang" : "한국어",
+  "beforeLang" : "일본어",
+  "boardSubTitle" : "test20241028-4",
+  "boardDescription" : "test test",
+  "highCtg" : "언어",
+  "lowCtg" : "영어",
+  "boardAuthor" : "test",
+  "boardContent" : "tes1/test22",
+  "fontSize" : 18,
+  "fontType" : "Nanum Myeangjo",
+  "foldCnt" : 0,
+  "tempStorageYn" : "N"
 } ]</code></pre>
 </div>
 </div>
@@ -1433,7 +1455,7 @@ Content-Length: 5691
 <div id="footer">
 <div id="footer-text">
 Version 0.1<br>
-Last updated 2024-10-26 17:19:39 +0900
+Last updated 2024-11-04 21:20:13 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
