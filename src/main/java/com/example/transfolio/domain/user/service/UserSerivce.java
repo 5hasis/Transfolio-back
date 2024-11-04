@@ -114,4 +114,22 @@ public class UserSerivce {
         return userRepository.findInfoByUserId(loginId);
     }
 
+    /**
+     * 로그아웃
+     */
+    public JSONObject logout(HttpServletResponse response) {
+
+        // JWT 토큰을 담고 있는 쿠키 삭제
+        Cookie cookie = new Cookie("jwtToken", null);
+        cookie.setHttpOnly(true);  // httponly 옵션 설정
+        cookie.setSecure(false); // https 옵션 설정
+        cookie.setPath("/"); // 모든 곳에서 쿠키열람이 가능하도록 설정
+        cookie.setMaxAge(0); // 쿠키 유효 시간: 즉시 만료
+
+        response.addCookie(cookie);
+
+        // 로그아웃 성공 메시지 반환
+        return new ResObj("로그아웃이 완료되었습니다.").getObject();
+    }
+
 }

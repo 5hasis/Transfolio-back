@@ -6,6 +6,7 @@ import com.example.transfolio.domain.user.model.UserDto;
 import com.example.transfolio.domain.user.model.UserIntrsDto;
 import com.example.transfolio.domain.user.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.simple.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
@@ -16,12 +17,14 @@ import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import javax.persistence.EntityManager;
+import javax.servlet.http.Cookie;
+import javax.transaction.Transactional;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @AutoConfigureRestDocs(uriHost = "3.36.105.195", uriPort = 8080)
 @AutoConfigureMockMvc
@@ -102,4 +105,34 @@ public class MemberTest {
 
     }
 
+    @Test
+    @Transactional
+    void signOutMember() throws Exception {
+        String userId = "accountTest";
+        String token = JwtUtil.createToken(userId, "my-secret-key-123123", 500000); // 테스트용 JWT
+
+        // 쿠키 설정
+        Cookie cookie = new Cookie("jwtToken", token);
+        cookie.setPath("/"); // 쿠키 경로 설정
+        cookie.setHttpOnly(true);
+        cookie.setSecure(false);
+
+        // 로그아웃 API 호출 및 검증
+        this.mockMvc.perform(post("/user/sign-out")
+                        .cookie(cookie) // 로그아웃 요청에 JWT 토큰 쿠키 포함
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.message").value("success")) // 수정된 메시지 검사
+                .andExpect(jsonPath("$.status").value("200")) // 상태 코드도 확인
+                .andExpect(jsonPath("$.result").value("로그아웃이 완료되었습니다."))
+                .andDo(document(
+                        "user/sign-out", // 문서화 식별자
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint()),
+                        relaxedResponseFields(
+                                fieldWithPath("status").type(JsonFieldType.STRING).description("응답 상태 코드"),
+                                fieldWithPath("message").type(JsonFieldType.STRING).description("로그아웃 메시지")
+                        )
+                ));
+    }
 }

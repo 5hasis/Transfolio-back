@@ -37,5 +37,14 @@ public class UserController {
         return userSerivce.login(user, response);
     }
 
+    /**
+     * 로그인
+     */
+    @PostMapping("/sign-out")
+    public JSONObject logoutUser(HttpServletResponse response) {
+
+
+        return userSerivce.logout(response);
+    }
 
 }

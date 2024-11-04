@@ -499,8 +499,8 @@ Host: 3.36.105.195:8080
 Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3MzA3MjI3OTQsImV4cCI6MTczMDcyNzc5NH0.uxGxOItlw64BxHBQR7I3B-_-KYJEKI1kyB6uc5M5Yts
-Set-Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3MzA3MjI3OTQsImV4cCI6MTczMDcyNzc5NH0.uxGxOItlw64BxHBQR7I3B-_-KYJEKI1kyB6uc5M5Yts; Path=/; Max-Age=3600; Expires=Mon, 04 Nov 2024 13:19:54 GMT; HttpOnly
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3MzA3MjY0MzgsImV4cCI6MTczMDczMTQzOH0.Wdg7oKLSShO0i-gJ6Ff_peAE7eAHeAlHOxYi35XW5cI
+Set-Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3MzA3MjY0MzgsImV4cCI6MTczMDczMTQzOH0.Wdg7oKLSShO0i-gJ6Ff_peAE7eAHeAlHOxYi35XW5cI; Path=/; Max-Age=3600; Expires=Mon, 04 Nov 2024 14:20:38 GMT; HttpOnly
 Content-Type: application/json
 X-Content-Type-Options: nosniff
 X-XSS-Protection: 1; mode=block
@@ -511,7 +511,7 @@ X-Frame-Options: DENY
 Content-Length: 208
 
 {
-  "result" : "eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3MzA3MjI3OTQsImV4cCI6MTczMDcyNzc5NH0.uxGxOItlw64BxHBQR7I3B-_-KYJEKI1kyB6uc5M5Yts",
+  "result" : "eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3MzA3MjY0MzgsImV4cCI6MTczMDczMTQzOH0.Wdg7oKLSShO0i-gJ6Ff_peAE7eAHeAlHOxYi35XW5cI",
   "message" : "success",
   "status" : "200"
 }</code></pre>
@@ -554,7 +554,7 @@ Content-Length: 208
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
-  "result" : "eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3MzA3MjI3OTQsImV4cCI6MTczMDcyNzc5NH0.uxGxOItlw64BxHBQR7I3B-_-KYJEKI1kyB6uc5M5Yts",
+  "result" : "eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3MzA3MjY0MzgsImV4cCI6MTczMDczMTQzOH0.Wdg7oKLSShO0i-gJ6Ff_peAE7eAHeAlHOxYi35XW5cI",
   "message" : "success",
   "status" : "200"
 }</code></pre>
@@ -681,7 +681,46 @@ Content-Length: 79
 </div>
 <div class="sect2">
 <h3 id="_로그아웃">로그아웃</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /user/sign-out HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Host: 3.36.105.195:8080
+Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3MzA3MjY0MzcsImV4cCI6MTczMDcyNjkzN30.UuyRXEoeiHfKUVmKkZvm5plFxok8ZND_o9R47eSbPJk</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Set-Cookie: jwtToken=; Path=/; Max-Age=0; Expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly
+Content-Type: application/json
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Length: 102
 
+{
+  "result" : "로그아웃이 완료되었습니다.",
+  "message" : "success",
+  "status" : "200"
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "result" : "로그아웃이 완료되었습니다.",
+  "message" : "success",
+  "status" : "200"
+}</code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -838,55 +877,6 @@ Content-Length: 939
 </tr>
 </tbody>
 </table>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
-  "userId" : "test",
-  "boardTitle" : "제목을 입력해주세요",
-  "boardSubTitle" : "Hi welcome/안녕 어서와",
-  "beforeLang" : "영어",
-  "afterLang" : "한국어",
-  "boardDescription" : "작품에 대한 설명",
-  "highCtg" : "대분류",
-  "lowCtg" : "하위카테고리",
-  "boardAuthor" : "작가이름",
-  "boardContent" : "Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다$Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다",
-  "fontSize" : 13,
-  "fontType" : "Noto Sanz",
-  "tempStorageYn" : "N"
-}</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
-  "object" : {
-    "result" : {
-      "boardPid" : null,
-      "user" : null,
-      "userId" : "test",
-      "boardTitle" : "제목을 입력해주세요",
-      "boardSubTitle" : "Hi welcome/안녕 어서와",
-      "beforeLang" : "영어",
-      "afterLang" : "한국어",
-      "boardDescription" : "작품에 대한 설명",
-      "highCtg" : "대분류",
-      "lowCtg" : "하위카테고리",
-      "boardAuthor" : "작가이름",
-      "boardContent" : "Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다$Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다",
-      "fontSize" : 13,
-      "fontType" : "Noto Sanz",
-      "createdAt" : null,
-      "updatedAt" : null,
-      "foldCnt" : 0,
-      "tempStorageYn" : "N"
-    },
-    "message" : "success",
-    "status" : "200"
-  }
-}</code></pre>
-</div>
-</div>
 </div>
 <div class="sect2">
 <h3 id="_게시글_조회">게시글 조회</h3>
@@ -978,7 +968,7 @@ Content-Length: 713
 <div class="content">
 <pre>POST /board/bookmark HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3MzA3MjI3OTIsImV4cCI6MTczMDcyMzI5Mn0.quEBs4jTy2eHcBn_-aS_xQoI49Ou908Upkg2cbSteyU
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3MzA3MjY0MzYsImV4cCI6MTczMDcyNjkzNn0.IWuB_etLFIoKckp4bEUiKraY9T1OJYsl_wB5Ifhjt9w
 Content-Length: 22
 Host: 3.36.105.195:8080
 
@@ -1159,14 +1149,14 @@ Content-Length: 551
   "careerContent" : "번역번역번역번역번역번역번역번역번역번역번역번역",
   "careerDate" : "2022-01-01",
   "updatedAt" : null,
-  "createdAt" : "2024-11-04T21:19:55.579698",
+  "createdAt" : "2024-11-04T22:20:38.652492",
   "userId" : "accountTest"
 }, {
   "careerTitle" : "고전시 번역 ~.~",
   "careerContent" : "번역번역번역번역번역번역번역번역번역번역번역번역",
   "careerDate" : "2021-05-10",
   "updatedAt" : "2021-05-11",
-  "createdAt" : "2024-11-04T21:19:55.579735",
+  "createdAt" : "2024-11-04T22:20:38.652511",
   "userId" : "accountTest"
 } ]</code></pre>
 </div>
@@ -1504,7 +1494,7 @@ Content-Length: 5280
 <div id="footer">
 <div id="footer-text">
 Version 0.1<br>
-Last updated 2024-11-04 21:19:46 +0900
+Last updated 2024-11-04 22:20:31 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
