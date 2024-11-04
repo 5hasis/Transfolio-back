@@ -95,7 +95,7 @@ public class UserSerivce {
 
         Cookie cookie = new Cookie("jwtToken", jwtToken);
         cookie.setHttpOnly(true);  //httponly 옵션 설정
-        cookie.setSecure(true); //https 옵션 설정
+        cookie.setSecure(false); //https 옵션 설정
         cookie.setPath("/"); // 모든 곳에서 쿠키열람이 가능하도록 설정
         cookie.setMaxAge(60 * 60);  // 쿠키 유효 시간 : 1시간
 
