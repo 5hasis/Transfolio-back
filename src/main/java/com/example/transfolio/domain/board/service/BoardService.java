@@ -8,6 +8,9 @@ import com.example.transfolio.domain.board.model.BoardFoldHistDto;
 import com.example.transfolio.domain.board.model.BoardRegistDto;
 import com.example.transfolio.domain.board.repository.BoardFoldHistRepository;
 import com.example.transfolio.domain.board.repository.BoardRepository;
+import com.example.transfolio.domain.user.model.UserDto;
+import com.example.transfolio.domain.user.model.UserSummaryDto;
+import com.example.transfolio.domain.user.repository.UserRepository;
 import com.example.transfolio.security.AuthenticationUtil;
 import org.json.simple.JSONObject;
 import org.springframework.data.domain.PageRequest;
@@ -27,6 +30,7 @@ public class BoardService {
 
     private final BoardRepository boardRepository;
     private final BoardFoldHistRepository boardFoldHistRepository;
+
 
     public BoardService(BoardRepository boardRepository, BoardFoldHistRepository boardFoldHistRepository) {
         this.boardRepository = boardRepository;
@@ -147,4 +151,24 @@ public class BoardService {
                         ("Board not found with pid: " + boardPid));
     }
 
+    public List<UserSummaryDto> getTop3TranslatorByCtg(BoardDto boardDto){
+
+        try {
+
+            List<Object[]> resultList = boardRepository.findTop3TranslatorByCtg(boardDto);
+
+
+            List<UserSummaryDto> top3Translators = resultList.stream()
+                    .map(result -> new UserSummaryDto((String) result[0], (String) result[1]))
+                    .collect(Collectors.toList());
+
+            return top3Translators;
+
+        } catch (Exception e) {
+            // 예외 처리: 로그를 남기거나 다른 오류 응답을 보낼 수 있음
+            System.err.println("Error occurred while fetching top translator: " + e.getMessage());
+            // 예외 발생 시 빈 리스트 반환 또는 적절한 오류 처리
+            return Collections.emptyList();
+        }
+    }
 }

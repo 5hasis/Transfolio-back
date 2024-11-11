@@ -41,6 +41,10 @@ include::{snippets}/board/{boardPid}/http-response.adoc[]
 include::{snippets}/board/{boardPid}/request-body.adoc[]
 include::{snippets}/board/{boardPid}/response-body.adoc[]
 
+=== 게시글 저장 완료 화면 top3 번역가
+include::{snippets}/board/top3-translators/http-request.adoc[]
+include::{snippets}/board/top3-translators/http-response.adoc[]
+
 === 찜하기(접기)
 * `userId 는 Token에서 가져옴`
 include::{snippets}/board/bookmark/http-request.adoc[]

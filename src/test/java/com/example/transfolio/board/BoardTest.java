@@ -8,6 +8,7 @@ import com.example.transfolio.domain.board.model.BoardFoldHistDto;
 import com.example.transfolio.domain.board.model.BoardRegistDto;
 import com.example.transfolio.domain.board.repository.BoardRepository;
 import com.example.transfolio.domain.board.service.BoardService;
+import com.example.transfolio.domain.user.model.UserSummaryDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.json.simple.JSONObject;
@@ -23,14 +24,20 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import javax.transaction.Transactional;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.*;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @AutoConfigureRestDocs(uriHost = "3.36.105.195", uriPort = 8080)
@@ -197,5 +204,47 @@ public class BoardTest {
                                 fieldWithPath("tempStorageYn").type(JsonFieldType.STRING).description("임시 저장 여부 Y/N")
                         )
                 ));
+    }
+
+    @Test
+    void testGetTop3TranslatorsByCtg() throws Exception {
+
+        Map<String, String> requestBody = new HashMap<>();
+        requestBody.put("highCtg", "대분류");
+        requestBody.put("lowCtg", "하위카테고리");
+
+
+        // Mock 데이터를 생성 (가정: 서비스가 반환할 예상 데이터)
+        List<UserSummaryDto> mockUserListtt = Arrays.asList(
+                new UserSummaryDto("accountTest1", "user1@example.com"),
+                new UserSummaryDto("accountTest2", "user1@example.com"),
+                new UserSummaryDto("accountTest3", "user1@example.com")
+        );
+
+
+        // 서비스 메서드의 반환값 설정
+        when(boardService.getTop3TranslatorByCtg(any(BoardDto.class))).thenReturn(mockUserListtt);
+
+
+        this.mockMvc.perform(post("/board/top3-translators")
+                        .content(objectMapper.writeValueAsString(requestBody))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andDo(print()) // 응답 본문 출력
+                .andDo(document(
+                        "board/top3-translators",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint()),
+                        requestFields(
+                                fieldWithPath("highCtg").type(JsonFieldType.STRING).description("대분류"),
+                                fieldWithPath("lowCtg").type(JsonFieldType.STRING).description("하위 카테고리")
+                        ),
+                        responseFields(
+                                fieldWithPath("[].userId").type(JsonFieldType.STRING).description("번역가의 사용자 ID"),
+                                fieldWithPath("[].email").type(JsonFieldType.STRING).description("번역가의 이메일")
+                        )
+                ));
+
     }
 }

@@ -2,6 +2,7 @@ package com.example.transfolio.domain.board.repository;
 
 import com.example.transfolio.domain.board.entity.BoardEntity;
 import com.example.transfolio.domain.board.model.BoardDto;
+import com.example.transfolio.domain.user.model.UserSummaryDto;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -72,5 +73,18 @@ public interface BoardRepository extends JpaRepository<BoardEntity, String> {
             FROM BoardEntity b WHERE b.boardPid = :boardPid
             """)
     Optional<BoardDto> findBoardByBoardPid(@Param("boardPid") Long boardPid);
+
+
+    @Query(value = """
+        SELECT m.user_id, m.email, b.fold_cnt
+        FROM tr_board b
+        JOIN tr_member m ON b.user_id = m.user_id 
+        WHERE b.high_ctg = :#{#boardDto.highCtg} 
+        AND b.low_ctg = :#{#boardDto.lowCtg} 
+        GROUP BY m.user_id, m.email, b.fold_cnt
+        ORDER BY b.fold_cnt DESC 
+        LIMIT 3
+        """, nativeQuery = true)
+    List<Object[]> findTop3TranslatorByCtg(@Param("boardDto") BoardDto boardDto);
 
 }

@@ -5,11 +5,15 @@ import com.example.transfolio.domain.board.model.BoardDto;
 import com.example.transfolio.domain.board.model.BoardFoldHistDto;
 import com.example.transfolio.domain.board.model.BoardRegistDto;
 import com.example.transfolio.domain.board.service.BoardService;
+import com.example.transfolio.domain.user.model.UserDto;
+import com.example.transfolio.domain.user.model.UserSummaryDto;
 import com.example.transfolio.security.AuthenticationUtil;
 import org.json.simple.JSONObject;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("board")
@@ -42,6 +46,13 @@ public class BoardController {
     public ResponseEntity<BoardDto> getBoardDetails(@PathVariable Long boardPid) {
         BoardDto boardDetails = boardService.getBoardDetailsByBoardPid(boardPid);
         return ResponseEntity.ok(boardDetails);
+    }
+
+    //제출 후 top3 번역가 조회
+    @PostMapping("/top3-translators")
+    public ResponseEntity<List<UserSummaryDto>> getTop3TranslatorByCtg(@RequestBody BoardDto boardDto){
+        List<UserSummaryDto> top3List = boardService.getTop3TranslatorByCtg(boardDto);
+        return ResponseEntity.ok(top3List);
     }
 
 
