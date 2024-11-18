@@ -26,10 +26,12 @@ public class BoardController {
     }
 
     @PostMapping("/regist")
-    public ResObj createBoard(@RequestBody BoardRegistDto board, @RequestHeader HttpHeaders httpHeaders) {
+    public ResObj createBoard(@RequestBody BoardRegistDto resgistBoard, @RequestHeader HttpHeaders httpHeaders) {
+        //token에서 로그인 아이디 가져와서 세팅
+        String loginId = AuthenticationUtil.getLoginIdFromAuthentication();
+        resgistBoard.setUserId(loginId);
 
-
-        return boardService.registerBoard(board);
+        return boardService.registerBoard(resgistBoard);
     }
 
     @PostMapping("/bookmark")
