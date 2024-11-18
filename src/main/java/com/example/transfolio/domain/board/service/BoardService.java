@@ -6,11 +6,10 @@ import com.example.transfolio.domain.board.entity.BoardFoldHistEntity;
 import com.example.transfolio.domain.board.model.BoardDto;
 import com.example.transfolio.domain.board.model.BoardFoldHistDto;
 import com.example.transfolio.domain.board.model.BoardRegistDto;
+import com.example.transfolio.domain.board.model.BoardResponseDto;
 import com.example.transfolio.domain.board.repository.BoardFoldHistRepository;
 import com.example.transfolio.domain.board.repository.BoardRepository;
-import com.example.transfolio.domain.user.model.UserDto;
 import com.example.transfolio.domain.user.model.UserSummaryDto;
-import com.example.transfolio.domain.user.repository.UserRepository;
 import com.example.transfolio.security.AuthenticationUtil;
 import org.json.simple.JSONObject;
 import org.springframework.data.domain.PageRequest;
@@ -146,10 +145,16 @@ public class BoardService {
         }
     }
 
-    public BoardDto getBoardDetailsByBoardPid(Long boardPid) {
-        return boardRepository.findBoardByBoardPid(boardPid)
+    public BoardResponseDto getBoardDetailsByBoardPid(Long boardPid, String loginId) {
+
+        BoardDto boardDto = boardRepository.findBoardByBoardPid(boardPid)
                 .orElseThrow(() -> new EntityNotFoundException //값이 없을 때
                         ("Board not found with pid: " + boardPid));
+
+        // 작성자 여부 판단
+        boolean isAuthorYn = boardDto.getUserId().equals(loginId);
+
+        return new BoardResponseDto(boardDto, isAuthorYn);
     }
 
     public List<UserSummaryDto> getTop3TranslatorByCtg(BoardDto boardDto){

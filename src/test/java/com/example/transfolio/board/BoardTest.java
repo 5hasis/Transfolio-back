@@ -6,6 +6,7 @@ import com.example.transfolio.domain.board.entity.BoardEntity;
 import com.example.transfolio.domain.board.model.BoardDto;
 import com.example.transfolio.domain.board.model.BoardFoldHistDto;
 import com.example.transfolio.domain.board.model.BoardRegistDto;
+import com.example.transfolio.domain.board.model.BoardResponseDto;
 import com.example.transfolio.domain.board.repository.BoardRepository;
 import com.example.transfolio.domain.board.service.BoardService;
 import com.example.transfolio.domain.user.model.UserSummaryDto;
@@ -23,15 +24,13 @@ import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import javax.transaction.Transactional;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
@@ -56,6 +55,7 @@ public class BoardTest {
 
     @MockBean
     private BoardService boardService;
+
 
 
     @Test
@@ -159,6 +159,10 @@ public class BoardTest {
     @Test
     public void testGetBoardDetailsByBoardPid() throws Exception {
         Long boardPid = 1L;
+
+        String userId = "accountTest";
+        String token = JwtUtil.createToken(userId,"my-secret-key-123123", 500000); // 테스트용
+
         BoardDto mockBoardDto = BoardDto.builder()
                 .boardPid(boardPid)
                 .userId("test")
@@ -177,9 +181,16 @@ public class BoardTest {
                 .foldCnt(78)
                 .build();
 
-        when(boardService.getBoardDetailsByBoardPid(boardPid)).thenReturn(mockBoardDto);
+        BoardResponseDto mockResponseDto = BoardResponseDto.builder()
+                .boardDto(mockBoardDto)
+                .isAuthorYn(true)
+                .build();
+
+
+        when(boardService.getBoardDetailsByBoardPid(boardPid, userId)).thenReturn(mockResponseDto);
 
         this.mockMvc.perform(get("/board/{boardPid}", boardPid)
+                        .header("Authorization", "Bearer " + token)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andDo(document(
@@ -187,21 +198,23 @@ public class BoardTest {
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint()),
                         responseFields(
-                                fieldWithPath("boardPid").type(JsonFieldType.NUMBER).description("게시물 ID"),
-                                fieldWithPath("boardAuthor").type(JsonFieldType.STRING).description("게시물 작성자"),
-                                fieldWithPath("boardContent").type(JsonFieldType.STRING).description("게시물 내용"),
-                                fieldWithPath("boardDescription").type(JsonFieldType.STRING).description("게시물 설명"),
-                                fieldWithPath("boardSubTitle").type(JsonFieldType.STRING).description("게시물 부제목"),
-                                fieldWithPath("boardTitle").type(JsonFieldType.STRING).description("게시물 제목"),
-                                fieldWithPath("highCtg").optional().type(JsonFieldType.STRING).description("대분류"),
-                                fieldWithPath("lowCtg").optional().type(JsonFieldType.STRING).description("하위 카테고리"),
-                                fieldWithPath("userId").type(JsonFieldType.STRING).description("사용자 ID"),
-                                fieldWithPath("foldCnt").type(JsonFieldType.NUMBER).description("게시물 접기 수"),
-                                fieldWithPath("afterLang").type(JsonFieldType.STRING).description("게시물 후원 언어"),
-                                fieldWithPath("beforeLang").type(JsonFieldType.STRING).description("게시물 전언 언어"),
-                                fieldWithPath("fontSize").type(JsonFieldType.NUMBER).description("글꼴 크기"),
-                                fieldWithPath("fontType").type(JsonFieldType.STRING).description("글꼴 유형"),
-                                fieldWithPath("tempStorageYn").type(JsonFieldType.STRING).description("임시 저장 여부 Y/N")
+                                fieldWithPath("boardDto").type(JsonFieldType.OBJECT).description("게시물 정보"),
+                                fieldWithPath("boardDto.boardPid").type(JsonFieldType.NUMBER).description("게시물 ID"),
+                                fieldWithPath("boardDto.boardAuthor").type(JsonFieldType.STRING).description("게시물 작성자"),
+                                fieldWithPath("boardDto.boardContent").type(JsonFieldType.STRING).description("게시물 내용"),
+                                fieldWithPath("boardDto.boardDescription").type(JsonFieldType.STRING).description("게시물 설명"),
+                                fieldWithPath("boardDto.boardSubTitle").type(JsonFieldType.STRING).description("게시물 부제목"),
+                                fieldWithPath("boardDto.boardTitle").type(JsonFieldType.STRING).description("게시물 제목"),
+                                fieldWithPath("boardDto.highCtg").optional().type(JsonFieldType.STRING).description("대분류"),
+                                fieldWithPath("boardDto.lowCtg").optional().type(JsonFieldType.STRING).description("하위 카테고리"),
+                                fieldWithPath("boardDto.userId").type(JsonFieldType.STRING).description("사용자 ID"),
+                                fieldWithPath("boardDto.foldCnt").type(JsonFieldType.NUMBER).description("게시물 접기 수"),
+                                fieldWithPath("boardDto.afterLang").type(JsonFieldType.STRING).description("게시물 후원 언어"),
+                                fieldWithPath("boardDto.beforeLang").type(JsonFieldType.STRING).description("게시물 전언 언어"),
+                                fieldWithPath("boardDto.fontSize").type(JsonFieldType.NUMBER).description("글꼴 크기"),
+                                fieldWithPath("boardDto.fontType").type(JsonFieldType.STRING).description("글꼴 유형"),
+                                fieldWithPath("boardDto.tempStorageYn").type(JsonFieldType.STRING).description("임시 저장 여부 Y/N"),
+                                fieldWithPath("isAuthorYn").type(JsonFieldType.BOOLEAN).description(true)
                         )
                 ));
     }

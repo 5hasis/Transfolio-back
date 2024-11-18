@@ -4,8 +4,8 @@ import com.example.transfolio.common.response.ResObj;
 import com.example.transfolio.domain.board.model.BoardDto;
 import com.example.transfolio.domain.board.model.BoardFoldHistDto;
 import com.example.transfolio.domain.board.model.BoardRegistDto;
+import com.example.transfolio.domain.board.model.BoardResponseDto;
 import com.example.transfolio.domain.board.service.BoardService;
-import com.example.transfolio.domain.user.model.UserDto;
 import com.example.transfolio.domain.user.model.UserSummaryDto;
 import com.example.transfolio.security.AuthenticationUtil;
 import org.json.simple.JSONObject;
@@ -43,9 +43,10 @@ public class BoardController {
     }
 
     @GetMapping("/{boardPid}")
-    public ResponseEntity<BoardDto> getBoardDetails(@PathVariable Long boardPid) {
-        BoardDto boardDetails = boardService.getBoardDetailsByBoardPid(boardPid);
-        return ResponseEntity.ok(boardDetails);
+    public ResponseEntity<BoardResponseDto> getBoardDetails(@PathVariable Long boardPid) {
+        String loginId = AuthenticationUtil.getLoginIdFromAuthentication();
+        BoardResponseDto responseDto = boardService.getBoardDetailsByBoardPid(boardPid, loginId);
+        return ResponseEntity.ok(responseDto);
     }
 
     //제출 후 top3 번역가 조회
