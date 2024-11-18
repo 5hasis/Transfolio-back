@@ -26,6 +26,12 @@ public interface BoardRepository extends JpaRepository<BoardEntity, String> {
     @Query(value = "UPDATE tr_board SET fold_cnt = fold_cnt + 1 WHERE board_pid = :boardPid", nativeQuery = true)
     int addBoardFoldCnt(@Param("boardPid") String boardPid);
 
+    //찜하기 취소
+    // board 테이블 fold_cnt-1
+    @Modifying
+    @Query(value = "UPDATE tr_board SET fold_cnt = fold_cnt -1 WHERE board_pid = :boardPid", nativeQuery = true)
+    int subtractBoardFoldCnt(@Param("boardPid") String boardPid);
+
     @Query(value = """
             SELECT 
                 new com.example.transfolio.domain.board.model.BoardDto(

@@ -114,6 +114,7 @@ public class BoardService {
         //기존 찜하기한 이력이 있으면 찜 취소(이력 삭제)
         if (existingHist.isPresent()) {
             boardFoldHistRepository.delete(existingHist.get());
+            result = boardRepository.subtractBoardFoldCnt(String.valueOf(boardFoldHistDto.getBoardPid()));
 
         }else{
             result = boardRepository.addBoardFoldCnt(String.valueOf(boardFoldHistDto.getBoardPid()));
