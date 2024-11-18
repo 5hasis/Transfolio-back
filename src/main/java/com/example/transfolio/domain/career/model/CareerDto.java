@@ -18,7 +18,7 @@ public class CareerDto {
 
     private String careerDate;
 
-    private String updatedAt;
+    private LocalDateTime updatedAt;
 
     private LocalDateTime createdAt;
 

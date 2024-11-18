@@ -29,7 +29,7 @@ public class CareerEntity implements Serializable {
 
     private String careerDate;
 
-    private String updatedAt;
+    private LocalDateTime updatedAt;
 
     @CreationTimestamp
     private LocalDateTime createdAt;

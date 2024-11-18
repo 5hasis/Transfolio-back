@@ -1,6 +1,7 @@
 package com.example.transfolio.domain.career.repository;
 
 import com.example.transfolio.domain.board.entity.BoardEntity;
+import com.example.transfolio.domain.career.entity.CareerEntity;
 import com.example.transfolio.domain.career.model.CareerDto;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -8,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface CareerRepository extends JpaRepository<BoardEntity, String> {
+public interface CareerRepository extends JpaRepository<CareerEntity, String> {
 
     @Query(value = """
     SELECT new com.example.transfolio.domain.career.model.CareerDto(
