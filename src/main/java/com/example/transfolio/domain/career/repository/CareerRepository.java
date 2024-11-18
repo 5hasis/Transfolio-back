@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface CareerRepository extends JpaRepository<CareerEntity, String> {
+public interface CareerRepository extends JpaRepository<CareerEntity, Long> {
 
     @Query(value = """
     SELECT new com.example.transfolio.domain.career.model.CareerDto(

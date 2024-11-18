@@ -470,6 +470,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_경력_2">경력</a>
 <ul class="sectlevel2">
 <li><a href="#_경력_등록">경력 등록</a></li>
+<li><a href="#_경력_삭제">경력 삭제</a></li>
 </ul>
 </li>
 <li><a href="#_홈화면">홈화면</a>
@@ -505,8 +506,8 @@ Host: 3.36.105.195:8080
 Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3MzE5MTk5MjMsImV4cCI6MTczMTkyNDkyM30.SfWX71H5-l97D1NGRuw95KGCMvQOQYL3WfTUz9unrOs
-Set-Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3MzE5MTk5MjMsImV4cCI6MTczMTkyNDkyM30.SfWX71H5-l97D1NGRuw95KGCMvQOQYL3WfTUz9unrOs; Path=/; Max-Age=3600; Expires=Mon, 18 Nov 2024 09:52:03 GMT; HttpOnly
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3MzE5MjczNjMsImV4cCI6MTczMTkzMjM2M30.69At74rV07_xGeHinx7VJy0FbIUocMN7s69QJREcMm4
+Set-Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3MzE5MjczNjMsImV4cCI6MTczMTkzMjM2M30.69At74rV07_xGeHinx7VJy0FbIUocMN7s69QJREcMm4; Path=/; Max-Age=3600; Expires=Mon, 18 Nov 2024 11:56:03 GMT; HttpOnly
 Content-Type: application/json
 X-Content-Type-Options: nosniff
 X-XSS-Protection: 1; mode=block
@@ -517,7 +518,7 @@ X-Frame-Options: DENY
 Content-Length: 208
 
 {
-  "result" : "eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3MzE5MTk5MjMsImV4cCI6MTczMTkyNDkyM30.SfWX71H5-l97D1NGRuw95KGCMvQOQYL3WfTUz9unrOs",
+  "result" : "eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3MzE5MjczNjMsImV4cCI6MTczMTkzMjM2M30.69At74rV07_xGeHinx7VJy0FbIUocMN7s69QJREcMm4",
   "message" : "success",
   "status" : "200"
 }</code></pre>
@@ -560,7 +561,7 @@ Content-Length: 208
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
-  "result" : "eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3MzE5MTk5MjMsImV4cCI6MTczMTkyNDkyM30.SfWX71H5-l97D1NGRuw95KGCMvQOQYL3WfTUz9unrOs",
+  "result" : "eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3MzE5MjczNjMsImV4cCI6MTczMTkzMjM2M30.69At74rV07_xGeHinx7VJy0FbIUocMN7s69QJREcMm4",
   "message" : "success",
   "status" : "200"
 }</code></pre>
@@ -692,7 +693,7 @@ Content-Length: 79
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /user/sign-out HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Host: 3.36.105.195:8080
-Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3MzE5MTk5MjMsImV4cCI6MTczMTkyMDQyM30.6NggXr1m5D2FSwC5iVyctQ7SQaYgmtN5rK-m0gLQhak</code></pre>
+Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3MzE5MjczNjMsImV4cCI6MTczMTkyNzg2M30.CDSQ32R3wJ-RJqhjRNrQ7D8buGK259c2LbSVp8n7DVw</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -765,41 +766,12 @@ Host: 3.36.105.195:8080
 Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
-Content-Type: application/json
 X-Content-Type-Options: nosniff
 X-XSS-Protection: 1; mode=block
 Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
-X-Frame-Options: DENY
-Content-Length: 939
-
-{
-  "object" : {
-    "result" : {
-      "boardPid" : null,
-      "user" : null,
-      "userId" : "test",
-      "boardTitle" : "제목을 입력해주세요",
-      "boardSubTitle" : "Hi welcome/안녕 어서와",
-      "beforeLang" : "영어",
-      "afterLang" : "한국어",
-      "boardDescription" : "작품에 대한 설명",
-      "highCtg" : "대분류",
-      "lowCtg" : "하위카테고리",
-      "boardAuthor" : "작가이름",
-      "boardContent" : "Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다$Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다",
-      "fontSize" : 13,
-      "fontType" : "Noto Sanz",
-      "createdAt" : null,
-      "updatedAt" : null,
-      "foldCnt" : 0,
-      "tempStorageYn" : "N"
-    },
-    "message" : "success",
-    "status" : "200"
-  }
-}</code></pre>
+X-Frame-Options: DENY</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
@@ -896,7 +868,7 @@ Content-Length: 939
 <div class="listingblock">
 <div class="content">
 <pre>GET /board/1 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3MzE5MTk5MjEsImV4cCI6MTczMTkyMDQyMX0.E9pMVdpgauXI08mHhu8itIkR3dgGUVLzK1RbeN8c2vg
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3MzE5MjczNjEsImV4cCI6MTczMTkyNzg2MX0.Vnm5graZJW6HSqUvwRJpiHNPLuiwA9hnX4ILgsn2LrA
 Accept: application/json
 Host: 3.36.105.195:8080</pre>
 </div>
@@ -1025,7 +997,7 @@ Content-Length: 200
 <div class="content">
 <pre>POST /board/bookmark HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3MzE5MTk5MjEsImV4cCI6MTczMTkyMDQyMX0.E9pMVdpgauXI08mHhu8itIkR3dgGUVLzK1RbeN8c2vg
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3MzE5MjczNjEsImV4cCI6MTczMTkyNzg2MX0.Vnm5graZJW6HSqUvwRJpiHNPLuiwA9hnX4ILgsn2LrA
 Content-Length: 22
 Host: 3.36.105.195:8080
 
@@ -1098,7 +1070,7 @@ Content-Length: 264
   "intrsLiterature" : "한국어,영어,일본어",
   "intrsMajor" : "공학,전공",
   "intrsLanguage" : "고전시,고전소설",
-  "totalFoldCnt" : 43
+  "totalFoldCnt" : 52
 }</code></pre>
 </div>
 </div>
@@ -1111,7 +1083,7 @@ Content-Length: 264
   "intrsLiterature" : "한국어,영어,일본어",
   "intrsMajor" : "공학,전공",
   "intrsLanguage" : "고전시,고전소설",
-  "totalFoldCnt" : 43
+  "totalFoldCnt" : 52
 }</code></pre>
 </div>
 </div>
@@ -1150,7 +1122,7 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 402
+Content-Length: 4970
 
 [ {
   "boardPid" : 2,
@@ -1167,6 +1139,198 @@ Content-Length: 402
   "fontSize" : 0,
   "fontType" : null,
   "foldCnt" : 7,
+  "tempStorageYn" : "N"
+}, {
+  "boardPid" : 304,
+  "userId" : "accountTest",
+  "boardTitle" : "test20241028-1",
+  "afterLang" : "일본어",
+  "beforeLang" : "영어",
+  "boardSubTitle" : null,
+  "boardDescription" : "test 내용입니다.",
+  "highCtg" : null,
+  "lowCtg" : null,
+  "boardAuthor" : null,
+  "boardContent" : null,
+  "fontSize" : 0,
+  "fontType" : null,
+  "foldCnt" : 0,
+  "tempStorageYn" : "N"
+}, {
+  "boardPid" : 305,
+  "userId" : "accountTest",
+  "boardTitle" : "test20241028-2",
+  "afterLang" : "일본어",
+  "beforeLang" : "불어",
+  "boardSubTitle" : null,
+  "boardDescription" : "test desc",
+  "highCtg" : null,
+  "lowCtg" : null,
+  "boardAuthor" : null,
+  "boardContent" : null,
+  "fontSize" : 0,
+  "fontType" : null,
+  "foldCnt" : 0,
+  "tempStorageYn" : "N"
+}, {
+  "boardPid" : 306,
+  "userId" : "accountTest",
+  "boardTitle" : "test20241028-3",
+  "afterLang" : "영어",
+  "beforeLang" : "불어",
+  "boardSubTitle" : null,
+  "boardDescription" : "test desc",
+  "highCtg" : null,
+  "lowCtg" : null,
+  "boardAuthor" : null,
+  "boardContent" : null,
+  "fontSize" : 0,
+  "fontType" : null,
+  "foldCnt" : 0,
+  "tempStorageYn" : "N"
+}, {
+  "boardPid" : 307,
+  "userId" : "accountTest",
+  "boardTitle" : "test20241028-4",
+  "afterLang" : "한국어",
+  "beforeLang" : "일본어",
+  "boardSubTitle" : null,
+  "boardDescription" : "test test",
+  "highCtg" : null,
+  "lowCtg" : null,
+  "boardAuthor" : null,
+  "boardContent" : null,
+  "fontSize" : 0,
+  "fontType" : null,
+  "foldCnt" : 0,
+  "tempStorageYn" : "N"
+}, {
+  "boardPid" : 308,
+  "userId" : "accountTest",
+  "boardTitle" : "test20241029-1",
+  "afterLang" : "한국어",
+  "beforeLang" : "일본어",
+  "boardSubTitle" : null,
+  "boardDescription" : "테스트",
+  "highCtg" : null,
+  "lowCtg" : null,
+  "boardAuthor" : null,
+  "boardContent" : null,
+  "fontSize" : 0,
+  "fontType" : null,
+  "foldCnt" : 0,
+  "tempStorageYn" : "N"
+}, {
+  "boardPid" : 309,
+  "userId" : "accountTest",
+  "boardTitle" : "test20241029-2",
+  "afterLang" : "아랍어",
+  "beforeLang" : "불어",
+  "boardSubTitle" : null,
+  "boardDescription" : "test",
+  "highCtg" : null,
+  "lowCtg" : null,
+  "boardAuthor" : null,
+  "boardContent" : null,
+  "fontSize" : 0,
+  "fontType" : null,
+  "foldCnt" : 0,
+  "tempStorageYn" : "N"
+}, {
+  "boardPid" : 310,
+  "userId" : "accountTest",
+  "boardTitle" : "test20241029-3",
+  "afterLang" : "영어",
+  "beforeLang" : "아랍어",
+  "boardSubTitle" : null,
+  "boardDescription" : "test11111",
+  "highCtg" : null,
+  "lowCtg" : null,
+  "boardAuthor" : null,
+  "boardContent" : null,
+  "fontSize" : 0,
+  "fontType" : null,
+  "foldCnt" : 1,
+  "tempStorageYn" : "N"
+}, {
+  "boardPid" : 312,
+  "userId" : "accountTest",
+  "boardTitle" : "테스트1111",
+  "afterLang" : "불어",
+  "beforeLang" : "일본어",
+  "boardSubTitle" : null,
+  "boardDescription" : "test",
+  "highCtg" : null,
+  "lowCtg" : null,
+  "boardAuthor" : null,
+  "boardContent" : null,
+  "fontSize" : 0,
+  "fontType" : null,
+  "foldCnt" : 1,
+  "tempStorageYn" : "N"
+}, {
+  "boardPid" : 313,
+  "userId" : "accountTest",
+  "boardTitle" : "제목을 입력해주세요",
+  "afterLang" : "한국어",
+  "beforeLang" : "영어",
+  "boardSubTitle" : null,
+  "boardDescription" : "작품에 대한 설명",
+  "highCtg" : null,
+  "lowCtg" : null,
+  "boardAuthor" : null,
+  "boardContent" : null,
+  "fontSize" : 0,
+  "fontType" : null,
+  "foldCnt" : 1,
+  "tempStorageYn" : "N"
+}, {
+  "boardPid" : 315,
+  "userId" : "accountTest",
+  "boardTitle" : "안녕하세요\n테스트\n입니다",
+  "afterLang" : "아랍어",
+  "beforeLang" : "영어",
+  "boardSubTitle" : null,
+  "boardDescription" : "testsetset",
+  "highCtg" : null,
+  "lowCtg" : null,
+  "boardAuthor" : null,
+  "boardContent" : null,
+  "fontSize" : 0,
+  "fontType" : null,
+  "foldCnt" : 1,
+  "tempStorageYn" : "N"
+}, {
+  "boardPid" : 316,
+  "userId" : "accountTest",
+  "boardTitle" : "ㄴㅇㄹㄴㅇ",
+  "afterLang" : "일본어",
+  "beforeLang" : "불어",
+  "boardSubTitle" : null,
+  "boardDescription" : "test",
+  "highCtg" : null,
+  "lowCtg" : null,
+  "boardAuthor" : null,
+  "boardContent" : null,
+  "fontSize" : 0,
+  "fontType" : null,
+  "foldCnt" : 4,
+  "tempStorageYn" : "N"
+}, {
+  "boardPid" : 317,
+  "userId" : "accountTest",
+  "boardTitle" : "제목을 입력해주세요",
+  "afterLang" : "한국어",
+  "beforeLang" : "영어",
+  "boardSubTitle" : null,
+  "boardDescription" : "작품에 대한 설명",
+  "highCtg" : null,
+  "lowCtg" : null,
+  "boardAuthor" : null,
+  "boardContent" : null,
+  "fontSize" : 0,
+  "fontType" : null,
+  "foldCnt" : 0,
   "tempStorageYn" : "N"
 } ]</code></pre>
 </div>
@@ -1206,14 +1370,14 @@ Content-Length: 560
   "careerContent" : "번역번역번역번역번역번역번역번역번역번역번역번역",
   "careerDate" : "2022-01-01",
   "updatedAt" : null,
-  "createdAt" : "2024-11-18T17:52:04.516277",
+  "createdAt" : "2024-11-18T19:56:04.644831",
   "userId" : "accountTest"
 }, {
   "careerTitle" : "고전시 번역 ~.~",
   "careerContent" : "번역번역번역번역번역번역번역번역번역번역번역번역",
   "careerDate" : "2021-05-10",
   "updatedAt" : "2021-05-11T00:00:00",
-  "createdAt" : "2024-11-18T17:52:04.518421",
+  "createdAt" : "2024-11-18T19:56:04.645854",
   "userId" : "accountTest"
 } ]</code></pre>
 </div>
@@ -1267,12 +1431,12 @@ X-Frame-Options: DENY
 Content-Length: 273
 
 {
-  "careerPid" : 2,
+  "careerPid" : 12,
   "careerTitle" : "제목 제목 경력 추가 테스트",
   "careerContent" : "내용 내용 경력 추가 테스트 내용",
   "careerDate" : "20241101",
   "updatedAt" : null,
-  "createdAt" : "2024-11-18T17:52:02.547792",
+  "createdAt" : "2024-11-18T19:56:02.67077",
   "userId" : "accountTest"
 }</code></pre>
 </div>
@@ -1329,6 +1493,47 @@ Content-Length: 273
 </tbody>
 </table>
 </div>
+<div class="sect2">
+<h3 id="_경력_삭제">경력 삭제</h3>
+<div class="paragraph">
+<p><code>경로 : DELETE /careers/{careerPid}</code></p>
+</div>
+<div class="sect3">
+<h4 id="_path_parameters">Path Parameters</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">이름</th>
+<th class="tableblock halign-left valign-top">설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">careerPid</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">삭제할 경력 ID</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_response">Response</h4>
+<div class="paragraph">
+<p>삭제가 성공적으로 이루어지면, 서버는 <code>204 No Content</code> 응답을 반환.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">DELETE /career/delete/1 HTTP/1.1
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3MzE5MjczNjIsImV4cCI6MTczMTkyNzg2Mn0.C2DHbNwAXqedDy4ljkPIzQ_709dvODD9iy_x2POKo88
+Host: 3.36.105.195:8080</code></pre>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1356,7 +1561,7 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 5319
+Content-Length: 5382
 
 [ {
   "boardPid" : 1,
@@ -1372,7 +1577,7 @@ Content-Length: 5319
   "boardContent" : "Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다$Hello, my name is Hong Gil-dong and I live in Seoul./안녕하세요 저는 서울에 살고있는 홍길동 이라고 합니다",
   "fontSize" : 13,
   "fontType" : "Noto Sanz",
-  "foldCnt" : 36,
+  "foldCnt" : 35,
   "tempStorageYn" : "Y"
 }, {
   "boardPid" : 2,
@@ -1392,7 +1597,7 @@ Content-Length: 5319
   "tempStorageYn" : "N"
 }, {
   "boardPid" : 316,
-  "userId" : null,
+  "userId" : "accountTest",
   "boardTitle" : "ㄴㅇㄹㄴㅇ",
   "afterLang" : "일본어",
   "beforeLang" : "불어",
@@ -1408,7 +1613,7 @@ Content-Length: 5319
   "tempStorageYn" : "N"
 }, {
   "boardPid" : 315,
-  "userId" : null,
+  "userId" : "accountTest",
   "boardTitle" : "안녕하세요\n테스트\n입니다",
   "afterLang" : "아랍어",
   "beforeLang" : "영어",
@@ -1424,7 +1629,7 @@ Content-Length: 5319
   "tempStorageYn" : "N"
 }, {
   "boardPid" : 314,
-  "userId" : null,
+  "userId" : "accountTest",
   "boardTitle" : "테스트",
   "afterLang" : "한국어",
   "beforeLang" : "불어",
@@ -1440,7 +1645,7 @@ Content-Length: 5319
   "tempStorageYn" : "Y"
 }, {
   "boardPid" : 313,
-  "userId" : null,
+  "userId" : "accountTest",
   "boardTitle" : "제목을 입력해주세요",
   "afterLang" : "한국어",
   "beforeLang" : "영어",
@@ -1456,7 +1661,7 @@ Content-Length: 5319
   "tempStorageYn" : "N"
 }, {
   "boardPid" : 312,
-  "userId" : null,
+  "userId" : "accountTest",
   "boardTitle" : "테스트1111",
   "afterLang" : "불어",
   "beforeLang" : "일본어",
@@ -1472,7 +1677,7 @@ Content-Length: 5319
   "tempStorageYn" : "N"
 }, {
   "boardPid" : 311,
-  "userId" : null,
+  "userId" : "accountTest",
   "boardTitle" : "제목 test temp storage title",
   "afterLang" : "불어",
   "beforeLang" : "일본어",
@@ -1488,7 +1693,7 @@ Content-Length: 5319
   "tempStorageYn" : "Y"
 }, {
   "boardPid" : 310,
-  "userId" : null,
+  "userId" : "accountTest",
   "boardTitle" : "test20241029-3",
   "afterLang" : "영어",
   "beforeLang" : "아랍어",
@@ -1512,7 +1717,7 @@ Content-Length: 5319
 <div id="footer">
 <div id="footer-text">
 Version 0.1<br>
-Last updated 2024-11-18 17:51:52 +0900
+Last updated 2024-11-18 19:52:23 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">

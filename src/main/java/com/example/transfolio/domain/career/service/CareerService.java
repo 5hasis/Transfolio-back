@@ -24,4 +24,19 @@ public class CareerService {
     public CareerEntity saveCareer(CareerEntity careerEntity) {
         return careerRepository.save(careerEntity);
     }
+
+    // 경력 삭제
+    public void deleteCareer(Long careerPid, String loginId) {
+        // 경력 조회
+        CareerEntity careerEntity = careerRepository.findById(careerPid)
+                .orElseThrow(() -> new RuntimeException("경력을 찾을 수 없습니다."));
+
+        // 작성자와 일치하는지 확인
+        if (!careerEntity.getUserId().equals(loginId)) {
+            throw new RuntimeException("삭제할 권한이 없습니다.");
+        }
+
+        // 경력 삭제
+        careerRepository.delete(careerEntity);
+    }
 }
