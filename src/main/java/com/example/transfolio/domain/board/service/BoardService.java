@@ -12,6 +12,8 @@ import com.example.transfolio.domain.board.repository.BoardRepository;
 import com.example.transfolio.domain.user.model.UserSummaryDto;
 import com.example.transfolio.security.AuthenticationUtil;
 import org.json.simple.JSONObject;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -26,6 +28,9 @@ import java.util.stream.Collectors;
 
 @Service
 public class BoardService {
+
+    @Autowired
+    private ModelMapper modelMapper;  // ModelMapper 주입
 
     private final BoardRepository boardRepository;
     private final BoardFoldHistRepository boardFoldHistRepository;
@@ -44,6 +49,25 @@ public class BoardService {
 
         return new ResObj(save);
     }
+
+    /* 게시글 수정 */
+    public ResObj updateBoard(Long boardPid, BoardRegistDto board) {
+
+        // 기존 게시물 조회
+        //new Entity 하면 새로운걸로 간주되어 createdAt 갱신됨
+        BoardEntity existingBoardEntity = boardRepository.findById(boardPid)
+                .orElseThrow(() -> new IllegalArgumentException("게시물을 찾을 수 없습니다."));
+
+        existingBoardEntity.setBoardPid(boardPid);
+
+        // DTO의 값으로 기존 엔티티를 갱신
+        modelMapper.map(board, existingBoardEntity); // DTO -> 엔티티로 한 번에 매핑
+
+        BoardEntity save = boardRepository.save(existingBoardEntity);
+
+        return new ResObj(save);
+    }
+
 
     /* 아이디로 게시물 조회 */
     public List<BoardDto> getBoardListById(String userId) {

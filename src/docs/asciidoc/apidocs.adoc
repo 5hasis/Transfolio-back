@@ -34,6 +34,15 @@ include::{snippets}/board/regist/http-request.adoc[]
 include::{snippets}/board/regist/http-response.adoc[]
 include::{snippets}/board/regist/request-fields.adoc[]
 
+=== 게시물 수정
+- **URL**: `/board/edit/{boardPid}`
+- **Method**: `PUT`
+- **요청 내용**: `boardPid`를 `PathVariable`로, 게시물의 수정된 정보를 `RequestBody`로 전달받음
+include::{snippets}/board/edit/{boardPid}/http-request.adoc[]
+include::{snippets}/board/edit/{boardPid}/http-response.adoc[]
+include::{snippets}/board/edit/{boardPid}/request-fields.adoc[]
+
+
 === 게시글 조회
 * `GET /board/{boardPid}`: 지정된 게시물 ID(`boardPid`)에 대한 게시글 정보를 조회
 include::{snippets}/board/{boardPid}/http-request.adoc[]

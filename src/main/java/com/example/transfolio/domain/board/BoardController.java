@@ -26,12 +26,26 @@ public class BoardController {
     }
 
     @PostMapping("/regist")
-    public ResObj createBoard(@RequestBody BoardRegistDto resgistBoard, @RequestHeader HttpHeaders httpHeaders) {
+    public ResObj createBoard(@RequestBody BoardRegistDto resgistBoard) {
         //token에서 로그인 아이디 가져와서 세팅
         String loginId = AuthenticationUtil.getLoginIdFromAuthentication();
         resgistBoard.setUserId(loginId);
 
         return boardService.registerBoard(resgistBoard);
+    }
+
+    @PutMapping("/edit/{boardPid}")
+    public ResponseEntity<ResObj> editBoard(@PathVariable Long boardPid, @RequestBody BoardRegistDto resgistBoard) throws Exception {
+        //token에서 로그인 아이디 가져와서 세팅
+        String loginId = AuthenticationUtil.getLoginIdFromAuthentication();
+
+        if (!resgistBoard.getUserId().equals(loginId)) {
+            throw new Exception("본인만 게시물을 수정할 수 있습니다.");
+        }
+
+        ResObj response = boardService.updateBoard(boardPid, resgistBoard);
+
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/bookmark")

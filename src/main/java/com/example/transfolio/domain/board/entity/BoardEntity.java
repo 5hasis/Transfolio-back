@@ -5,7 +5,9 @@ import com.example.transfolio.domain.board.model.BoardRegistDto;
 import com.example.transfolio.domain.user.entity.UserEntity;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -19,6 +21,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode
 @AllArgsConstructor
 @Table(name = "tr_board")
+@EntityListeners(AuditingEntityListener.class) // Auditing 활성화
 public class BoardEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -57,9 +60,11 @@ public class BoardEntity implements Serializable {
 
     private String fontType;
 
-    @CreationTimestamp
+    @CreatedDate
+    @Column(updatable = false) // 수정 방지
     private LocalDateTime createdAt;
 
+    @LastModifiedDate // 업데이트 시 자동 갱신
     private LocalDateTime updatedAt;
 
     private int foldCnt;

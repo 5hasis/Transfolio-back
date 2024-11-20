@@ -34,8 +34,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -89,6 +88,64 @@ public class BoardTest {
                 .andExpect(status().isOk())
                 .andDo(document(
                         "board/regist",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint()),
+                        requestFields(
+                                fieldWithPath("userId").type(JsonFieldType.STRING).description("유저 아이디"),
+                                fieldWithPath("boardTitle").type(JsonFieldType.STRING).description("제목"),
+                                fieldWithPath("boardSubTitle").type(JsonFieldType.STRING).description("부제목"),
+                                fieldWithPath("beforeLang").type(JsonFieldType.STRING).description("번역전 언어"),
+                                fieldWithPath("afterLang").type(JsonFieldType.STRING).description("번역후 언어"),
+                                fieldWithPath("boardDescription").type(JsonFieldType.STRING).description("작품 설명"),
+                                fieldWithPath("highCtg").type(JsonFieldType.STRING).description("대분류"),
+                                fieldWithPath("lowCtg").type(JsonFieldType.STRING).description("하위카테고리"),
+                                fieldWithPath("boardAuthor").type(JsonFieldType.STRING).description("작가"),
+                                fieldWithPath("fontSize").type(JsonFieldType.NUMBER).description("글씨 크기"),
+                                fieldWithPath("fontType").type(JsonFieldType.STRING).description("글꼴"),
+                                fieldWithPath("boardContent").type(JsonFieldType.STRING).description("본문"),
+                                fieldWithPath("tempStorageYn").type(JsonFieldType.STRING).description("임시저장여부(Y/N)")
+                        )));
+
+    }
+
+    @Test
+    void testUpdateBoard() throws Exception {
+
+        String userId = "accountTest";
+        String token = JwtUtil.createToken(userId,"my-secret-key-123123", 500000); // 테스트용 사용자 계정
+
+        Long boardPid = 1L;
+
+        BoardRegistDto board = BoardRegistDto.builder()
+                .userId(userId)
+                .boardTitle("111수정테스트 제목을 입력해주세요")
+                .boardSubTitle("수정테스트Hi welcome/안녕 어서와")
+                .beforeLang("영어")
+                .afterLang("한국어")
+                .boardDescription("작품에 대한 설명")
+                .highCtg("대분류")
+                .lowCtg("하위카테고리")
+                .boardAuthor("수정 작가이름")
+                .boardContent("수정 테스트 내용 내용 수정 테스트 내용 내용")
+                .fontSize(13)
+                .fontType("Noto Sanz")
+                .tempStorageYn("N")
+                .build();
+
+        BoardEntity mockBoardEntity = new BoardEntity(board);
+
+
+        ResObj mockResponse = new ResObj(mockBoardEntity);
+
+        when(boardService.updateBoard(boardPid,board)).thenReturn(mockResponse);
+
+        this.mockMvc.perform(put("/board/edit/{boardPid}", boardPid)
+                        .header("Authorization", "Bearer " + token)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(board)))
+                .andExpect(status().isOk())
+                .andDo(document(
+                        "board/edit/{boardPid}",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint()),
                         requestFields(
