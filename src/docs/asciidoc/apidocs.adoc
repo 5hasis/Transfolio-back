@@ -1,0 +1,57 @@
+= TRANS FOLIO API
+:toc: left
+:toc-title: 목차
+:toclevels: 2
+:source-highlighter: highlightjs
+
+:snippets: {docdir}/build/generated-snippets
+
+[[USER]]
+
+== 유저 API
+=== 로그인
+include::{snippets}/user/sign-in/http-request.adoc[]
+include::{snippets}/user/sign-in/http-response.adoc[]
+include::{snippets}/user/sign-in/request-fields.adoc[]
+include::{snippets}/user/sign-in/request-body.adoc[]
+include::{snippets}/user/sign-in/response-body.adoc[]
+
+=== 회원가입
+include::{snippets}/user/sign-up/http-request.adoc[]
+include::{snippets}/user/sign-up/http-response.adoc[]
+include::{snippets}/user/sign-up/request-fields.adoc[]
+include::{snippets}/user/sign-up/request-body.adoc[]
+include::{snippets}/user/sign-up/response-body.adoc[]
+
+=== 로그아웃
+
+== 게시글 API
+=== 게시글 등록
+include::{snippets}/board/http-request.adoc[]
+include::{snippets}/board/http-response.adoc[]
+include::{snippets}/board/request-fields.adoc[]
+include::{snippets}/board/request-body.adoc[]
+include::{snippets}/board/response-body.adoc[]
+
+== 프로필
+=== 사용자 프로필 정보
+include::{snippets}/profile/myInfo/http-request.adoc[]
+include::{snippets}/profile/myInfo/http-response.adoc[]
+include::{snippets}/profile/myInfo/response-body.adoc[]
+
+=== 포트폴리오
+include::{snippets}/profile/portfolio/http-request.adoc[]
+include::{snippets}/profile/portfolio/http-response.adoc[]
+include::{snippets}/profile/portfolio/response-body.adoc[]
+
+=== 경력
+include::{snippets}/profile/career/http-request.adoc[]
+include::{snippets}/profile/career/http-response.adoc[]
+include::{snippets}/profile/career/response-body.adoc[]
+
+
+== 홈화면
+=== 관심분야 게시물
+include::{snippets}/homeIntrs/http-request.adoc[]
+include::{snippets}/homeIntrs/http-response.adoc[]
+include::{snippets}/homeIntrs/response-body.adoc[]
