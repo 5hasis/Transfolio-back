@@ -1,0 +1,26 @@
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="jdbc" level="OFF"/>
+    <!-- SQL 문을 출력 -->
+    <logger name="jdbc.sqlonly" level="OFF"/>
+    <!-- SQL문을 수행하는 시간 출력 -->
+    <logger name="jdbc.sqltiming" level="INFO"/>
+    <!-- ResultSet을 제외한 모든 JDBC 호출정보 출력 -->
+    <logger name="jdbc.audit" level="OFF"/>
+    <!-- ResultSet을 포함한 모든 JDB 호출정보 출력 -->
+    <logger name="jdbc.resultset" level="OFF"/>
+    <!-- SQL 결과로 조회된 데이터를 Table형태로 로그를 출력 -->
+    <logger name="jdbc.resultsettable" level="TRUE"/>
+    <!-- DB 연결, 연결 해제 로그 출력 -->
+    <logger name="jdbc.connection" level="OFF"/>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>
