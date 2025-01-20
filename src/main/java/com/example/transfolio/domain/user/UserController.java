@@ -38,7 +38,7 @@ public class UserController {
     }
 
     /**
-     * 로그인
+     * 로그아웃
      */
     @PostMapping("/sign-out")
     public JSONObject logoutUser(HttpServletResponse response) {

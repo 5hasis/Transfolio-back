@@ -101,7 +101,11 @@ public class UserSerivce {
 
         response.addCookie(cookie);
 
-        return new ResObj(jwtToken).getObject();
+        JSONObject jsonObject = new ResObj(jwtToken).getObject();
+        jsonObject.put("userId", user.getUserId());
+        jsonObject.put("email", user.getEmail());
+
+        return jsonObject;
 
     }
 
