@@ -26,7 +26,7 @@ import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@AutoConfigureRestDocs(uriHost = "3.36.105.195", uriPort = 8080)
+@AutoConfigureRestDocs
 @AutoConfigureMockMvc
 @SpringBootTest
 public class MemberTest {
@@ -115,7 +115,7 @@ public class MemberTest {
         Cookie cookie = new Cookie("jwtToken", token);
         cookie.setPath("/"); // 쿠키 경로 설정
         cookie.setHttpOnly(true);
-        cookie.setSecure(false);
+        //cookie.setSecure(false);
 
         // 로그아웃 API 호출 및 검증
         this.mockMvc.perform(post("/user/sign-out")

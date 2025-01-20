@@ -1,7 +1,7 @@
-FROM adoptopenjdk/openjdk11
+FROM adoptopenjdk:16-jdk
 
-ARG JAR_PATH=build/libs/Transfolio-0.1.jar
+ARG JAR_FILE=build/libs/Transfolio-0.1.jar
 
-ADD ${JAR_PATH} trans-dev.jar
+ADD ${JAR_FILE} Transfolio-0.1.jar
 
-ENTRYPOINT [ "java", "-jar", "trans-dev.jar" ]
+ENTRYPOINT [ "java", "-jar", "Transfolio-0.1.jar" ]

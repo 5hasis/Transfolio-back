@@ -38,7 +38,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@AutoConfigureRestDocs(uriHost = "3.36.105.195", uriPort = 8080)
+@AutoConfigureRestDocs
 @AutoConfigureMockMvc
 @SpringBootTest
 public class BoardTest {

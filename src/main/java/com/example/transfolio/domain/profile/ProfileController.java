@@ -4,10 +4,11 @@ import com.example.transfolio.domain.board.model.BoardDto;
 import com.example.transfolio.domain.board.service.BoardService;
 import com.example.transfolio.domain.career.model.CareerDto;
 import com.example.transfolio.domain.career.service.CareerService;
-import com.example.transfolio.domain.user.entity.UserEntity;
 import com.example.transfolio.domain.user.model.UserDto;
 import com.example.transfolio.domain.user.model.UserInfoDto;
+import com.example.transfolio.domain.user.model.UserInfoResponseDto;
 import com.example.transfolio.domain.user.service.UserSerivce;
+import com.example.transfolio.security.AuthenticationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -64,18 +65,27 @@ public class ProfileController {
      * 프로필 사용자 정보
      */
     @PostMapping("/myInfo")
-    public UserInfoDto getUserInfo(@RequestBody UserDto userDto) throws Exception {
+    public UserInfoResponseDto getUserInfo(@RequestBody UserDto userDto) throws Exception {
+
+        String loginId = AuthenticationUtil.getLoginIdFromAuthentication();
 
         String userId = userDto.getUserId();
-        UserInfoDto userinfoDto = new UserInfoDto();
+        UserInfoDto userInfoDto = new UserInfoDto();
+
+        boolean isAuthorYn;
 
         if (userId != null && !userId.equals("")) {
-            userinfoDto = userSerivce.getUserByUserId(userId);
+            userInfoDto = userSerivce.getUserByUserId(userId);
+
+            // 작성자 여부 판단
+            isAuthorYn = userId.equals(loginId);
+
+
         }else {
             throw new Exception();
         }
 
-        return userinfoDto;
+        return new UserInfoResponseDto(userInfoDto, isAuthorYn);
     }
 
 }
