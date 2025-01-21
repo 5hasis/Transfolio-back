@@ -23,6 +23,7 @@ import org.springframework.http.MediaType;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import javax.servlet.http.Cookie;
 import javax.transaction.Transactional;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -140,7 +141,7 @@ public class BoardTest {
         when(boardService.updateBoard(boardPid,board)).thenReturn(mockResponse);
 
         this.mockMvc.perform(put("/board/edit/{boardPid}", boardPid)
-                        .header("Authorization", "Bearer " + token)
+                        .cookie(new Cookie("jwtToken", token))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(board)))
                 .andExpect(status().isOk())
@@ -192,7 +193,7 @@ public class BoardTest {
         when(boardService.saveBookmark(any(BoardFoldHistDto.class))).thenReturn(mockResponse);
 
         this.mockMvc.perform(post("/board/bookmark")
-                        .header("Authorization", "Bearer " + token)
+                        .cookie(new Cookie("jwtToken", token))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json.toString()))
                 .andExpect(status().isOk())
@@ -247,7 +248,7 @@ public class BoardTest {
         when(boardService.getBoardDetailsByBoardPid(boardPid, userId)).thenReturn(mockResponseDto);
 
         this.mockMvc.perform(get("/board/{boardPid}", boardPid)
-                        .header("Authorization", "Bearer " + token)
+                        .cookie(new Cookie("jwtToken", token))
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andDo(document(

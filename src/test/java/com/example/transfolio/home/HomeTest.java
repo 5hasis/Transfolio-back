@@ -19,6 +19,7 @@ import org.springframework.http.MediaType;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import javax.servlet.http.Cookie;
 import java.util.List;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
@@ -62,7 +63,7 @@ public class HomeTest {
         String token = JwtUtil.createToken(userId,"my-secret-key-123123", 500000); // 테스트용 사용자 계정
 
         this.mockMvc.perform(post("/homeIntrs")
-                        .header("Authorization", "Bearer " + token)
+                        .cookie(new Cookie("jwtToken", token))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonUserId)
                 )

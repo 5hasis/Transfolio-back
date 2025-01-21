@@ -15,6 +15,8 @@ import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.Cookie;
+
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
@@ -98,7 +100,7 @@ public class CareerTest {
 
         this.mockMvc.perform(RestDocumentationRequestBuilders.delete("/career/delete/{careerPid}", careerPid)
                         .accept(MediaType.APPLICATION_JSON)
-                        .header("Authorization", "Bearer " + token) // JWT 인증을 위한 header
+                        .cookie(new Cookie("jwtToken", token)) // JWT 인증을 위한 header
 
                 )
                 .andExpect(status().isNoContent()) // 삭제가 성공하면 204 응답

@@ -91,7 +91,7 @@ public class UserSerivce {
 
         String jwtToken = JwtUtil.createToken(user.getUserId(), secretKey, expireTimeMs);
 
-        response.setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + jwtToken);
+        //response.setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + jwtToken);
 
         Cookie cookie = new Cookie("jwtToken", jwtToken);
         cookie.setHttpOnly(true);  //httponly 옵션 설정
