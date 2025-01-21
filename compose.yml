@@ -1,0 +1,57 @@
+version: '3'
+
+services:
+  mydb:
+    image: mysql
+
+    container_name: mysql-container
+    environment:
+      MYSQL_DATABASE: transfolio
+      MYSQL_ROOT_PASSWORD: mysql
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
+    ports:
+      - 3306:3306
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - app-network
+  jenkins:
+    image: jenkins/jenkins:lts-jdk17
+    container_name: jenkins
+    volumes:
+      - /usr/bin/docker:/usr/bin/docker
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /jenkins:/var/jenkins_home
+    ports:
+      - 9090:8080
+    privileged: true
+    user: root
+    networks:
+      - jenkins-network
+
+  app:
+    image: ohasis/transfolio-image:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mydb:3306/transfolio?serverTimezone=UTC&useSSL=false
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: user
+    depends_on:
+      - mydb
+    ports:
+      - 8080:8080
+    networks:
+      - app-network
+
+volumes:
+  db_data:
+
+networks:
+  app-network:
+    driver: bridge
+  jenkins-network:
+    driver: bridge
+
