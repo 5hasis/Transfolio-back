@@ -2,6 +2,7 @@ package com.example.transfolio.career;
 
 import com.example.transfolio.common.utils.JwtUtil;
 import com.example.transfolio.domain.career.entity.CareerEntity;
+import com.example.transfolio.domain.career.model.CareerDto;
 import com.example.transfolio.domain.career.repository.CareerRepository;
 import com.example.transfolio.domain.career.service.CareerService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,6 +24,7 @@ import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -112,5 +114,42 @@ public class CareerTest {
                                 parameterWithName("careerPid").description("삭제할 경력 ID")
                         )
                 ));
+    }
+
+    @Test
+    public void testUpdateCareer() throws Exception {
+        Long careerPid = 1L; // 수정할 경력 ID
+        String loginId = "accountTest"; // 로그인된 사용자 ID
+        String token = JwtUtil.createToken(loginId,"my-secret-key-123123", 500000); // 테스트용 사용자 계정
+
+        CareerDto careerDto = CareerDto.builder()
+                .careerPid(careerPid)
+                .careerTitle("[수정 테스트] 제목 제목 경력 테스트")
+                .careerContent("[수정 테스트] 내용 내용 경력 추가 테스트 내용")
+                .careerDate("20241101")
+                .userId("accountTest")
+                .build();
+
+        //CareerEntity mockCareerEntity = new CareerEntity();
+
+        this.mockMvc.perform(put("/career/edit", careerDto)
+                        .cookie(new Cookie("jwtToken", token))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(careerDto)))
+                .andExpect(status().isOk())
+                .andDo(document("career/edit",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint()),
+                        requestFields(
+                                fieldWithPath("careerPid").description("경력 ID"),
+                                fieldWithPath("careerTitle").description("경력 제목"),
+                                fieldWithPath("careerContent").description("경력 내용"),
+                                fieldWithPath("careerDate").description("경력 날짜"),
+                                fieldWithPath("updatedAt").description("수정일").optional(),
+                                fieldWithPath("createdAt").description("작성일"),
+                                fieldWithPath("userId").description("작성자 ID")
+                        )))
+        ;
+
     }
 }

@@ -98,6 +98,11 @@ include::{snippets}/career/regist/request-fields.adoc[]
 삭제가 성공적으로 이루어지면, 서버는 `204 No Content` 응답을 반환.
 include::{snippets}/career/delete/{careerPid}/http-request.adoc[]
 
+=== 경력 수정
+include::{snippets}/career/edit/http-request.adoc[]
+include::{snippets}/career/edit/http-response.adoc[]
+include::{snippets}/career/edit/request-fields.adoc[]
+
 == 홈화면
 === 오늘의 번역
 include::{snippets}/todaysTranslator/http-request.adoc[]

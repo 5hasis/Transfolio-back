@@ -61,6 +61,10 @@ public class BoardTest {
     @Test
     void registerBoard() throws Exception {
 
+        String userId = "accountTest";
+        String token = JwtUtil.createToken(userId,"my-secret-key-123123", 500000); // 테스트용 사용자 계정
+
+
         BoardRegistDto board = BoardRegistDto.builder()
                 .userId("test")
                 .boardTitle("제목을 입력해주세요")
@@ -84,6 +88,7 @@ public class BoardTest {
         when(boardService.registerBoard(board)).thenReturn(mockResponse);
 
         this.mockMvc.perform(post("/board/regist")
+                        .cookie(new Cookie("jwtToken", token))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(board)))
                 .andExpect(status().isOk())

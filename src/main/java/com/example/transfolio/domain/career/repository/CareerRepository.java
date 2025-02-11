@@ -13,7 +13,8 @@ public interface CareerRepository extends JpaRepository<CareerEntity, Long> {
 
     @Query(value = """
     SELECT new com.example.transfolio.domain.career.model.CareerDto(
-        c.careerTitle
+        c.careerPid
+        , c.careerTitle
         , c.careerDate
         , c.careerContent
         , c.updatedAt

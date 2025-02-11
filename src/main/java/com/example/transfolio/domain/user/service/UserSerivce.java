@@ -12,14 +12,13 @@ import com.example.transfolio.domain.user.repository.UserIntrsRepository;
 import com.example.transfolio.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONObject;
-import org.springframework.http.HttpHeaders;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -47,6 +46,7 @@ public class UserSerivce {
                 .userId(userDto.getUserId())
                 .email(userDto.getEmail())
                 .password(encodePassword)
+                .createdAt(LocalDateTime.now())
                 .build();
 
         userRepository.save(build);

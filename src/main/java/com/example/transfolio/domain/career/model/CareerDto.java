@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @Setter
 public class CareerDto {
 
+    private Long careerPid;
 
     private String careerTitle;
 
