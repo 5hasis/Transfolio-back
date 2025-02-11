@@ -201,4 +201,20 @@ public class BoardService {
             return Collections.emptyList();
         }
     }
+
+    //게시물 삭제
+    public void deleteBoard(Long boardPid, String loginId){
+        //게시물 조회
+        BoardEntity boardEntity = boardRepository.findById(boardPid)
+                .orElseThrow(() -> new RuntimeException("게시물을 찾을 수 없습니다."));
+
+        // 작성자와 일치하는지 확인
+        if (!boardEntity.getUserId().equals(loginId)) {
+            throw new RuntimeException("삭제할 권한이 없습니다.");
+        }
+
+        //게시물 삭제
+        boardRepository.delete(boardEntity);
+
+    }
 }

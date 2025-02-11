@@ -20,6 +20,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -31,10 +32,13 @@ import java.util.List;
 import java.util.Map;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -323,4 +327,32 @@ public class BoardTest {
                 ));
 
     }
+
+    @Test
+    @Transactional
+    public void  testDeleteBoard() throws Exception{
+
+        Long boardPid = 1L; // 삭제할 게시물 ID
+        String loginId = "accountTest"; // 로그인된 사용자 ID
+        String token = JwtUtil.createToken(loginId,"my-secret-key-123123", 500000); // 테스트용 사용자 계정
+
+
+        doNothing().when(boardService).deleteBoard(boardPid, loginId);
+
+        this.mockMvc.perform(RestDocumentationRequestBuilders.delete("/board/delete/{boardPid}", boardPid)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .cookie(new Cookie("jwtToken", token)) // JWT 인증을 위한 header
+
+                )
+                .andExpect(status().isNoContent()) // 삭제가 성공하면 204 응답
+                .andDo(document(
+                        "board/delete/{boardPid}", // 문서화할 이름
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint()),
+                        pathParameters( // 경로 변수 설명
+                                parameterWithName("boardPid").description("삭제할 게시글 ID")
+                        )
+                ));
+    }
+
 }

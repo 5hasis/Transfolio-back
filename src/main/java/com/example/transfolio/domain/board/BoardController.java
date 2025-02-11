@@ -72,6 +72,15 @@ public class BoardController {
         return ResponseEntity.ok(top3List);
     }
 
+    @DeleteMapping("/delete/{boardPid}")
+    public ResponseEntity<Void> deleteBoard(@PathVariable Long boardPid) {
+        // 로그인된 사용자 정보
+        String loginId = AuthenticationUtil.getLoginIdFromAuthentication();
+        boardService.deleteBoard(boardPid, loginId);
+
+        return ResponseEntity.noContent().build(); // 삭제가 성공하면 204 No Content 응답
+    }
+
 
 
 }
