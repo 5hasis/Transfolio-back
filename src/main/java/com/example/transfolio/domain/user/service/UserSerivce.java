@@ -98,6 +98,7 @@ public class UserSerivce {
         //cookie.setSecure(false); //https 옵션 설정
         cookie.setPath("/"); // 모든 곳에서 쿠키열람이 가능하도록 설정
         cookie.setMaxAge(60 * 60);  // 쿠키 유효 시간 : 1시간
+        cookie.setDomain("front-translate-web.vercel.app"); // 쿠키 도메인 고정
 
         response.addCookie(cookie);
 
@@ -125,10 +126,12 @@ public class UserSerivce {
 
         // JWT 토큰을 담고 있는 쿠키 삭제
         Cookie cookie = new Cookie("jwtToken", null);
+        cookie.setDomain("front-translate-web.vercel.app"); // 쿠키 도메인 고정
         cookie.setHttpOnly(true);  // httponly 옵션 설정
         //cookie.setSecure(false); // https 옵션 설정
         cookie.setPath("/"); // 모든 곳에서 쿠키열람이 가능하도록 설정
         cookie.setMaxAge(0); // 쿠키 유효 시간: 즉시 만료
+
 
         response.addCookie(cookie);
 
