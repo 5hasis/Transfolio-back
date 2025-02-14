@@ -1,6 +1,7 @@
 package com.example.transfolio.domain.profile;
 
 import com.example.transfolio.domain.board.model.BoardDto;
+import com.example.transfolio.domain.board.model.BoardFoldHistDto;
 import com.example.transfolio.domain.board.service.BoardService;
 import com.example.transfolio.domain.career.model.CareerDto;
 import com.example.transfolio.domain.career.service.CareerService;
@@ -86,6 +87,25 @@ public class ProfileController {
         }
 
         return new UserInfoResponseDto(userInfoDto, isAuthorYn);
+    }
+
+
+    /**
+     * 접음 탭 리스트 조회
+     */
+    @PostMapping("/bookmarks")
+    public List<BoardFoldHistDto> getUserBookmark(@RequestBody UserDto userDto) throws Exception {
+
+        String userId = userDto.getUserId();
+        List<BoardFoldHistDto> BoardFoldDtoList = new ArrayList<>();
+
+        if (userId != null && !userId.equals("")) {
+            BoardFoldDtoList = boardService.getBookmarkListById(userId);
+        }else {
+            throw new Exception();
+        }
+
+        return BoardFoldDtoList;
     }
 
 }

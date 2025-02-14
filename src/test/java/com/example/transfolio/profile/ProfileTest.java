@@ -1,5 +1,7 @@
 package com.example.transfolio.profile;
 
+import com.example.transfolio.domain.board.model.BoardFoldHistDto;
+import com.example.transfolio.domain.board.service.BoardService;
 import com.example.transfolio.domain.career.model.CareerDto;
 import com.example.transfolio.domain.career.service.CareerService;
 import com.example.transfolio.domain.user.repository.UserRepository;
@@ -42,6 +44,9 @@ public class ProfileTest {
 
     @MockBean
     private CareerService careerService;
+
+    @MockBean
+    private BoardService boardService;
 
     @Test
     void getUserPortFolio() throws Exception{
@@ -109,6 +114,36 @@ public class ProfileTest {
                 )
                 .andExpect(status().isOk())
                 .andDo(document("profile/myInfo",
+                                preprocessRequest(prettyPrint()),
+                                preprocessResponse(prettyPrint()),
+                                relaxedRequestFields(
+                                        fieldWithPath("userId").type(JsonFieldType.STRING).description("유저 아이디")
+                                )
+                        )
+                );
+    }
+
+    @Test
+    void getUserBookmark() throws Exception{
+
+        String userId = "accountTest";
+        String jsonUserId = "{\"userId\":\"" + userId + "\"}";
+
+        // 가짜 데이터 정의
+        List<BoardFoldHistDto> fakeBookmarkList = Arrays.asList(
+                new BoardFoldHistDto(1L,"5", null, LocalDateTime.now(), "accountTest"),
+                new BoardFoldHistDto(2L,"13", LocalDateTime.now(), LocalDateTime.parse("2021-05-11T00:00:00"), "accountTest")
+        );
+
+        // when ~ thenReturn을 사용하여 서비스 메서드가 가짜 데이터를 반환하도록 설정
+        when(boardService.getBookmarkListById(userId)).thenReturn(fakeBookmarkList);
+
+        this.mockMvc.perform(post("/profile/bookmarks")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonUserId)
+                )
+                .andExpect(status().isOk())
+                .andDo(document("profile/bookmarks",
                                 preprocessRequest(prettyPrint()),
                                 preprocessResponse(prettyPrint()),
                                 relaxedRequestFields(

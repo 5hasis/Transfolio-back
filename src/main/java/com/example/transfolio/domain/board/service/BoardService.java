@@ -217,4 +217,9 @@ public class BoardService {
         boardRepository.delete(boardEntity);
 
     }
+
+    //내정보(프로필) 북마크 리스트 조회
+    public List<BoardFoldHistDto> getBookmarkListById(String userId) {
+        return boardFoldHistRepository.getBookmarkListById(userId);
+    }
 }

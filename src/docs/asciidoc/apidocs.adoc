@@ -91,6 +91,10 @@ include::{snippets}/profile/portfolio/http-response.adoc[]
 include::{snippets}/profile/career/http-request.adoc[]
 include::{snippets}/profile/career/http-response.adoc[]
 
+=== 접음
+include::{snippets}/profile/bookmarks/http-request.adoc[]
+include::{snippets}/profile/bookmarks/http-response.adoc[]
+
 == 경력
 === 경력 등록
 * `careerDate`: ex) 20241201 숫자 8자리로 전달 !

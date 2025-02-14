@@ -26,7 +26,7 @@ public class BoardFoldHistEntity implements Serializable {
 
     private String boardPid;
 
-    private String updatedAt;
+    private LocalDateTime updatedAt;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
