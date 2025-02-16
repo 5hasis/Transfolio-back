@@ -12,12 +12,15 @@ import com.example.transfolio.domain.user.repository.UserIntrsRepository;
 import com.example.transfolio.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONObject;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseCookie;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -93,14 +96,19 @@ public class UserSerivce {
 
         //response.setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + jwtToken);
 
-        Cookie cookie = new Cookie("jwtToken", jwtToken);
-        cookie.setHttpOnly(true);  //httponly 옵션 설정
-        //cookie.setSecure(false); //https 옵션 설정
-        cookie.setPath("/"); // 모든 곳에서 쿠키열람이 가능하도록 설정
-        cookie.setMaxAge(60 * 60);  // 쿠키 유효 시간 : 1시간
-        cookie.setDomain("front-translate-web.vercel.app"); // 쿠키 도메인 고정
 
-        response.addCookie(cookie);
+        // ResponseCookie 사용 (기존 Cookie 방식 개선)
+        ResponseCookie jwtCookie = ResponseCookie.from("jwtToken", jwtToken)
+                .httpOnly(true)  // JavaScript 접근 불가
+                .sameSite("None") // 크로스 도메인 허용
+                .secure(false) // HTTPS 미지원 환경에서는 false
+                .path("/") // 모든 경로에서 접근 가능
+                .maxAge(Duration.ofHours(1)) // 쿠키 유효 시간: 1시간
+                .domain("front-translate-web.vercel.app") // 쿠키 도메인 설정
+                .build();
+
+        // 응답 헤더에 쿠키 추가
+        response.setHeader(HttpHeaders.SET_COOKIE, jwtCookie.toString());
 
         JSONObject jsonObject = new ResObj(jwtToken).getObject();
         jsonObject.put("userId", user.getUserId());
@@ -124,16 +132,19 @@ public class UserSerivce {
      */
     public JSONObject logout(HttpServletResponse response) {
 
-        // JWT 토큰을 담고 있는 쿠키 삭제
-        Cookie cookie = new Cookie("jwtToken", null);
-        cookie.setDomain("front-translate-web.vercel.app"); // 쿠키 도메인 고정
-        cookie.setHttpOnly(true);  // httponly 옵션 설정
-        //cookie.setSecure(false); // https 옵션 설정
-        cookie.setPath("/"); // 모든 곳에서 쿠키열람이 가능하도록 설정
-        cookie.setMaxAge(0); // 쿠키 유효 시간: 즉시 만료
+        // JWT 토큰을 담고 있는 쿠키 삭제 (즉시 만료)
+        ResponseCookie jwtCookie = ResponseCookie.from("jwtToken", "")
+                .domain("front-translate-web.vercel.app") // 쿠키 도메인 설정
+                .httpOnly(true)  // JavaScript 접근 불가
+                .sameSite("None") // 크로스 도메인 허용
+                .secure(false) // HTTPS 미지원 환경에서는 false
+                .path("/") // 모든 경로에서 접근 가능
+                .maxAge(0) // 쿠키 즉시 만료 (삭제)
+                .build();
 
+        // 응답 헤더에 쿠키 삭제 요청 추가
+        response.setHeader(HttpHeaders.SET_COOKIE, jwtCookie.toString());
 
-        response.addCookie(cookie);
 
         // 로그아웃 성공 메시지 반환
         return new ResObj("로그아웃이 완료되었습니다.").getObject();
