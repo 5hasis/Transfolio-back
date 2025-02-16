@@ -24,7 +24,7 @@ public class BoardFoldHistEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long foldHistPid;
 
-    private String boardPid;
+    private Long boardPid;
 
     private LocalDateTime updatedAt;
 

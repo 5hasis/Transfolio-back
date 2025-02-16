@@ -1,6 +1,7 @@
 package com.example.transfolio.profile;
 
 import com.example.transfolio.domain.board.model.BoardFoldHistDto;
+import com.example.transfolio.domain.board.model.BoardFoldResponseDto;
 import com.example.transfolio.domain.board.service.BoardService;
 import com.example.transfolio.domain.career.model.CareerDto;
 import com.example.transfolio.domain.career.service.CareerService;
@@ -23,8 +24,7 @@ import java.util.List;
 import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
-import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
-import static org.springframework.restdocs.payload.PayloadDocumentation.relaxedRequestFields;
+import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -130,9 +130,11 @@ public class ProfileTest {
         String jsonUserId = "{\"userId\":\"" + userId + "\"}";
 
         // 가짜 데이터 정의
-        List<BoardFoldHistDto> fakeBookmarkList = Arrays.asList(
-                new BoardFoldHistDto(1L,"5", null, LocalDateTime.now(), "accountTest"),
-                new BoardFoldHistDto(2L,"13", LocalDateTime.now(), LocalDateTime.parse("2021-05-11T00:00:00"), "accountTest")
+        List<BoardFoldResponseDto> fakeBookmarkList = Arrays.asList(
+                new BoardFoldResponseDto(1L, LocalDateTime.of(2024, 2, 16, 12, 34, 56), "accountTest",
+                        "게시물 제목", "게시물 부제목", 109),
+                new BoardFoldResponseDto(2L, LocalDateTime.of(2024, 2, 10, 8, 20, 30), "accountTest",
+                        "다른 게시물 제목", "다른 게시물 부제목", 78)
         );
 
         // when ~ thenReturn을 사용하여 서비스 메서드가 가짜 데이터를 반환하도록 설정
@@ -148,8 +150,15 @@ public class ProfileTest {
                                 preprocessResponse(prettyPrint()),
                                 relaxedRequestFields(
                                         fieldWithPath("userId").type(JsonFieldType.STRING).description("유저 아이디")
-                                )
-                        )
+                                ),
+                        responseFields(
+                                fieldWithPath("[].boardPid").description("게시물 ID"),
+                                fieldWithPath("[].createdAt").description("게시물 접음 날짜"),
+                                fieldWithPath("[].userId").description("글쓴이 ID"),
+                                fieldWithPath("[].boardTitle").description("게시물 제목"),
+                                fieldWithPath("[].boardSubTitle").description("게시물 부제목"),
+                                fieldWithPath("[].foldCnt").description("접음 횟수")
+                        ))
                 );
     }
 }

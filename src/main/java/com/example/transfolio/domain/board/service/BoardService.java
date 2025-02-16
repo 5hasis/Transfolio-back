@@ -3,10 +3,7 @@ package com.example.transfolio.domain.board.service;
 import com.example.transfolio.common.response.ResObj;
 import com.example.transfolio.domain.board.entity.BoardEntity;
 import com.example.transfolio.domain.board.entity.BoardFoldHistEntity;
-import com.example.transfolio.domain.board.model.BoardDto;
-import com.example.transfolio.domain.board.model.BoardFoldHistDto;
-import com.example.transfolio.domain.board.model.BoardRegistDto;
-import com.example.transfolio.domain.board.model.BoardResponseDto;
+import com.example.transfolio.domain.board.model.*;
 import com.example.transfolio.domain.board.repository.BoardFoldHistRepository;
 import com.example.transfolio.domain.board.repository.BoardRepository;
 import com.example.transfolio.domain.user.model.UserSummaryDto;
@@ -129,7 +126,7 @@ public class BoardService {
         int result = 0;
         BoardFoldHistEntity boardFoldHistEntity = new BoardFoldHistEntity(boardFoldHistDto);
 
-        String boardPid = boardFoldHistDto.getBoardPid();
+        Long boardPid = boardFoldHistDto.getBoardPid();
         String userId = boardFoldHistDto.getUserId();
 
         Optional<BoardFoldHistEntity> existingHist = boardFoldHistRepository.findByBoardPidAndUserId(boardPid, userId);
@@ -219,7 +216,7 @@ public class BoardService {
     }
 
     //내정보(프로필) 북마크 리스트 조회
-    public List<BoardFoldHistDto> getBookmarkListById(String userId) {
-        return boardFoldHistRepository.getBookmarkListById(userId);
+    public List<BoardFoldResponseDto> getBookmarkListById(String userId) {
+        return boardFoldHistRepository.getBookmarkedBoardsByUserId(userId);
     }
 }

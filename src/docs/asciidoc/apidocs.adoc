@@ -94,6 +94,7 @@ include::{snippets}/profile/career/http-response.adoc[]
 === 접음
 include::{snippets}/profile/bookmarks/http-request.adoc[]
 include::{snippets}/profile/bookmarks/http-response.adoc[]
+include::{snippets}/profile/bookmarks/response-fields.adoc[]
 
 == 경력
 === 경력 등록

@@ -181,7 +181,7 @@ public class BoardTest {
     void saveBookmark() throws Exception {
 
         BoardFoldHistDto foldHistDto = BoardFoldHistDto.builder()
-                .boardPid("1")
+                .boardPid(1L)
                 .build();
 
         String userId = "accountTest";

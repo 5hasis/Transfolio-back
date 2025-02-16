@@ -9,11 +9,13 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Getter
 @Setter
-public class BoardFoldHistDto {
+public class BoardFoldResponseDto {
 
-    private long foldHistPid;
-    private long boardPid;
-    private LocalDateTime updatedAt;
+    private Long boardPid;
     private LocalDateTime createdAt;
     private String userId;
+
+    private String boardTitle;
+    private String boardSubTitle;
+    private int foldCnt;
 }
