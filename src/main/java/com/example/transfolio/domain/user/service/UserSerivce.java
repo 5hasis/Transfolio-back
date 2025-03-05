@@ -101,10 +101,10 @@ public class UserSerivce {
         ResponseCookie jwtCookie = ResponseCookie.from("jwtToken", jwtToken)
                 .httpOnly(true)  // JavaScript 접근 불가
                 .sameSite("None") // 크로스 도메인 허용
-                .secure(false) // HTTPS 미지원 환경에서는 false
+                .secure(true) // HTTPS 에서만 사용
                 .path("/") // 모든 경로에서 접근 가능
                 .maxAge(Duration.ofHours(1)) // 쿠키 유효 시간: 1시간
-                .domain("front-translate-web.vercel.app") // 쿠키 도메인 설정
+                //.domain("front-translate-web.vercel.app") // 쿠키 도메인 설정
                 .build();
 
         // 응답 헤더에 쿠키 추가
@@ -134,10 +134,10 @@ public class UserSerivce {
 
         // JWT 토큰을 담고 있는 쿠키 삭제 (즉시 만료)
         ResponseCookie jwtCookie = ResponseCookie.from("jwtToken", "")
-                .domain("front-translate-web.vercel.app") // 쿠키 도메인 설정
+                //.domain("front-translate-web.vercel.app") // 쿠키 도메인 설정
                 .httpOnly(true)  // JavaScript 접근 불가
                 .sameSite("None") // 크로스 도메인 허용
-                .secure(false) // HTTPS 미지원 환경에서는 false
+                .secure(true) // HTTPS 에서만 사용
                 .path("/") // 모든 경로에서 접근 가능
                 .maxAge(0) // 쿠키 즉시 만료 (삭제)
                 .build();

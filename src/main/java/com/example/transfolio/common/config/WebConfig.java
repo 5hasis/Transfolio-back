@@ -16,7 +16,8 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedOrigins("https://front-translate-web.vercel.app","http://localhost:5173")
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowCredentials(true)
-                .allowedHeaders("Authorization", "Content-Type")
+                //.allowedHeaders("Authorization", "Content-Type")
+                .allowedHeaders("*")
                 .exposedHeaders("Custom-Header")
                 .maxAge(3600);
     }
