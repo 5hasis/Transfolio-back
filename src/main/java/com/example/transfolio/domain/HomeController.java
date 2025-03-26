@@ -21,6 +21,11 @@ public class HomeController {
     @Autowired
     private BoardService boardService;
 
+    @GetMapping("/")
+    public ResponseEntity<String> healthCheck() {
+        return ResponseEntity.ok("OK");
+    }
+
     @PostMapping("/homeIntrs")
     public List<BoardDto> homeIntrs() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

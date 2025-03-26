@@ -124,6 +124,7 @@ public class BoardTest {
         String userId = "accountTest";
         String token = JwtUtil.createToken(userId,"my-secret-key-123123", 500000); // 테스트용 사용자 계정
 
+
         Long boardPid = 1L;
 
         BoardRegistDto board = BoardRegistDto.builder()

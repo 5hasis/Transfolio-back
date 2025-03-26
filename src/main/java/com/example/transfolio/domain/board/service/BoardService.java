@@ -6,7 +6,9 @@ import com.example.transfolio.domain.board.entity.BoardFoldHistEntity;
 import com.example.transfolio.domain.board.model.*;
 import com.example.transfolio.domain.board.repository.BoardFoldHistRepository;
 import com.example.transfolio.domain.board.repository.BoardRepository;
+import com.example.transfolio.domain.user.entity.UserEntity;
 import com.example.transfolio.domain.user.model.UserSummaryDto;
+import com.example.transfolio.domain.user.repository.UserRepository;
 import com.example.transfolio.security.AuthenticationUtil;
 import org.json.simple.JSONObject;
 import org.modelmapper.ModelMapper;
@@ -31,17 +33,27 @@ public class BoardService {
 
     private final BoardRepository boardRepository;
     private final BoardFoldHistRepository boardFoldHistRepository;
+    private final UserRepository userRepository;
 
 
-    public BoardService(BoardRepository boardRepository, BoardFoldHistRepository boardFoldHistRepository) {
+    public BoardService(BoardRepository boardRepository, BoardFoldHistRepository boardFoldHistRepository, UserRepository userRepository) {
         this.boardRepository = boardRepository;
         this.boardFoldHistRepository = boardFoldHistRepository;
+        this.userRepository = userRepository;
     }
 
     /* 게시글 저장 */
     public ResObj registerBoard(BoardRegistDto board) {
 
+        List<UserEntity> userEntityList = userRepository.findByUserId(board.getUserId());
+        if (userEntityList.isEmpty()) {
+            throw new IllegalArgumentException("회원을 찾을 수 없습니다.");
+        }
+        UserEntity userEntity = userEntityList.get(0);
+
         BoardEntity boardEntity = new BoardEntity(board);
+        boardEntity.setUser(userEntity);
+
         BoardEntity save = boardRepository.save(boardEntity);
 
         return new ResObj(save);
@@ -206,9 +218,9 @@ public class BoardService {
                 .orElseThrow(() -> new RuntimeException("게시물을 찾을 수 없습니다."));
 
         // 작성자와 일치하는지 확인
-        if (!boardEntity.getUserId().equals(loginId)) {
-            throw new RuntimeException("삭제할 권한이 없습니다.");
-        }
+//        if (!boardEntity.getUserId().equals(loginId)) {
+//            throw new RuntimeException("삭제할 권한이 없습니다.");
+//        }
 
         //게시물 삭제
         boardRepository.delete(boardEntity);

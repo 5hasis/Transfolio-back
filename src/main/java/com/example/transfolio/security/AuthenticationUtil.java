@@ -13,6 +13,8 @@ public class AuthenticationUtil {
             Object principal = authentication.getPrincipal();
             if (principal instanceof String) {
                 loginId = (String) principal;
+            }else {
+                System.out.println("Principal type: " + principal.getClass().getName());
             }
         } else {
             throw new IllegalStateException("Unexpected authentication principal type: " + authentication.getPrincipal().getClass());

@@ -31,11 +31,11 @@ public class BoardEntity implements Serializable {
     private Long boardPid;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    @JoinColumn(name = "user_pid", referencedColumnName = "user_pid")
     @JsonManagedReference
     private UserEntity user;
 
-    @Column(name = "user_id", insertable = false, updatable = false)
+    @Column(name = "user_id", updatable = false)
     private String userId;
 
     private String boardTitle;
