@@ -1,10 +1,13 @@
 package com.example.transfolio.domain.user;
 
+import com.example.transfolio.common.response.ResObj;
 import com.example.transfolio.domain.user.model.UserDto;
 import com.example.transfolio.domain.user.service.UserSerivce;
+import com.example.transfolio.security.AuthenticationUtil;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -45,6 +48,21 @@ public class UserController {
 
 
         return userSerivce.logout(response);
+    }
+
+    @PutMapping("/edit/intrs")
+    public ResponseEntity<ResObj> editUserIntrs(@RequestBody UserDto userDto) throws Exception {
+        //token에서 로그인 아이디 가져와서 세팅
+        String loginId = AuthenticationUtil.getLoginIdFromAuthentication();
+
+        if (!userDto.getUserId().equals(loginId)) {
+            throw new Exception("본인의 정보만 수정할 수 있습니다.");
+        }
+
+        ResObj response = userSerivce.updateUserIntrs(userDto);
+
+
+        return ResponseEntity.ok(response);
     }
 
 }

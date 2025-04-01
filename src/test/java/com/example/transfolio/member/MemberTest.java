@@ -20,7 +20,9 @@ import javax.persistence.EntityManager;
 import javax.servlet.http.Cookie;
 import javax.transaction.Transactional;
 
+
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.put;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -135,4 +137,45 @@ public class MemberTest {
                         )
                 ));
     }
+
+
+    @Test
+    void updateUserIntrs() throws Exception{
+
+        String userId = "accountTest";
+        String token = JwtUtil.createToken(userId, "my-secret-key-123123", 500000); // 테스트용 JWT
+
+        UserIntrsDto userIntrs = new UserIntrsDto().builder()
+                .intrsLanguage("러시아어")
+                .intrsMajor("예체능,인문")
+                .intrsLiterature("유럽문학")
+                .intrsCorporation("엔터테인먼트")
+                .build();
+
+        UserDto userDto = new UserDto().builder()
+                .userId("accountTest")
+                .userIntrsDto(userIntrs)
+                .build();
+
+
+        this.mockMvc.perform(put("/user/edit/intrs")
+                        .cookie(new Cookie("jwtToken", token))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(userDto)))
+                .andExpect(status().isOk())  // 응답 상태 코드가 200 OK인지를 검증
+                .andDo(document(  // Spring REST Docs 문서화
+                        "user/edit/intrs",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint()),
+                        relaxedRequestFields(  // 요청 필드 설명
+                                fieldWithPath("userId").type(JsonFieldType.STRING).description("유저 아이디"),
+                                fieldWithPath("userIntrsDto.intrsLanguage").type(JsonFieldType.STRING).description("유저의 관심 언어"),
+                                fieldWithPath("userIntrsDto.intrsMajor").type(JsonFieldType.STRING).description("유저의 관심 전공"),
+                                fieldWithPath("userIntrsDto.intrsLiterature").type(JsonFieldType.STRING).description("유저의 관심 문학"),
+                                fieldWithPath("userIntrsDto.intrsCorporation").type(JsonFieldType.STRING).description("유저의 관심 기업")
+                        )
+                ));
+
+    }
+
 }

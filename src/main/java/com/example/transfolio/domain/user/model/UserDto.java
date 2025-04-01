@@ -3,7 +3,8 @@ package com.example.transfolio.domain.user.model;
 import lombok.*;
 
 @Builder
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDto {

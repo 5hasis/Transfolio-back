@@ -4,6 +4,9 @@ import com.example.transfolio.domain.board.entity.BoardEntity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -19,6 +22,7 @@ import java.util.List;
 @EqualsAndHashCode(exclude = "userIntrs")
 @AllArgsConstructor
 @Table(name = "tr_member")
+@EntityListeners(AuditingEntityListener.class)
 public class UserEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,8 +46,11 @@ public class UserEntity implements Serializable {
     @JsonManagedReference
     private UserIntrsEntity userIntrs;
 
+    @CreatedDate
+    @Column(updatable = false) // 수정 방지
     private LocalDateTime createdAt;
 
+    @LastModifiedDate
     private LocalDateTime updatedAt;
 
     public UserEntity() {

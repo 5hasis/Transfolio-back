@@ -28,6 +28,11 @@ include::{snippets}/user/sign-out/http-request.adoc[]
 include::{snippets}/user/sign-out/http-response.adoc[]
 include::{snippets}/user/sign-out/response-body.adoc[]
 
+=== 관심사 수정
+include::{snippets}/user/edit/intrs/request-fields.adoc[]
+include::{snippets}/user/edit/intrs/http-response.adoc[]
+include::{snippets}/user/edit/intrs/response-body.adoc[]
+
 == 게시글 API
 === 게시글 등록
 include::{snippets}/board/regist/http-request.adoc[]
@@ -81,6 +86,7 @@ include::{snippets}/board/bookmark/http-response.adoc[]
 include::{snippets}/profile/myInfo/http-request.adoc[]
 include::{snippets}/profile/myInfo/http-response.adoc[]
 include::{snippets}/profile/myInfo/response-body.adoc[]
+
 
 === 포트폴리오
 * `userId 는 Token에서 가져옴`

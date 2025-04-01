@@ -8,6 +8,7 @@ import com.example.transfolio.domain.user.entity.UserEntity;
 import com.example.transfolio.domain.user.entity.UserIntrsEntity;
 import com.example.transfolio.domain.user.model.UserDto;
 import com.example.transfolio.domain.user.model.UserInfoDto;
+import com.example.transfolio.domain.user.model.UserIntrsDto;
 import com.example.transfolio.domain.user.repository.UserIntrsRepository;
 import com.example.transfolio.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -149,5 +150,30 @@ public class UserSerivce {
         // 로그아웃 성공 메시지 반환
         return new ResObj("로그아웃이 완료되었습니다.").getObject();
     }
+
+    @Transactional
+    public ResObj updateUserIntrs(UserDto userDto){
+
+        // userId로 UserEntity 조회
+        UserEntity user = userRepository.findByUserId(userDto.getUserId())
+                .stream()
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다."));
+
+        UserIntrsEntity userIntrs = userIntrsRepository.findByUser(user)
+                .orElseGet(() -> UserIntrsEntity.builder().user(user).build());
+
+        UserIntrsDto userIntrsDto = userDto.getUserIntrsDto();
+
+        userIntrs.setIntrsLanguage(userIntrsDto.getIntrsLanguage());
+        userIntrs.setIntrsMajor(userIntrsDto.getIntrsMajor());
+        userIntrs.setIntrsCorporation(userIntrsDto.getIntrsCorporation());
+        userIntrs.setIntrsLiterature(userIntrsDto.getIntrsLiterature());
+
+        UserIntrsEntity save = userIntrsRepository.save(userIntrs);
+
+        return new ResObj(save);
+    }
+
 
 }
