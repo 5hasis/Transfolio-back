@@ -92,4 +92,6 @@ public interface BoardRepository extends JpaRepository<BoardEntity, Long> {
         """, nativeQuery = true)
     List<Object[]> findTop3TranslatorByCtg(@Param("boardDto") BoardDto boardDto);
 
+    int countByUserId(String userId);
+
 }

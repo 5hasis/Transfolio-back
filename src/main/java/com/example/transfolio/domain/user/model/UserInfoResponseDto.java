@@ -15,4 +15,10 @@ public class UserInfoResponseDto {
 
     @JsonProperty("isAuthorYn") // JSON 필드명을 강제로 지정
     private boolean isAuthorYn;
+
+    private int portfolioCnt;
+
+    private int careerCnt;
+
+    private int bookmarkCnt;
 }

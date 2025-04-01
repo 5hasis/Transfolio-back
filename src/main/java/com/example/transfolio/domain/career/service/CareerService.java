@@ -62,4 +62,8 @@ public class CareerService {
 
         return new ResObj(save);
     }
+
+    public int getCareerCountById(String userId){
+        return careerRepository.countByUserId(userId);
+    }
 }

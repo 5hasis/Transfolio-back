@@ -22,4 +22,6 @@ public interface BoardFoldHistRepository extends JpaRepository<BoardFoldHistEnti
             "WHERE f.userId = :userId " +
             "ORDER BY f.createdAt DESC")
     List<BoardFoldResponseDto> getBookmarkedBoardsByUserId(@Param("userId") String userId);
+
+    int countByUserId(String userId);
 }

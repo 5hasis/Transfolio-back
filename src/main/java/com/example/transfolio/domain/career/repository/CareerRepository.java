@@ -23,4 +23,6 @@ public interface CareerRepository extends JpaRepository<CareerEntity, Long> {
     ) FROM CareerEntity c WHERE c.userId = :userId
     """)
     List<CareerDto> getCareerListById(@Param("userId") String userId);
+
+    int countByUserId(String userId);
 }

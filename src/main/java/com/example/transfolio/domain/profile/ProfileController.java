@@ -87,7 +87,12 @@ public class ProfileController {
             throw new Exception();
         }
 
-        return new UserInfoResponseDto(userInfoDto, isAuthorYn);
+        int portfolioCnt = boardService.getBoardCountById(userId);
+        int careerCnt = careerService.getCareerCountById(userId);
+        int bookmarkCnt = boardService.getBookmarkCountById(userId);
+
+
+        return new UserInfoResponseDto(userInfoDto, isAuthorYn, portfolioCnt, careerCnt, bookmarkCnt);
     }
 
 

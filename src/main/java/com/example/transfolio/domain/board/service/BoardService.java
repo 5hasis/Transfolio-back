@@ -231,4 +231,12 @@ public class BoardService {
     public List<BoardFoldResponseDto> getBookmarkListById(String userId) {
         return boardFoldHistRepository.getBookmarkedBoardsByUserId(userId);
     }
+
+    public int getBoardCountById(String userId) {
+        return boardRepository.countByUserId(userId);
+    }
+
+    public int getBookmarkCountById(String userId){
+        return boardFoldHistRepository.countByUserId(userId);
+    }
 }

@@ -51,7 +51,7 @@ include::{snippets}/board/{boardPid}/request-body.adoc[]
 include::{snippets}/board/{boardPid}/response-body.adoc[]
 
 === 게시글 삭제
- `경로 : DELETE /board/{boardPid}`
+ `경로 : DELETE /board/delete/{boardPid}`
 
 ==== Path Parameters
 
