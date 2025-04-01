@@ -1,6 +1,5 @@
 package com.example.transfolio.domain.career.repository;
 
-import com.example.transfolio.domain.board.entity.BoardEntity;
 import com.example.transfolio.domain.career.entity.CareerEntity;
 import com.example.transfolio.domain.career.model.CareerDto;
 import org.apache.ibatis.annotations.Param;
@@ -15,8 +14,8 @@ public interface CareerRepository extends JpaRepository<CareerEntity, Long> {
     SELECT new com.example.transfolio.domain.career.model.CareerDto(
         c.careerPid
         , c.careerTitle
-        , c.careerDate
         , c.careerContent
+        , c.careerDate
         , c.updatedAt
         , c.createdAt
         , c.userId
