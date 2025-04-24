@@ -31,6 +31,13 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
+        String path = request.getRequestURI();
+
+        // 공개 경로는 필터 통과
+        if (isPublicPath(path)) {
+            filterChain.doFilter(request, response);
+            return;
+        }
         String token = null;
 
         // STEP 1. 쿠키에서 JWT Token 추출
@@ -45,7 +52,12 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 
         // STEP 2. JWT Token이 없으면 필터 체인을 계속 진행
         if (token == null) {
-            filterChain.doFilter(request, response);
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED); //401 code
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(objectMapper.writeValueAsString(
+                    new ErrorObj(ErrorMessage.UNAUTHORIZED_ACCESS))
+            );
             return;
         }
 
@@ -64,7 +76,12 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         // STEP. 5 추출한 loginId로 User 찾아오기
         List<UserEntity> byUserId = userRepository.findByUserId(loginId);
         if (byUserId.isEmpty()) {
-            filterChain.doFilter(request, response);
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(objectMapper.writeValueAsString(
+                    new ErrorObj(ErrorMessage.REQUIRED_ID_PASSWORD))
+            );
             return;
         }
 
@@ -84,5 +101,14 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 
 //      STEP. 8 필터 계속 진행
         filterChain.doFilter(request, response);
+    }
+
+    private boolean isPublicPath(String path) {
+        return path.startsWith("/user/sign-in")
+                || path.startsWith("/user/sign-up")
+                || path.startsWith("/css/")
+                || path.startsWith("/js/")
+                || path.startsWith("/images/")
+                || path.equals("/");
     }
 }

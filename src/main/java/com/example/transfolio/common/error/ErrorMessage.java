@@ -11,11 +11,15 @@ public enum ErrorMessage implements ErrorEnum {
 
     REQUIRED_BODY_FIELD("002", "BODY에 필수값이 존재하지 않습니다"),
 
-    DUPLICATION_ID("003", "이미 존재하는 아이디 입니다"),
+    DUPLICATION_ID("003", "이미 존재하는 아이디입니다"),
 
     REQUIRED_ID_PASSWORD("004", "아이디 또는 비밀번호가 일치하지 않습니다"),
 
     EXPIRED_JWT_TOKEN("005", "만료된 토큰입니다"),
+
+    UNAUTHORIZED_ACCESS("006","로그인이 필요합니다."),
+
+    INVALID_JWT_USER("007","유효하지 않은 사용자 정보입니다.")
 
     ;
 
