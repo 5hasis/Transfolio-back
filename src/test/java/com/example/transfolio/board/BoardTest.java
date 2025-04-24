@@ -13,8 +13,10 @@ import com.example.transfolio.domain.user.model.UserSummaryDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.json.simple.JSONObject;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -60,14 +62,21 @@ public class BoardTest {
     @MockBean
     private BoardService boardService;
 
+    private String token;
+    private Cookie jwtCookie;
+    private final String userId = "accountTest";
 
+    @Value("${jwt.secret}")
+    String secretKey;
+
+    @BeforeEach
+    void setUp() {
+        token = JwtUtil.createToken(userId, secretKey, 500000);
+        jwtCookie = new Cookie("jwtToken", token);
+    }
 
     @Test
     void registerBoard() throws Exception {
-
-        String userId = "accountTest";
-        String token = JwtUtil.createToken(userId,"my-secret-key-123123", 500000); // 테스트용 사용자 계정
-
 
         BoardRegistDto board = BoardRegistDto.builder()
                 .userId("test")
@@ -92,7 +101,7 @@ public class BoardTest {
         when(boardService.registerBoard(board)).thenReturn(mockResponse);
 
         this.mockMvc.perform(post("/board/regist")
-                        .cookie(new Cookie("jwtToken", token))
+                        .cookie(jwtCookie)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(board)))
                 .andExpect(status().isOk())
@@ -121,10 +130,6 @@ public class BoardTest {
     @Test
     void testUpdateBoard() throws Exception {
 
-        String userId = "accountTest";
-        String token = JwtUtil.createToken(userId,"my-secret-key-123123", 500000); // 테스트용 사용자 계정
-
-
         Long boardPid = 1L;
 
         BoardRegistDto board = BoardRegistDto.builder()
@@ -151,7 +156,7 @@ public class BoardTest {
         when(boardService.updateBoard(boardPid,board)).thenReturn(mockResponse);
 
         this.mockMvc.perform(put("/board/edit/{boardPid}", boardPid)
-                        .cookie(new Cookie("jwtToken", token))
+                        .cookie(jwtCookie)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(board)))
                 .andExpect(status().isOk())
@@ -185,9 +190,6 @@ public class BoardTest {
                 .boardPid(1L)
                 .build();
 
-        String userId = "accountTest";
-        String token = JwtUtil.createToken(userId,"my-secret-key-123123", 500000); // 테스트용 사용자 계정
-
         // Expected response
         JSONObject mockResponse = new JSONObject();
         mockResponse.put("status", "200");
@@ -203,7 +205,7 @@ public class BoardTest {
         when(boardService.saveBookmark(any(BoardFoldHistDto.class))).thenReturn(mockResponse);
 
         this.mockMvc.perform(post("/board/bookmark")
-                        .cookie(new Cookie("jwtToken", token))
+                        .cookie(jwtCookie)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json.toString()))
                 .andExpect(status().isOk())
@@ -227,9 +229,6 @@ public class BoardTest {
     @Test
     public void testGetBoardDetailsByBoardPid() throws Exception {
         Long boardPid = 1L;
-
-        String userId = "accountTest";
-        String token = JwtUtil.createToken(userId,"my-secret-key-123123", 500000); // 테스트용
 
         BoardDto mockBoardDto = BoardDto.builder()
                 .boardPid(boardPid)
@@ -258,7 +257,7 @@ public class BoardTest {
         when(boardService.getBoardDetailsByBoardPid(boardPid, userId)).thenReturn(mockResponseDto);
 
         this.mockMvc.perform(get("/board/{boardPid}", boardPid)
-                        .cookie(new Cookie("jwtToken", token))
+                        .cookie(jwtCookie)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andDo(document(
@@ -290,6 +289,7 @@ public class BoardTest {
     @Test
     void testGetTop3TranslatorsByCtg() throws Exception {
 
+
         Map<String, String> requestBody = new HashMap<>();
         requestBody.put("highCtg", "대분류");
         requestBody.put("lowCtg", "하위카테고리");
@@ -308,6 +308,7 @@ public class BoardTest {
 
 
         this.mockMvc.perform(post("/board/top3-translators")
+                        .cookie(jwtCookie)
                         .content(objectMapper.writeValueAsString(requestBody))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -334,15 +335,13 @@ public class BoardTest {
     public void  testDeleteBoard() throws Exception{
 
         Long boardPid = 1L; // 삭제할 게시물 ID
-        String loginId = "accountTest"; // 로그인된 사용자 ID
-        String token = JwtUtil.createToken(loginId,"my-secret-key-123123", 500000); // 테스트용 사용자 계정
 
 
-        doNothing().when(boardService).deleteBoard(boardPid, loginId);
+        doNothing().when(boardService).deleteBoard(boardPid, userId);
 
         this.mockMvc.perform(RestDocumentationRequestBuilders.delete("/board/delete/{boardPid}", boardPid)
                         .accept(MediaType.APPLICATION_JSON)
-                        .cookie(new Cookie("jwtToken", token)) // JWT 인증을 위한 header
+                        .cookie(jwtCookie) // JWT 인증을 위한 header
 
                 )
                 .andExpect(status().isNoContent()) // 삭제가 성공하면 204 응답

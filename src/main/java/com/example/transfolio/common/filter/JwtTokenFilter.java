@@ -7,9 +7,11 @@ import com.example.transfolio.domain.user.entity.UserEntity;
 import com.example.transfolio.domain.user.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -21,11 +23,16 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
+@Component
 @RequiredArgsConstructor
 public class JwtTokenFilter extends OncePerRequestFilter {
 
     private final UserRepository userRepository;
-    private final String secretKey;
+    //private final String secretKey;
+
+    @Value("${jwt.secret}")
+    private String secretKey;
+
     private ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
@@ -109,6 +116,8 @@ public class JwtTokenFilter extends OncePerRequestFilter {
                 || path.startsWith("/css/")
                 || path.startsWith("/js/")
                 || path.startsWith("/images/")
+                || path.startsWith("/docs/")
+                || path.startsWith("/v3/api-docs")
                 || path.equals("/");
     }
 }

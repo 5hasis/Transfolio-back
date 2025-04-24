@@ -5,6 +5,7 @@ import com.example.transfolio.domain.user.repository.UserRepository;
 import com.example.transfolio.domain.user.service.UserSerivce;
 import io.jsonwebtoken.JwtException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -27,6 +28,9 @@ public class SecurityConfig {
     private final UserRepository userRepository;
     private static String secretKey = "my-secret-key-123123";
 
+    @Autowired
+    private JwtTokenFilter jwtTokenFilter;  // 자동 주입
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
@@ -34,7 +38,7 @@ public class SecurityConfig {
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .addFilterBefore(new JwtTokenFilter(userRepository, secretKey), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers("/jwt-login/info").authenticated()
                 //.antMatchers("/jwt-login/admin/**").hasAuthority(UserRole.ADMIN.name())

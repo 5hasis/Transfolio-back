@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.simple.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -44,6 +45,9 @@ public class MemberTest {
 
     @Autowired
     private EntityManager entityManager;
+
+    @Value("${jwt.secret}")
+    String secretKey;
 
     @Test
     void saveMember() throws Exception {
@@ -111,7 +115,7 @@ public class MemberTest {
     @Transactional
     void signOutMember() throws Exception {
         String userId = "accountTest";
-        String token = JwtUtil.createToken(userId, "my-secret-key-123123", 500000); // 테스트용 JWT
+        String token = JwtUtil.createToken(userId, secretKey, 500000); // 테스트용 JWT
 
         // 쿠키 설정
         Cookie cookie = new Cookie("jwtToken", token);
@@ -143,7 +147,7 @@ public class MemberTest {
     void updateUserIntrs() throws Exception{
 
         String userId = "accountTest";
-        String token = JwtUtil.createToken(userId, "my-secret-key-123123", 500000); // 테스트용 JWT
+        String token = JwtUtil.createToken(userId, secretKey, 500000); // 테스트용 JWT
 
         UserIntrsDto userIntrs = new UserIntrsDto().builder()
                 .intrsLanguage("러시아어")

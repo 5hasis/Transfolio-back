@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -44,10 +45,19 @@ public class HomeTest {
     @Autowired
     BoardRepository boardRepository;
 
+    private String token;
+    private Cookie jwtCookie;
+    private final String userId = "accountTest";
+
+    @Value("${jwt.secret}")
+    String secretKey;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
+
+        token = JwtUtil.createToken(userId, secretKey, 500000);
+        jwtCookie = new Cookie("jwtToken", token);
     }
 
     @Test
@@ -57,13 +67,11 @@ public class HomeTest {
 
     @Test
     public void getHomeIntrsPost() throws Exception {
-        String userId = "accountTest";
+
         String jsonUserId = "{\"userId\":\"" + userId + "\"}";
 
-        String token = JwtUtil.createToken(userId,"my-secret-key-123123", 500000); // 테스트용 사용자 계정
-
         this.mockMvc.perform(post("/homeIntrs")
-                        .cookie(new Cookie("jwtToken", token))
+                        .cookie(jwtCookie)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonUserId)
                 )
@@ -81,6 +89,7 @@ public class HomeTest {
     @Test
     public void testGetTop9BoardsByFoldCntWithRestDocs() throws Exception {
         this.mockMvc.perform(get("/todaysTranslator")
+                        .cookie(jwtCookie)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 //.andExpect(jsonPath("$.length()").value(9))  // 상위 9개 게시글만

@@ -1,5 +1,6 @@
 package com.example.transfolio.profile;
 
+import com.example.transfolio.common.utils.JwtUtil;
 import com.example.transfolio.domain.board.model.BoardFoldHistDto;
 import com.example.transfolio.domain.board.model.BoardFoldResponseDto;
 import com.example.transfolio.domain.board.service.BoardService;
@@ -7,8 +8,10 @@ import com.example.transfolio.domain.career.model.CareerDto;
 import com.example.transfolio.domain.career.service.CareerService;
 import com.example.transfolio.domain.user.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,6 +20,7 @@ import org.springframework.http.MediaType;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import javax.servlet.http.Cookie;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
@@ -48,14 +52,27 @@ public class ProfileTest {
     @MockBean
     private BoardService boardService;
 
+    private String token;
+    private Cookie jwtCookie;
+    private final String userId = "accountTest";
+
+    @Value("${jwt.secret}")
+    String secretKey;
+
+    @BeforeEach
+    void setUp() {
+        token = JwtUtil.createToken(userId, secretKey, 500000);
+        jwtCookie = new Cookie("jwtToken", token);
+    }
+
     @Test
     void getUserPortFolio() throws Exception{
 
-        String userId = "accountTest";
         String jsonUserId = "{\"userId\":\"" + userId + "\"}";
 
 
         this.mockMvc.perform(post("/profile/portfolio")
+                        .cookie(jwtCookie)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonUserId)
                 )
@@ -73,7 +90,6 @@ public class ProfileTest {
     @Test
     void getUserCareer() throws Exception{
 
-        String userId = "accountTest";
         String jsonUserId = "{\"userId\":\"" + userId + "\"}";
 
         // 가짜 데이터 정의
@@ -86,6 +102,7 @@ public class ProfileTest {
         when(careerService.getCareerListById(userId)).thenReturn(fakeCareerList);
 
         this.mockMvc.perform(post("/profile/career")
+                        .cookie(jwtCookie)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonUserId)
                 )
@@ -103,12 +120,10 @@ public class ProfileTest {
     @Test
     void getUserInfo() throws Exception{
 
-        String userId = "accountTest";
         String jsonUserId = "{\"userId\":\"" + userId + "\"}";
 
-        //String token = JwtUtil.createToken(userId,"my-secret-key-123123", 500000); // 테스트용 사용자 계정
-
         this.mockMvc.perform(post("/profile/myInfo")
+                        .cookie(jwtCookie)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonUserId)
                 )
@@ -126,7 +141,6 @@ public class ProfileTest {
     @Test
     void getUserBookmark() throws Exception{
 
-        String userId = "accountTest";
         String jsonUserId = "{\"userId\":\"" + userId + "\"}";
 
         // 가짜 데이터 정의
@@ -141,6 +155,7 @@ public class ProfileTest {
         when(boardService.getBookmarkListById(userId)).thenReturn(fakeBookmarkList);
 
         this.mockMvc.perform(post("/profile/bookmarks")
+                        .cookie(jwtCookie)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonUserId)
                 )

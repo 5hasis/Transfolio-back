@@ -6,8 +6,10 @@ import com.example.transfolio.domain.career.model.CareerDto;
 import com.example.transfolio.domain.career.repository.CareerRepository;
 import com.example.transfolio.domain.career.service.CareerService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -45,6 +47,19 @@ public class CareerTest {
     @Autowired
     CareerRepository careerRepository;
 
+    private String token;
+    private Cookie jwtCookie;
+    private final String userId = "accountTest";
+
+    @Value("${jwt.secret}")
+    String secretKey;
+
+    @BeforeEach
+    void setUp() {
+        token = JwtUtil.createToken(userId, secretKey, 500000);
+        jwtCookie = new Cookie("jwtToken", token);
+    }
+
     @Test
     public void testCreateCareer() throws Exception {
         CareerEntity careerEntity = CareerEntity.builder()
@@ -56,6 +71,7 @@ public class CareerTest {
                 .build();
 
         this.mockMvc.perform(post("/career/regist")
+                        .cookie(jwtCookie)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(careerEntity)))
                 .andExpect(status().isCreated())
@@ -81,28 +97,27 @@ public class CareerTest {
     @Transactional
     public void testDeleteCareer() throws Exception {
 
-        Long careerPid = 1L; // 삭제할 경력 ID
-        String loginId = "accountTest"; // 로그인된 사용자 ID
-        String token = JwtUtil.createToken(loginId,"my-secret-key-123123", 500000); // 테스트용 사용자 계정
+        //Long careerPid = 1L;
 
         // 삭제할 경력 엔티티 생성
         CareerEntity careerEntity = CareerEntity.builder()
-                .careerPid(careerPid)
+                //.careerPid(careerPid)
                 .careerTitle("제목 제목 경력 삭제 테스트")
                 .careerContent("내용 내용 경력 삭제 테스트 내용")
-                .careerDate("2024-11-01")
+                .careerDate("20241101")
                 .updatedAt(null)
-                .userId(loginId)
+                .userId(userId)
                 .build();
 
         // 실제 데이터베이스에 경력 저장 (테스트 데이터 준비)
-        careerRepository.save(careerEntity);
+        CareerEntity savedCareer = careerRepository.save(careerEntity); // 삭제할 경력 ID
+        Long savedPid = savedCareer.getCareerPid();
 
         //when(careerService.deleteCareer(careerPid, loginId)).thenReturn(true); // 서비스 호출 mock
 
-        this.mockMvc.perform(RestDocumentationRequestBuilders.delete("/career/delete/{careerPid}", careerPid)
+        this.mockMvc.perform(RestDocumentationRequestBuilders.delete("/career/delete/{careerPid}", savedPid)
                         .accept(MediaType.APPLICATION_JSON)
-                        .cookie(new Cookie("jwtToken", token)) // JWT 인증을 위한 header
+                        .cookie(jwtCookie) // JWT 인증을 위한 header
 
                 )
                 .andExpect(status().isNoContent()) // 삭제가 성공하면 204 응답
@@ -118,12 +133,25 @@ public class CareerTest {
 
     @Test
     public void testUpdateCareer() throws Exception {
-        Long careerPid = 1L; // 수정할 경력 ID
-        String loginId = "accountTest"; // 로그인된 사용자 ID
-        String token = JwtUtil.createToken(loginId,"my-secret-key-123123", 500000); // 테스트용 사용자 계정
+
+
+        // 삭제할 경력 엔티티 생성
+        CareerEntity careerEntity = CareerEntity.builder()
+                //.careerPid(careerPid)
+                .careerTitle("제목 제목 경력 삭제 테스트")
+                .careerContent("내용 내용 경력 삭제 테스트 내용")
+                .careerDate("20241101")
+                .updatedAt(null)
+                .userId(userId)
+                .build();
+
+        // 실제 데이터베이스에 경력 저장 (테스트 데이터 준비)
+        CareerEntity savedCareer = careerRepository.save(careerEntity); // 삭제할 경력 ID
+        Long savedPid = savedCareer.getCareerPid();
+
 
         CareerDto careerDto = CareerDto.builder()
-                .careerPid(careerPid)
+                .careerPid(savedPid)
                 .careerTitle("[수정 테스트] 제목 제목 경력 테스트")
                 .careerContent("[수정 테스트] 내용 내용 경력 추가 테스트 내용")
                 .careerDate("20241101")
@@ -133,7 +161,7 @@ public class CareerTest {
         //CareerEntity mockCareerEntity = new CareerEntity();
 
         this.mockMvc.perform(put("/career/edit", careerDto)
-                        .cookie(new Cookie("jwtToken", token))
+                        .cookie(jwtCookie)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(careerDto)))
                 .andExpect(status().isOk())
