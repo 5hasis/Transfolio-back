@@ -19,7 +19,9 @@ public enum ErrorMessage implements ErrorEnum {
 
     UNAUTHORIZED_ACCESS("006","로그인이 필요합니다."),
 
-    INVALID_JWT_USER("007","유효하지 않은 사용자 정보입니다.")
+    INVALID_JWT_USER("007","유효하지 않은 사용자 정보입니다."),
+
+    USER_NOT_FOUND("008", "존재하지 않는 회원입니다")
 
     ;
 

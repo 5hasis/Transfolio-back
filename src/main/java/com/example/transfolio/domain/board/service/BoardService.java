@@ -1,5 +1,8 @@
 package com.example.transfolio.domain.board.service;
 
+import com.example.transfolio.common.error.BusinessException;
+import com.example.transfolio.common.error.ErrorEnum;
+import com.example.transfolio.common.error.ErrorMessage;
 import com.example.transfolio.common.response.ResObj;
 import com.example.transfolio.domain.board.entity.BoardEntity;
 import com.example.transfolio.domain.board.entity.BoardFoldHistEntity;
@@ -47,7 +50,7 @@ public class BoardService {
 
         List<UserEntity> userEntityList = userRepository.findByUserId(board.getUserId());
         if (userEntityList.isEmpty()) {
-            throw new IllegalArgumentException("회원을 찾을 수 없습니다.");
+            throw new BusinessException(ErrorMessage.USER_NOT_FOUND); //
         }
         UserEntity userEntity = userEntityList.get(0);
 

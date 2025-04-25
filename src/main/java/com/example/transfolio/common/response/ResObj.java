@@ -19,7 +19,6 @@ import java.util.Objects;
  * ===================================================
  */
 
-
 @ToString
 public class ResObj {
 
@@ -37,6 +36,12 @@ public class ResObj {
         this.result = result;
     }
 
+    public ResObj(String status, String message) {
+        this.status = status;
+        this.message = message;
+
+    }
+
     public JSONObject getObject() {
         JSONObject jsonObj = new JSONObject();
 
@@ -51,4 +56,11 @@ public class ResObj {
 
     }
 
+    public String getStatus() {
+        return status;
+    }
+
 }
+
+
+
