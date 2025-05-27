@@ -134,3 +134,11 @@ include::{snippets}/career/edit/request-fields.adoc[]
 === 오늘의 번역
 include::{snippets}/todaysTranslator/http-request.adoc[]
 include::{snippets}/todaysTranslator/http-response.adoc[]
+
+=== 카테고리별 번역가 추천
+==== `GET /translators/recommendations`
+가장 찜하기(접기)가 많은 게시물을 작성한 회원 중, 특정 카테고리에 해당하는 상위 6명의 통역가/번역가 정보를 조회
+
+include::{snippets}/translators/recommendations/request-parameters.adoc[]
+include::{snippets}/translators/recommendations/http-response.adoc[]
+include::{snippets}/translators/recommendations/response-fields.adoc[]

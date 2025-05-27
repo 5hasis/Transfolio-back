@@ -2,6 +2,7 @@ package com.example.transfolio.domain.board.repository;
 
 import com.example.transfolio.domain.board.entity.BoardEntity;
 import com.example.transfolio.domain.board.model.BoardDto;
+import com.example.transfolio.domain.user.model.UserInfoDto;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -93,5 +94,14 @@ public interface BoardRepository extends JpaRepository<BoardEntity, Long> {
     List<Object[]> findTop3TranslatorByCtg(@Param("boardDto") BoardDto boardDto);
 
     int countByUserId(String userId);
+
+    @Query("SELECT NEW com.example.transfolio.domain.user.model.UserInfoDto(u.userId, u.email) " +
+            "FROM UserEntity u " +
+            "JOIN u.boardList b " +
+            "JOIN BoardFoldHistEntity l ON b.boardPid = l.boardPid " +
+            "WHERE b.highCtg = :ctg " +
+            "GROUP BY b.boardPid, u.userPid, u.userId " + // UserEntity의 userPid, userId를 GROUP BY에 추가
+            "ORDER BY COUNT(l.foldHistPid) DESC")
+    List<UserInfoDto> findRecommendedTranslatorsByCtg(@Param("ctg") String ctg, Pageable pageable);
 
 }

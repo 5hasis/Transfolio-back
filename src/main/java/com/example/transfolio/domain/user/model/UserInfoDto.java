@@ -24,4 +24,9 @@ public class UserInfoDto {
 
     private long totalFoldCnt;
 
+    public UserInfoDto(String userId, String email) {
+        this.userId = userId;
+        this.email = email;
+    }
+
 }

@@ -2,14 +2,12 @@ package com.example.transfolio.domain;
 
 import com.example.transfolio.domain.board.model.BoardDto;
 import com.example.transfolio.domain.board.service.BoardService;
+import com.example.transfolio.domain.user.model.UserInfoDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,5 +50,14 @@ public class HomeController {
     public ResponseEntity<List<BoardDto>> getTopBoards() {
         List<BoardDto> topBoards = boardService.getTop9Boards();
         return ResponseEntity.ok(topBoards);
+    }
+
+    @GetMapping("/translators/recommendations")
+    public ResponseEntity<List<UserInfoDto>> getRecommendedTranslators(@RequestParam String category) {
+        List<UserInfoDto> result = boardService.getRecommendedTranslatorsByCtg(category);
+        if (result.isEmpty()) {
+            return ResponseEntity.noContent().build(); // 204 No Content
+        }
+        return ResponseEntity.ok(result); // 200 OK
     }
 }

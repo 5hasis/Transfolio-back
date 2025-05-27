@@ -6,11 +6,13 @@ import com.example.transfolio.domain.board.model.BoardFoldHistDto;
 import com.example.transfolio.domain.board.model.BoardRegistDto;
 import com.example.transfolio.domain.board.model.BoardResponseDto;
 import com.example.transfolio.domain.board.service.BoardService;
+import com.example.transfolio.domain.user.entity.UserEntity;
 import com.example.transfolio.domain.user.model.UserSummaryDto;
 import com.example.transfolio.security.AuthenticationUtil;
 import org.json.simple.JSONObject;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,15 +37,12 @@ public class BoardController {
     }
 
     @PutMapping("/edit/{boardPid}")
-    public ResponseEntity<ResObj> editBoard(@PathVariable Long boardPid, @RequestBody BoardRegistDto resgistBoard) throws Exception {
+    public ResponseEntity<ResObj> editBoard(@PathVariable Long boardPid, @RequestBody BoardRegistDto resgistBoard
+            , @AuthenticationPrincipal String loginId) throws Exception {
         //token에서 로그인 아이디 가져와서 세팅
-        String loginId = AuthenticationUtil.getLoginIdFromAuthentication();
+        //String loginId = AuthenticationUtil.getLoginIdFromAuthentication();
 
-        if (!resgistBoard.getUserId().equals(loginId)) {
-            throw new Exception("본인만 게시물을 수정할 수 있습니다.");
-        }
-
-        ResObj response = boardService.updateBoard(boardPid, resgistBoard);
+        ResObj response = boardService.updateBoard(boardPid, resgistBoard, loginId);
 
         return ResponseEntity.ok(response);
     }

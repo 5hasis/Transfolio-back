@@ -38,9 +38,13 @@ public class JwtUtil {
 
     // Claims에서 loginId 꺼내기
     public static String getLoginId(String token, String secretKey) {
-
-        Claims body = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
-        return body.get("loginId").toString();
+        try {
+            Claims body = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
+            return body.get("loginId").toString();
+        } catch (JwtException e) {
+            log.error("JWT 파싱 오류: {}", e.getMessage()); // 파싱 오류 발생 시 로그 남기기
+            throw new RuntimeException("JWT 토큰 파싱 오류");
+        }
     }
 
     // 밝급된 Token이 만료 시간이 지났는지 체크
@@ -48,18 +52,24 @@ public class JwtUtil {
 
         try {
             Date expiredDate = extractClaims(token, secretKey).getExpiration();
+            return expiredDate.before(new Date()); //현재 시간이 만료 시간을 초과한 경우 true 반환
         } catch (Exception e) {
+            log.error("JWT 만료 검사 오류: {}", e.getMessage()); // 만료 검사 시 오류 발생 시 로그 남기기
             return true;
         }
 
-        return false;
+        //return false;
     }
 
     // SecretKey를 사용해 Token Parsing
     private static Claims extractClaims(String token, String secretKey) throws Exception {
-
+    try {
         Claims body = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
         return body;
+    } catch (JwtException e) {
+        log.error("JWT 파싱 오류: {}", e.getMessage()); // 파싱 오류 발생 시 로그 남기기
+        throw new JwtException("JWT 파싱 오류", e); // 예외 던지기
+    }
     }
 
 }

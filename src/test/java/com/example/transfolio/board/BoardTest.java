@@ -153,7 +153,7 @@ public class BoardTest {
 
         ResObj mockResponse = new ResObj(mockBoardEntity);
 
-        when(boardService.updateBoard(boardPid,board)).thenReturn(mockResponse);
+        when(boardService.updateBoard(boardPid,board,userId)).thenReturn(mockResponse);
 
         this.mockMvc.perform(put("/board/edit/{boardPid}", boardPid)
                         .cookie(jwtCookie)

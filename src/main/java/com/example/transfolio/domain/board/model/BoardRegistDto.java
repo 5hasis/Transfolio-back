@@ -8,7 +8,6 @@ import lombok.*;
 @AllArgsConstructor
 public class BoardRegistDto {
 
-    @NonNull
     private String userId;
 
     private String boardTitle;

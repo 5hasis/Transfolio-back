@@ -10,6 +10,7 @@ import com.example.transfolio.domain.board.model.*;
 import com.example.transfolio.domain.board.repository.BoardFoldHistRepository;
 import com.example.transfolio.domain.board.repository.BoardRepository;
 import com.example.transfolio.domain.user.entity.UserEntity;
+import com.example.transfolio.domain.user.model.UserInfoDto;
 import com.example.transfolio.domain.user.model.UserSummaryDto;
 import com.example.transfolio.domain.user.repository.UserRepository;
 import com.example.transfolio.security.AuthenticationUtil;
@@ -18,6 +19,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -63,14 +65,21 @@ public class BoardService {
     }
 
     /* 게시글 수정 */
-    public ResObj updateBoard(Long boardPid, BoardRegistDto board) {
+    public ResObj updateBoard(Long boardPid, BoardRegistDto board, String loginId) throws Exception {
 
         // 기존 게시물 조회
         //new Entity 하면 새로운걸로 간주되어 createdAt 갱신됨
         BoardEntity existingBoardEntity = boardRepository.findById(boardPid)
                 .orElseThrow(() -> new IllegalArgumentException("게시물을 찾을 수 없습니다."));
 
+
         existingBoardEntity.setBoardPid(boardPid);
+
+        if (!existingBoardEntity.getUserId().equals(loginId)) {
+            throw new Exception("본인만 게시물을 수정할 수 있습니다.");
+        }
+
+        board.setUserId(loginId);
 
         // DTO의 값으로 기존 엔티티를 갱신
         modelMapper.map(board, existingBoardEntity); // DTO -> 엔티티로 한 번에 매핑
@@ -241,5 +250,11 @@ public class BoardService {
 
     public int getBookmarkCountById(String userId){
         return boardFoldHistRepository.countByUserId(userId);
+    }
+
+    public List<UserInfoDto> getRecommendedTranslatorsByCtg(String category){
+        Pageable pageable = PageRequest.of(0, 6); // 상위 6개 결과만 가져오도록 설정
+        return boardRepository.findRecommendedTranslatorsByCtg(category, pageable);
+
     }
 }

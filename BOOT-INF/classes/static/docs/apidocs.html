@@ -481,6 +481,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_홈화면">홈화면</a>
 <ul class="sectlevel2">
 <li><a href="#_오늘의_번역">오늘의 번역</a></li>
+<li><a href="#_카테고리별_번역가_추천">카테고리별 번역가 추천</a></li>
 </ul>
 </li>
 </ul>
@@ -511,7 +512,7 @@ Host: localhost:8080
 Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
-Set-Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3NDU0OTI4NDQsImV4cCI6MTc0NTQ5Nzg0NH0.NHUNyXmqJ6NBohPrGr_Hu3RIcyij6cpeCQT5_MN4s5k; Path=/; Max-Age=3600; Expires=Thu, 24 Apr 2025 12:07:24 GMT; Secure; HttpOnly; SameSite=None
+Set-Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3NDgzMzQwMDAsImV4cCI6MTc0ODMzOTAwMH0.tVeZSGrivUnf6JjwN5EW-JgA-SCJezS3Zl6kaB0i4p4; Path=/; Max-Age=3600; Expires=Tue, 27 May 2025 09:20:00 GMT; Secure; HttpOnly; SameSite=None
 Content-Type: application/json
 X-Content-Type-Options: nosniff
 X-XSS-Protection: 1; mode=block
@@ -519,13 +520,13 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 269
+Content-Length: 265
 
 {
-  "result" : "eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3NDU0OTI4NDQsImV4cCI6MTc0NTQ5Nzg0NH0.NHUNyXmqJ6NBohPrGr_Hu3RIcyij6cpeCQT5_MN4s5k",
+  "result" : "eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3NDgzMzQwMDAsImV4cCI6MTc0ODMzOTAwMH0.tVeZSGrivUnf6JjwN5EW-JgA-SCJezS3Zl6kaB0i4p4",
   "message" : "success",
   "userId" : "accountTest",
-  "email" : "test@test.account",
+  "email" : "test@test.com",
   "status" : "200"
 }</code></pre>
 </div>
@@ -567,10 +568,10 @@ Content-Length: 269
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
-  "result" : "eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3NDU0OTI4NDQsImV4cCI6MTc0NTQ5Nzg0NH0.NHUNyXmqJ6NBohPrGr_Hu3RIcyij6cpeCQT5_MN4s5k",
+  "result" : "eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3NDgzMzQwMDAsImV4cCI6MTc0ODMzOTAwMH0.tVeZSGrivUnf6JjwN5EW-JgA-SCJezS3Zl6kaB0i4p4",
   "message" : "success",
   "userId" : "accountTest",
-  "email" : "test@test.account",
+  "email" : "test@test.com",
   "status" : "200"
 }</code></pre>
 </div>
@@ -701,7 +702,7 @@ Content-Length: 78
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /user/sign-out HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Host: localhost:8080
-Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3NDU0OTI4NDQsImV4cCI6MTc0NTQ5MzM0NH0.4FT2S3OrDtgk7XAe-WJXVS5UuOD1qVpufl6tXGjCIKk</code></pre>
+Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3NDgzMzQwMDAsImV4cCI6MTc0ODMzNDUwMH0.ifPty2b2peyveUoMZuuPLY-eeXTV20QsISCsbrZ5JpE</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -793,9 +794,10 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 381
+Content-Length: 402
 
 {
+  "status" : "200",
   "object" : {
     "result" : {
       "pid" : 1,
@@ -803,8 +805,8 @@ Content-Length: 381
       "intrsMajor" : "예체능,인문",
       "intrsLiterature" : "유럽문학",
       "intrsCorporation" : "엔터테인먼트",
-      "createdAt" : "2025-04-16T17:46:16.63892",
-      "updatedAt" : "2025-04-24T18:22:52.700207"
+      "createdAt" : "2025-05-27T03:52:17.681244",
+      "updatedAt" : "2025-05-27T16:09:26.251388"
     },
     "message" : "success",
     "status" : "200"
@@ -815,6 +817,7 @@ Content-Length: 381
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "status" : "200",
   "object" : {
     "result" : {
       "pid" : 1,
@@ -822,8 +825,8 @@ Content-Length: 381
       "intrsMajor" : "예체능,인문",
       "intrsLiterature" : "유럽문학",
       "intrsCorporation" : "엔터테인먼트",
-      "createdAt" : "2025-04-16T17:46:16.63892",
-      "updatedAt" : "2025-04-24T18:22:52.700207"
+      "createdAt" : "2025-05-27T03:52:17.681244",
+      "updatedAt" : "2025-05-27T16:09:26.251388"
     },
     "message" : "success",
     "status" : "200"
@@ -845,7 +848,7 @@ Content-Length: 381
 Content-Type: application/json;charset=UTF-8
 Content-Length: 677
 Host: localhost:8080
-Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3NDU0OTI4NDIsImV4cCI6MTc0NTQ5MzM0Mn0.lGSKamSulf0CAjMdv3DJXS2LPa9M_4WY5vJ9yVzh48Q
+Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3NDgzMzM5OTksImV4cCI6MTc0ODMzNDQ5OX0.G2K96IIWZ4PLtMaQHXaJKqyqCONuCgimcI49jcNfHvE
 
 {
   "userId" : "test",
@@ -981,7 +984,7 @@ X-Frame-Options: DENY</code></pre>
 Content-Type: application/json;charset=UTF-8
 Content-Length: 529
 Host: localhost:8080
-Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3NDU0OTI4NDIsImV4cCI6MTc0NTQ5MzM0Mn0.lGSKamSulf0CAjMdv3DJXS2LPa9M_4WY5vJ9yVzh48Q
+Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3NDgzMzM5OTksImV4cCI6MTc0ODMzNDQ5OX0.G2K96IIWZ4PLtMaQHXaJKqyqCONuCgimcI49jcNfHvE
 
 {
   "userId" : "accountTest",
@@ -1013,9 +1016,10 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 791
+Content-Length: 811
 
 {
+  "status" : "200",
   "object" : {
     "result" : {
       "boardPid" : null,
@@ -1139,7 +1143,7 @@ Content-Length: 791
 <pre>GET /board/1 HTTP/1.1
 Accept: application/json
 Host: localhost:8080
-Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3NDU0OTI4NDIsImV4cCI6MTc0NTQ5MzM0Mn0.lGSKamSulf0CAjMdv3DJXS2LPa9M_4WY5vJ9yVzh48Q</pre>
+Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3NDgzMzM5OTksImV4cCI6MTc0ODMzNDQ5OX0.G2K96IIWZ4PLtMaQHXaJKqyqCONuCgimcI49jcNfHvE</pre>
 </div>
 </div>
 <div class="listingblock">
@@ -1247,7 +1251,7 @@ Content-Length: 787
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">DELETE /board/delete/1 HTTP/1.1
 Accept: application/json
 Host: localhost:8080
-Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3NDU0OTI4NDEsImV4cCI6MTc0NTQ5MzM0MX0.ljCTpYgpwZtVE7X8sQzM01mBWPTzd-4gGDuvVZ2KeVs</code></pre>
+Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3NDgzMzM5OTgsImV4cCI6MTc0ODMzNDQ5OH0.dfiW1v-s08mR2A_vAA_O0TfcEYOC4U7yYGxaMc4J5R4</code></pre>
 </div>
 </div>
 </div>
@@ -1261,7 +1265,7 @@ Content-Type: application/json;charset=UTF-8
 Accept: application/json
 Content-Length: 64
 Host: localhost:8080
-Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3NDU0OTI4NDIsImV4cCI6MTc0NTQ5MzM0Mn0.lGSKamSulf0CAjMdv3DJXS2LPa9M_4WY5vJ9yVzh48Q
+Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3NDgzMzM5OTksImV4cCI6MTc0ODMzNDQ5OX0.G2K96IIWZ4PLtMaQHXaJKqyqCONuCgimcI49jcNfHvE
 
 {
   "highCtg" : "대분류",
@@ -1312,7 +1316,7 @@ Content-Length: 200
 Content-Type: application/json;charset=UTF-8
 Content-Length: 22
 Host: localhost:8080
-Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3NDU0OTI4NDIsImV4cCI6MTc0NTQ5MzM0Mn0.lGSKamSulf0CAjMdv3DJXS2LPa9M_4WY5vJ9yVzh48Q
+Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3NDgzMzM5OTksImV4cCI6MTc0ODMzNDQ5OX0.G2K96IIWZ4PLtMaQHXaJKqyqCONuCgimcI49jcNfHvE
 
 {
   "boardPid" : "1"
@@ -1355,7 +1359,7 @@ Content-Length: 63
 Content-Type: application/json;charset=UTF-8
 Content-Length: 30
 Host: localhost:8080
-Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3NDU0OTI4NDUsImV4cCI6MTc0NTQ5MzM0NX0.PTsRLrXdE8juAkZbiFGN8xyaiTP0bzRLegdDQ_VRMxU
+Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3NDgzMzQwMDEsImV4cCI6MTc0ODMzNDUwMX0.CxIOqt6yYEOAM4pIFsdiE1iQv3HLvx3wMPYAfp8mS0U
 
 {
   "userId" : "accountTest"
@@ -1375,12 +1379,12 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 364
+Content-Length: 360
 
 {
   "userInfoDto" : {
     "userId" : "accountTest",
-    "email" : "test@test.account",
+    "email" : "test@test.com",
     "intrsCorporation" : "엔터테인먼트",
     "intrsLiterature" : "러시아어",
     "intrsMajor" : "예체능,인문",
@@ -1399,7 +1403,7 @@ Content-Length: 364
 <pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
   "userInfoDto" : {
     "userId" : "accountTest",
-    "email" : "test@test.account",
+    "email" : "test@test.com",
     "intrsCorporation" : "엔터테인먼트",
     "intrsLiterature" : "러시아어",
     "intrsMajor" : "예체능,인문",
@@ -1429,7 +1433,7 @@ Content-Length: 364
 Content-Type: application/json;charset=UTF-8
 Content-Length: 30
 Host: localhost:8080
-Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3NDU0OTI4NDUsImV4cCI6MTc0NTQ5MzM0NX0.PTsRLrXdE8juAkZbiFGN8xyaiTP0bzRLegdDQ_VRMxU
+Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3NDgzMzQwMDEsImV4cCI6MTc0ODMzNDUwMX0.CxIOqt6yYEOAM4pIFsdiE1iQv3HLvx3wMPYAfp8mS0U
 
 {
   "userId" : "accountTest"
@@ -1463,7 +1467,7 @@ Content-Length: 3
 Content-Type: application/json;charset=UTF-8
 Content-Length: 30
 Host: localhost:8080
-Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3NDU0OTI4NDUsImV4cCI6MTc0NTQ5MzM0NX0.PTsRLrXdE8juAkZbiFGN8xyaiTP0bzRLegdDQ_VRMxU
+Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3NDgzMzQwMDEsImV4cCI6MTc0ODMzNDUwMX0.CxIOqt6yYEOAM4pIFsdiE1iQv3HLvx3wMPYAfp8mS0U
 
 {
   "userId" : "accountTest"
@@ -1491,7 +1495,7 @@ Content-Length: 598
   "careerContent" : "번역번역번역번역번역번역번역번역번역번역번역번역",
   "careerDate" : "2022-01-01",
   "updatedAt" : null,
-  "createdAt" : "2025-04-24T20:07:25.625488",
+  "createdAt" : "2025-05-27T17:20:01.188251",
   "userId" : "accountTest"
 }, {
   "careerPid" : 2,
@@ -1499,7 +1503,7 @@ Content-Length: 598
   "careerContent" : "번역번역번역번역번역번역번역번역번역번역번역번역",
   "careerDate" : "2021-05-10",
   "updatedAt" : "2021-05-11T00:00:00",
-  "createdAt" : "2025-04-24T20:07:25.625763",
+  "createdAt" : "2025-05-27T17:20:01.188541",
   "userId" : "accountTest"
 } ]</code></pre>
 </div>
@@ -1513,7 +1517,7 @@ Content-Length: 598
 Content-Type: application/json;charset=UTF-8
 Content-Length: 30
 Host: localhost:8080
-Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3NDU0OTI4NDUsImV4cCI6MTc0NTQ5MzM0NX0.PTsRLrXdE8juAkZbiFGN8xyaiTP0bzRLegdDQ_VRMxU
+Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3NDgzMzQwMDEsImV4cCI6MTc0ODMzNDUwMX0.CxIOqt6yYEOAM4pIFsdiE1iQv3HLvx3wMPYAfp8mS0U
 
 {
   "userId" : "accountTest"
@@ -1619,7 +1623,7 @@ Content-Length: 391
 Content-Type: application/json;charset=UTF-8
 Content-Length: 252
 Host: localhost:8080
-Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3NDU0OTI4NDQsImV4cCI6MTc0NTQ5MzM0NH0.4FT2S3OrDtgk7XAe-WJXVS5UuOD1qVpufl6tXGjCIKk
+Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3NDgzMzQwMDAsImV4cCI6MTc0ODMzNDUwMH0.ifPty2b2peyveUoMZuuPLY-eeXTV20QsISCsbrZ5JpE
 
 {
   "careerPid" : null,
@@ -1648,12 +1652,12 @@ X-Frame-Options: DENY
 Content-Length: 274
 
 {
-  "careerPid" : 22,
+  "careerPid" : 27,
   "careerTitle" : "제목 제목 경력 추가 테스트",
   "careerContent" : "내용 내용 경력 추가 테스트 내용",
   "careerDate" : "20241101",
   "updatedAt" : null,
-  "createdAt" : "2025-04-24T20:07:24.345722",
+  "createdAt" : "2025-05-27T17:20:00.138461",
   "userId" : "accountTest"
 }</code></pre>
 </div>
@@ -1743,10 +1747,10 @@ Content-Length: 274
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">DELETE /career/delete/21 HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">DELETE /career/delete/26 HTTP/1.1
 Accept: application/json
 Host: localhost:8080
-Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3NDU0OTI4NDQsImV4cCI6MTc0NTQ5MzM0NH0.4FT2S3OrDtgk7XAe-WJXVS5UuOD1qVpufl6tXGjCIKk</code></pre>
+Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3NDgzMzQwMDAsImV4cCI6MTc0ODMzNDUwMH0.ifPty2b2peyveUoMZuuPLY-eeXTV20QsISCsbrZ5JpE</code></pre>
 </div>
 </div>
 </div>
@@ -1759,10 +1763,10 @@ Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOj
 Content-Type: application/json;charset=UTF-8
 Content-Length: 281
 Host: localhost:8080
-Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3NDU0OTI4NDMsImV4cCI6MTc0NTQ5MzM0M30.AgWGZapClNU0Hi7alfiDv6ss9yY9IzLVhHqW5soFxjA
+Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3NDgzMzM5OTksImV4cCI6MTc0ODMzNDQ5OX0.G2K96IIWZ4PLtMaQHXaJKqyqCONuCgimcI49jcNfHvE
 
 {
-  "careerPid" : 20,
+  "careerPid" : 25,
   "careerTitle" : "[수정 테스트] 제목 제목 경력 테스트",
   "careerContent" : "[수정 테스트] 내용 내용 경력 추가 테스트 내용",
   "careerDate" : "20241101",
@@ -1785,16 +1789,17 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 423
+Content-Length: 444
 
 {
+  "status" : "200",
   "object" : {
     "result" : {
-      "careerPid" : 20,
+      "careerPid" : 25,
       "careerTitle" : "[수정 테스트] 제목 제목 경력 테스트",
       "careerContent" : "[수정 테스트] 내용 내용 경력 추가 테스트 내용",
       "careerDate" : "20241101",
-      "updatedAt" : "2025-04-24T20:07:24.20356",
+      "updatedAt" : "2025-05-27T17:20:00.005569",
       "createdAt" : null,
       "userId" : "accountTest"
     },
@@ -1868,7 +1873,7 @@ Content-Length: 423
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /todaysTranslator HTTP/1.1
 Accept: application/json
 Host: localhost:8080
-Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3NDU0OTI4NDQsImV4cCI6MTc0NTQ5MzM0NH0.4FT2S3OrDtgk7XAe-WJXVS5UuOD1qVpufl6tXGjCIKk</code></pre>
+Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiYWNjb3VudFRlc3QiLCJpYXQiOjE3NDgzMzQwMDAsImV4cCI6MTc0ODMzNDUwMH0.ifPty2b2peyveUoMZuuPLY-eeXTV20QsISCsbrZ5JpE</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -1884,26 +1889,174 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 997
+Content-Length: 1460
 
 [ {
-  "boardPid" : 1,
-  "userId" : "accountTest",
-  "boardTitle" : "썸네일\n테스트 250421 #1",
-  "afterLang" : "일본어",
-  "beforeLang" : "한국어",
-  "boardSubTitle" : "테스트 250421 #1",
-  "boardDescription" : "도시가 무너진 후, 소년은 유일한 친구인 로봇과 함께 생존의 희망인 ‘마지막 빛’을 찾아 끝없는 폐허를 걷기 시작한다. (수정 테스트)",
-  "highCtg" : "문학",
-  "lowCtg" : "고전 소설",
-  "boardAuthor" : "김작가",
-  "boardContent" : "소년은 걸음을 멈추고 조용히 로봇의 손을 잡았다./少年は立ち止まり、ロボットの手をそっと握った。$“여기… 아직 빛이 남아 있을까.”/「ここに、光はまだ残っているのかな……」$로봇은 아무 말 없이 고요히 하늘을 올려다보았다./ロボットは何も言わず、静かに空を見上げた。",
-  "fontSize" : 12,
-  "fontType" : "Nanum Barun Gothic",
+  "boardPid" : 8,
+  "userId" : "user3_test",
+  "boardTitle" : "다른 카테고리 게시물 D",
+  "afterLang" : null,
+  "beforeLang" : null,
+  "boardSubTitle" : null,
+  "boardDescription" : null,
+  "highCtg" : "기업",
+  "lowCtg" : "공기업",
+  "boardAuthor" : null,
+  "boardContent" : null,
+  "fontSize" : 0,
+  "fontType" : null,
+  "foldCnt" : 0,
+  "tempStorageYn" : "N"
+}, {
+  "boardPid" : 7,
+  "userId" : "user2_test",
+  "boardTitle" : "게시물 C",
+  "afterLang" : null,
+  "beforeLang" : null,
+  "boardSubTitle" : null,
+  "boardDescription" : null,
+  "highCtg" : "전공",
+  "lowCtg" : "예체능",
+  "boardAuthor" : null,
+  "boardContent" : null,
+  "fontSize" : 0,
+  "fontType" : null,
+  "foldCnt" : 0,
+  "tempStorageYn" : "N"
+}, {
+  "boardPid" : 6,
+  "userId" : "user1_test",
+  "boardTitle" : "게시물 B",
+  "afterLang" : null,
+  "beforeLang" : null,
+  "boardSubTitle" : null,
+  "boardDescription" : null,
+  "highCtg" : "전공",
+  "lowCtg" : "공학",
+  "boardAuthor" : null,
+  "boardContent" : null,
+  "fontSize" : 0,
+  "fontType" : null,
+  "foldCnt" : 0,
+  "tempStorageYn" : "N"
+}, {
+  "boardPid" : 5,
+  "userId" : "user1_test",
+  "boardTitle" : "게시물 A",
+  "afterLang" : null,
+  "beforeLang" : null,
+  "boardSubTitle" : null,
+  "boardDescription" : null,
+  "highCtg" : "전공",
+  "lowCtg" : "사회",
+  "boardAuthor" : null,
+  "boardContent" : null,
+  "fontSize" : 0,
+  "fontType" : null,
   "foldCnt" : 0,
   "tempStorageYn" : "N"
 } ]</code></pre>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_카테고리별_번역가_추천">카테고리별 번역가 추천</h3>
+<div class="sect3">
+<h4 id="_get_translatorsrecommendations"><code>GET /translators/recommendations</code></h4>
+<div class="paragraph">
+<p>가장 찜하기(접기)가 많은 게시물을 작성한 회원 중, 특정 카테고리에 해당하는 상위 6명의 통역가/번역가 정보를 조회</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>category</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">게시물 카테고리(대분류)</p></td>
+</tr>
+</tbody>
+</table>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Content-Type: application/json
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Length: 578
+
+[ {
+  "userId" : "user1_test",
+  "email" : "user1@example.com",
+  "intrsCorporation" : null,
+  "intrsLiterature" : null,
+  "intrsMajor" : null,
+  "intrsLanguage" : null,
+  "totalFoldCnt" : 0
+}, {
+  "userId" : "user1_test",
+  "email" : "user1@example.com",
+  "intrsCorporation" : null,
+  "intrsLiterature" : null,
+  "intrsMajor" : null,
+  "intrsLanguage" : null,
+  "totalFoldCnt" : 0
+}, {
+  "userId" : "user2_test",
+  "email" : "user2@example.com",
+  "intrsCorporation" : null,
+  "intrsLiterature" : null,
+  "intrsMajor" : null,
+  "intrsLanguage" : null,
+  "totalFoldCnt" : 0
+} ]</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">추천 통역가/번역가 (가장 찜하기 많은 게시물 작성 회원) 정보 리스트</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].userId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 아이디</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].email</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 아이디</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -1912,7 +2065,7 @@ Content-Length: 997
 <div id="footer">
 <div id="footer-text">
 Version 0.1<br>
-Last updated 2025-04-01 21:19:14 +0900
+Last updated 2025-05-27 17:19:07 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
