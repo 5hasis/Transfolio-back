@@ -2,6 +2,9 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '2.7.17'
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+
+    /* asciidoctor 플러그인 */
+    id "org.asciidoctor.jvm.convert" version "3.3.2"
 }
 
 group = 'com.example'
@@ -11,7 +14,43 @@ java {
     sourceCompatibility = '11'
 }
 
+/* [REST DOC] Snippets 파일 저장 경로 선언 */
+ext {
+    set('snippetsDir', file("build/generated-snippets"))
+}
+
+/* [REST DOC] AsciiDoctor 설정 task */
+asciidoctor {
+    inputs.dir snippetsDir
+    dependsOn test
+}
+
+/* [RESC DOC] 경로 파일 삭제 */
+asciidoctor.doFirst {
+    delete file('src/main/resources/static/docs')
+}
+
+
+bootJar{
+    dependsOn asciidoctor
+    copy {
+        from "${asciidoctor.outputDir}"
+        into 'BOOT-INF/classes/static/docs'
+    }
+}
+
+task copyDocument(type: Copy) {
+    dependsOn asciidoctor
+    from file("build/docs/asciidoc")
+    into file("src/main/resources/static/docs")
+}
+
+build {
+    dependsOn copyDocument
+}
+
 configurations {
+    asciidoctorExt
     compileOnly {
         extendsFrom annotationProcessor
     }
@@ -22,19 +61,31 @@ repositories {
 }
 
 dependencies {
-    // DataBase Mapper
-    // implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.3.1'
-
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'io.jsonwebtoken:jjwt:0.9.1'
+    implementation 'io.jsonwebtoken:jjwt-api:0.12.3'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.3'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.3' // or 'io.jsonwebtoken:jjwt-gson:0.12.3' for gson
+    implementation group: 'org.bgee.log4jdbc-log4j2', name:'log4jdbc-log4j2-jdbc4.1', version: '1.16'
+    implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.modelmapper:modelmapper:2.4.2'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:2.3.1'
+    testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'com.mysql:mysql-connector-j'
     annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:2.3.1'
+    asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor'
 }
 
-tasks.named('test') {
+
+test {
     useJUnitPlatform()
 }
+

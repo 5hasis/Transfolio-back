@@ -1,23 +1,24 @@
 package com.example.transfolio;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Controller
 public class TestAPI {
 
-    @GetMapping("/test")
+    @GetMapping("/docs")
     public String Test() {
 
-        return "Test Get API Success";
+        return "docs/apidocs.html";
 
     }
 
     @PostMapping("/test")
     public String PostTest() {
 
-        return "Test Post API Success";
+        return "Test Post API Success TEST";
 
     }
 
