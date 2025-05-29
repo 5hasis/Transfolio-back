@@ -27,10 +27,6 @@
 ---
 
 ### 📁 프로젝트 구조 
-
-<details>
-<summary>📁 프로젝트 디렉토리 구조</summary>
-
 ```text
 📁 transfolio-backend/
 ├── src/
@@ -75,10 +71,6 @@
 ├── build.gradle            # Gradle 빌드 스크립트
 └── README.md               # 프로젝트 설명 문서
 ```
-
-</details>
-
-
 
 ### 🚀 설치 및 실행 방법
 
