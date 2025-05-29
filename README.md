@@ -28,32 +28,33 @@
 
 ### 📁 프로젝트 구조 
 
+📁 transfolio-backend/
 ├── src/
 │   ├── main/
 │   │   ├── java/
 │   │   │   └── com/
 │   │   │       └── example/
 │   │   │           └── transfolio/
-│   │   │               ├── common/ # 공통적으로 사용되는 유틸리티, 설정, 예외 처리 등
+│   │   │               ├── common/                # 공통 유틸리티, 설정, 예외 처리 등
 │   │   │               │   ├── config/
 │   │   │               │   ├── error/
 │   │   │               │   ├── filter/
 │   │   │               │   └── ...
 │   │   │               ├── domain/
-│   │   │               │   ├── user/ # 사용자 계정 및 프로필 관리 관련 기능
+│   │   │               │   ├── user/              # 사용자 계정 및 프로필 관리
 │   │   │               │   │   ├── controller/
 │   │   │               │   │   ├── service/
 │   │   │               │   │   ├── dto/
-│   │   │               │   │   └── ... # (repository, entity 등 도메인 핵심 요소 포함)
-│   │   │               │   ├── board/ # 번역 게시물 관리 기능
+│   │   │               │   │   └── ...            # repository, entity 등 포함
+│   │   │               │   ├── board/             # 번역 게시물 관리
 │   │   │               │   │   ├── controller/
 │   │   │               │   │   ├── service/
 │   │   │               │   │   ├── dto/
 │   │   │               │   │   └── ...
-│   │   │               │   └── ... # 기타 도메인 (career, instr 등)
-│   │   │               ├── security/ # 인증 및 인가 관련 로직 (Spring Security 설정, JWT 등)
+│   │   │               │   └── ...                # 기타 도메인 (career, instr 등)
+│   │   │               ├── security/              # 인증 및 인가 (Spring Security, JWT 등)
 │   │   │               │   └── ...
-│   │   │               └── TransfolioBackApplication.java # Spring Boot 메인 애플리케이션 시작점
+│   │   │               └── TransfolioBackApplication.java  # 메인 클래스
 │   │   └── resources/
 │   │       ├── application.properties
 │   │       └── static/
@@ -62,13 +63,14 @@
 │       │   └── com/
 │       │       └── example/
 │       │           └── transfolio/
-│       │               ├── user/ # 사용자 관련 테스트 (Mock Test 포함)
-│       │               ├── board/ # 번역 게시물 관련 테스트 (Mock Test 포함)
-│       │               └── ... # 기타 도메인/공통 모듈 테스트
+│       │               ├── user/                 # 사용자 관련 테스트 (Mock 포함)
+│       │               ├── board/                # 번역 게시물 관련 테스트
+│       │               └── ...                   # 기타 도메인/공통 모듈 테스트
 │       └── resources/
-├── Dockerfile # Docker 이미지 빌드 및 실행을 위한 설정 파일
-├── build.gradle # Gradle 빌드 스크립트 (의존성, 태스크 정의)
-└── README.md # 프로젝트 설명 문서
+├── Dockerfile              # Docker 이미지 빌드 및 실행 설정
+├── build.gradle            # Gradle 빌드 스크립트
+└── README.md               # 프로젝트 설명 문서
+
 
 ### 🚀 설치 및 실행 방법
 
@@ -119,8 +121,6 @@
 ---
 
 ### 💡 배운 점 및 성장 기록
-
-이 Transfolio-Back 프로젝트를 개발하면서 다음과 같은 기술적 경험과 지식을 얻고 있습니다.
 
 * **Spring Boot 기반 API 개발:** Java와 Spring Boot를 사용하여 **RESTful API를 설계하고 구현**하는 실질적인 경험을 쌓고 있어요. 컨트롤러, 서비스, 리포지토리 계층을 분리하여 애플리케이션의 구조적 견고함을 높이는 방법을 학습하고 있습니다.
 * **JPA와 ORM 활용:** JPA를 통해 **객체지향적으로 데이터베이스를 다루는 방법**을 익히고 있어요. 엔티티 관계 설정, 쿼리 작성 등 ORM의 장점을 활용하여 개발 효율성을 높이는 방법을 배우고 있습니다.
