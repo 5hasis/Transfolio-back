@@ -11,7 +11,8 @@ group = 'com.example'
 version = '0.1'
 
 java {
-    sourceCompatibility = '11'
+    sourceCompatibility = '17'
+    targetCompatibility = '17'
 }
 
 /* [REST DOC] Snippets 파일 저장 경로 선언 */
