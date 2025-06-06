@@ -49,7 +49,8 @@ public interface BoardRepository extends JpaRepository<BoardEntity, Long> {
                     b.fontSize,
                     b.fontType,
                     COALESCE(b.foldCnt, 0),
-                    b.tempStorageYn
+                    b.tempStorageYn,
+                    b.updatedAt
                 )
             FROM BoardEntity b
             ORDER BY b.foldCnt DESC, b.createdAt DESC
@@ -74,7 +75,8 @@ public interface BoardRepository extends JpaRepository<BoardEntity, Long> {
                 b.fontSize,
                 b.fontType,
                 b.foldCnt,
-                b.tempStorageYn
+                b.tempStorageYn,
+                b.updatedAt
                 ) 
             FROM BoardEntity b WHERE b.boardPid = :boardPid
             """)

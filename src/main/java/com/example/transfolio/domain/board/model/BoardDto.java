@@ -47,6 +47,8 @@ public class BoardDto {
 
     private String tempStorageYn;
 
+    private LocalDateTime updatedAt;
+
     /* DTO -> Entity */
     public BoardEntity toEntity(){
         BoardEntity board = BoardEntity.builder()

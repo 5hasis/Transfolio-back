@@ -28,6 +28,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import javax.servlet.http.Cookie;
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -246,6 +247,7 @@ public class BoardTest {
                 .fontType("Noto Sanz")
                 .tempStorageYn("N")
                 .foldCnt(78)
+                .updatedAt(LocalDateTime.parse("2025-05-11T00:00:00"))
                 .build();
 
         BoardResponseDto mockResponseDto = BoardResponseDto.builder()
@@ -280,6 +282,7 @@ public class BoardTest {
                                 fieldWithPath("boardDto.beforeLang").type(JsonFieldType.STRING).description("게시물 전언 언어"),
                                 fieldWithPath("boardDto.fontSize").type(JsonFieldType.NUMBER).description("글꼴 크기"),
                                 fieldWithPath("boardDto.fontType").type(JsonFieldType.STRING).description("글꼴 유형"),
+                                fieldWithPath("boardDto.updatedAt").type(JsonFieldType.STRING).description("최종 수정 일시"),
                                 fieldWithPath("boardDto.tempStorageYn").type(JsonFieldType.STRING).description("임시 저장 여부 Y/N"),
                                 fieldWithPath("isAuthorYn").type(JsonFieldType.BOOLEAN).description(true)
                         )
