@@ -1,8 +1,10 @@
 package com.example.transfolio.domain;
 
 import com.example.transfolio.domain.board.model.BoardDto;
+import com.example.transfolio.domain.board.model.BoardWithUserDto;
 import com.example.transfolio.domain.board.service.BoardService;
 import com.example.transfolio.domain.user.model.UserInfoDto;
+import com.example.transfolio.security.AuthenticationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -24,24 +26,12 @@ public class HomeController {
         return ResponseEntity.ok("OK");
     }
 
-    @PostMapping("/homeIntrs")
-    public List<BoardDto> homeIntrs() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String loginId = null;
-        List<BoardDto> boardDtoList = new ArrayList<>();
+    @GetMapping("/homeIntrs")
+    public List<BoardWithUserDto> homeIntrs() {
+        //token에서 로그인 아이디 가져와서 세팅
+        String loginId = AuthenticationUtil.getLoginIdFromAuthentication();
 
-        if (authentication != null && authentication.isAuthenticated()) {
-            Object principal = authentication.getPrincipal();
-            if (principal instanceof String) {
-                loginId = (String)principal;
-            }
-            if (loginId != null && !loginId.equals("")) {
-
-                boardDtoList = boardService.getHomeIntrsBoard(loginId);
-            }
-        }else {
-            throw new IllegalStateException("Unexpected authentication principal type: " + authentication.getPrincipal().getClass());
-        }
+        List<BoardWithUserDto> boardDtoList = boardService.getHomeIntrsBoard(loginId);
 
         return boardDtoList;
     }

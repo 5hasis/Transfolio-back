@@ -21,6 +21,7 @@ public interface UserRepository extends JpaRepository<UserEntity, String> {
                 , ui.intrsMajor
                 , ui.intrsLiterature
                 , COALESCE(SUM(b.foldCnt), 0)
+                , u.userDscr
             )
             FROM UserEntity u 
             LEFT JOIN u.boardList b

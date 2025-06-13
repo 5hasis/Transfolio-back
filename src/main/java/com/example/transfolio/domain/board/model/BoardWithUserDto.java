@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Getter
 @Setter
-public class BoardDto {
+public class BoardWithUserDto {
 
     private Long boardPid;
 
@@ -49,18 +49,6 @@ public class BoardDto {
 
     private LocalDateTime updatedAt;
 
-    /* DTO -> Entity */
-    public BoardEntity toEntity(){
-        BoardEntity board = BoardEntity.builder()
-                .boardPid(boardPid)
-                .boardTitle(boardTitle)
-                .afterLang(afterLang)
-                .beforeLang(beforeLang)
-                .userId(userId)
-
-                .build();
-
-        return board;
-    }
+    private String nickname;
 
 }

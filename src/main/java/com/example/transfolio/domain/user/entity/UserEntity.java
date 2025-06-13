@@ -53,6 +53,10 @@ public class UserEntity implements Serializable {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
+    private String userDscr;
+
+    private String nickname;
+
     public UserEntity() {
 
     }

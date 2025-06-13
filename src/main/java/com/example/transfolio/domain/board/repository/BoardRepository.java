@@ -17,8 +17,25 @@ public interface BoardRepository extends JpaRepository<BoardEntity, Long> {
     @Query(value = "SELECT * FROM tr_board WHERE user_id = :userId AND (:isSelf = 'Y' OR (temp_storage_yn = 'N' AND :isSelf = 'N'))", nativeQuery = true)
     List<BoardEntity> findByUserUserIdNative(@Param("userId") String userId, @Param("isSelf") String isSelf);
 
-    @Query(value = "SELECT * FROM tr_board WHERE user_id = :userId", nativeQuery = true)
-    List<BoardEntity> findByOrderByCreatedAtDesc(@Param("userId") String userId);
+    @Query("""
+        SELECT b FROM BoardEntity b
+        JOIN FETCH b.user u
+        WHERE 
+           EXISTS (
+               SELECT 1 FROM UserIntrsEntity mi
+               JOIN mi.user u2
+               WHERE u2.userId = :userId
+               AND
+               (
+                   (mi.intrsCorporation IS NOT NULL AND b.highCtg = '기업' AND b.lowCtg = mi.intrsCorporation) OR
+                   (mi.intrsLanguage IS NOT NULL AND b.highCtg = '언어' AND b.lowCtg = mi.intrsLanguage) OR
+                   (mi.intrsLiterature IS NOT NULL AND b.highCtg = '문학' AND b.lowCtg = mi.intrsLiterature) OR
+                   (mi.intrsMajor IS NOT NULL AND b.highCtg = '전공' AND b.lowCtg = mi.intrsMajor)
+               )
+           ) AND b.userId != :userId
+       ORDER BY b.foldCnt DESC
+    """)
+    List<BoardEntity> findTop9ByUserIntrsFetchJoin(@Param("userId") String userId, Pageable pageable);
 
     //찜하기 등록
     // board 테이블 fold_cnt+1
@@ -97,7 +114,7 @@ public interface BoardRepository extends JpaRepository<BoardEntity, Long> {
 
     int countByUserId(String userId);
 
-    @Query("SELECT NEW com.example.transfolio.domain.user.model.UserInfoDto(u.userId, u.email) " +
+    @Query("SELECT NEW com.example.transfolio.domain.user.model.UserInfoDto(u.userId, u.email, u.userDscr) " +
             "FROM UserEntity u " +
             "JOIN u.boardList b " +
             "JOIN BoardFoldHistEntity l ON b.boardPid = l.boardPid " +

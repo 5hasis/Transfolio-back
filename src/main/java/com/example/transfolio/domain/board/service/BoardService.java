@@ -125,22 +125,21 @@ public class BoardService {
     }
 
     /* 홈화면 게시물 조회(관심분야 9개) */
-    public List<BoardDto> getHomeIntrsBoard(String userId) {
-        List<BoardEntity> boardList = boardRepository.findByOrderByCreatedAtDesc(userId);
+    public List<BoardWithUserDto> getHomeIntrsBoard(String userId) {
 
-        List<BoardDto> boardDtoList = new ArrayList<>();
-        for (BoardEntity board : boardList) {
-            BoardDto boardDto = BoardDto.builder()
-                    .boardPid(board.getBoardPid())
-                    .boardTitle(board.getBoardTitle())
-                    .afterLang(board.getAfterLang())
-                    .beforeLang(board.getBeforeLang())
-                    .build();
+        Pageable top9 = PageRequest.of(0, 9);
+        List<BoardEntity> boardList = boardRepository.findTop9ByUserIntrsFetchJoin(userId, top9);
 
-            boardDtoList.add(boardDto);
-        }
-
-        return boardDtoList;
+        return boardList.stream()
+                .map(board -> BoardWithUserDto.builder()
+                        .boardPid(board.getBoardPid())
+                        .boardTitle(board.getBoardTitle())
+                        .highCtg(board.getHighCtg())
+                        .lowCtg(board.getLowCtg())
+                        .foldCnt(board.getFoldCnt())
+                        .nickname(board.getUser().getNickname()) // ← 여기는 N+1 아님! 이미 join되어 있음
+                        .build())
+                .collect(Collectors.toList());
     }
 
     /* 게시물 찜하기 저장 및 취소(삭제)*/

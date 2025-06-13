@@ -1,4 +1,4 @@
-FROM adoptopenjdk:16-jdk
+FROM eclipse-temurin:17-jdk-alpine
 
 ARG JAR_FILE=build/libs/Transfolio-0.1.jar
 

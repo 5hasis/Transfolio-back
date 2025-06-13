@@ -63,20 +63,17 @@ public class HomeTest {
     @Test
     public void getHomeIntrsPost() throws Exception {
 
-        String jsonUserId = "{\"userId\":\"" + userId + "\"}";
-
-        this.mockMvc.perform(post("/homeIntrs")
+        this.mockMvc.perform(get("/homeIntrs")
                         .cookie(jwtCookie)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(jsonUserId)
                 )
                 .andExpect(status().isOk())
                 .andDo(document("homeIntrs",
                             preprocessRequest(prettyPrint()),
-                            preprocessResponse(prettyPrint()),
-                            relaxedRequestFields(
-                                    fieldWithPath("userId").type(JsonFieldType.STRING).description("유저 아이디")
-                            )
+                            preprocessResponse(prettyPrint())
+//                            relaxedResponseFields(
+//                                    fieldWithPath("userId").type(JsonFieldType.STRING).description("유저 아이디")
+//                            )
                         )
                 );
     }
@@ -116,7 +113,9 @@ public class HomeTest {
                         relaxedResponseFields( // 응답 필드 설명
                                 fieldWithPath("[]").description("추천 통역가/번역가 (가장 찜하기 많은 게시물 작성 회원) 정보 리스트"),
                                 fieldWithPath("[].userId").type(JsonFieldType.STRING).description("회원 아이디"),
-                                fieldWithPath("[].email").type(JsonFieldType.STRING).description("회원 아이디")
+                                fieldWithPath("[].email").type(JsonFieldType.STRING).description("회원 이메일"),
+                                fieldWithPath("[].userDscr").type(JsonFieldType.STRING).description("회원 설명").optional()
+
                         )
                 ));
     }
